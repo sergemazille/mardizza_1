@@ -1,5 +1,23 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block content %}
-    <h1>Mardizza !!</h1>
+    <div id="app">
+        <h1>${pageTitle}</h1>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script type="application/javascript">
+
+        Vue.config.delimiters = ['${', '}'];
+
+        new Vue({
+            el: '#app',
+            data: {
+                pageTitle: "Mardizza !!!"
+            }
+        });
+    </script>
 {% endblock %}
