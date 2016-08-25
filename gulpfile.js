@@ -14,6 +14,12 @@ gulp.task('sass', function () {
 
 });
 
+gulp.task('images', function () {
+    return gulp.src('./src/AppBundle/Resources/public/images/**/*.jpg')
+        .pipe(gulp.dest('./web/assets/images'));
+
+});
+
 // Watches
 gulp.task('watch', function () {
     gulp.watch('./src/AppBundle/Resources/js/**/*.js', ['js']);
@@ -21,4 +27,4 @@ gulp.task('watch', function () {
 });
 
 // Default
-gulp.task('default', ['js', 'sass', 'watch']);
+gulp.task('default', ['js', 'sass', 'images', 'watch']);
