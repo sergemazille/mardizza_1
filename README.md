@@ -7,3 +7,11 @@ Application de gestion de choix de la pizza du mardi
 - Composer
 - NPM
 - Gulp
+
+# Installation
+- git clone https://github.com/sergemazille/mardizza.git
+- cd mardizza
+- composer update
+- gulp deploy
+
+Don't forget to give read/write permissions to var/ directory
