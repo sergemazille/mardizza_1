@@ -28,3 +28,6 @@ gulp.task('watch', function () {
 
 // Default
 gulp.task('default', ['js', 'sass', 'images', 'watch']);
+
+// Deploy only (without watch task)
+gulp.task('deploy', ['js', 'sass', 'images']);
