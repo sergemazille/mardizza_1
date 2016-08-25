@@ -11,7 +11,7 @@ Application de gestion de choix de la pizza du mardi
 # Installation
 - git clone https://github.com/sergemazille/mardizza.git
 - cd mardizza
-- composer update
+- composer install
 - gulp deploy
 
 Don't forget to give read/write permissions to var/ directory
