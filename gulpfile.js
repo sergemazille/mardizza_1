@@ -3,6 +3,14 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
+var del = require('del');
+
+// clear temp files
+gulp.task('clear', function(){
+    return del([
+        'web/assets/temp',
+    ]);
+});
 
 // Scripts
 gulp.task('js', function () {
@@ -12,14 +20,14 @@ gulp.task('js', function () {
 });
 
 // Style
-gulp.task('sass', function () {
+gulp.task('sass', ['clear'], function () {
     return gulp.src('./src/AppBundle/Resources/sass/*.scss')
         .pipe(sass())
-        .pipe(gulp.dest('./src/AppBundle/Resources/public/css/'));
+        .pipe(gulp.dest('./web/assets/temp'));
 });
 
 gulp.task('concat-css', ['sass'], function (){
-    return gulp.src('./src/AppBundle/Resources/public/css/*.css')
+    return gulp.src('./web/assets/temp/**/*.css')
         .pipe(concat('style.css'))
         .pipe(gulp.dest('./web/assets/css'))
 });
@@ -34,11 +42,11 @@ gulp.task('images', function () {
 // Watches
 gulp.task('watch', function () {
     gulp.watch('./src/AppBundle/Resources/js/**/*.js', ['js']);
-    gulp.watch('./src/AppBundle/Resources/**/*.scss', ['sass', 'concat-css']);
+    gulp.watch('./src/AppBundle/Resources/**/*.scss', ['concat-css']);
 });
 
 // Default
-gulp.task('default', ['js', 'sass', 'concat-css', 'images', 'watch']);
+gulp.task('default', ['js', 'concat-css', 'images', 'watch']);
 
 // Deploy only (without watch task)
-gulp.task('deploy', ['js', 'sass', 'concat-css', 'images']);
+gulp.task('deploy', ['js', 'concat-css', 'images']);
