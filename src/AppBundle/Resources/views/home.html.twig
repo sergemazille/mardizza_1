@@ -1,8 +1,20 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block content %}
-    <div id="app">
-        <h1>${pageTitle}</h1>
+    <div id="app" class="container">
+        <h1 class="text-center">${pageTitle}</h1>
+
+        <div class="row">
+            {% for pizza in pizzas %}
+                <div class="text-center col-md-3">
+                    <h1>{{ pizza.name }}</h1>
+                    <p><img src="{{ asset('assets/images/pizzas/' ~ pizza.image ~ '.jpg') }}"></p>
+                    <p>{{ pizza.ingredients|upper }}</p>
+                    <h3>{{ pizza.price|number_format(2, ',', '.') }} €</h3>
+                </div>
+            {% endfor %}
+        </div>
+
     </div>
 {% endblock %}
 
