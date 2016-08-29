@@ -30,6 +30,11 @@ class Pizza
     /**
      * @ORM\Column(type="string")
      */
+    private $ingredients;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     private $image;
 
     /**
@@ -70,6 +75,22 @@ class Pizza
     public function setPrice($price)
     {
         $this->price = $price;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIngredients()
+    {
+        return $this->ingredients;
+    }
+
+    /**
+     * @param string $ingredients
+     */
+    public function setIngredients($ingredients)
+    {
+        $this->ingredients = $ingredients;
     }
 
     /**
