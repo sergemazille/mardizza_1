@@ -8,6 +8,8 @@ class HomeController extends Controller
 {
     public function homeAction()
     {
-        return $this->render('@App/home.html.twig');
+        $pizzas = $this->get('mardizza.pizza')->getPizzas();
+
+        return $this->render('@App/home.html.twig', compact('pizzas'));
     }
 }
