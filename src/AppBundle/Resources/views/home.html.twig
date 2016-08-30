@@ -6,11 +6,12 @@
 
         <div class="row">
             {% for pizza in pizzas %}
-                <div class="text-center col-md-3">
-                    <h1>{{ pizza.name }}</h1>
-                    <p><img src="{{ asset('assets/images/pizzas/' ~ pizza.image ~ '.jpg') }}"></p>
-                    <p>{{ pizza.ingredients|upper }}</p>
-                    <h3>{{ pizza.price|number_format(2, ',', '.') }} €</h3>
+                <div class="card col-md-3">
+                    <img class="card-img-top img-responsive" src="{{ asset('assets/images/pizzas/' ~ pizza.image ~ '.jpg') }}" alt="{{ pizza.name }}">
+                    <div class="card-block">
+                        <h4 class="card-title">{{ pizza.name|upper }}</h4>
+                        <p class="card-text">{{ pizza.ingredients }}</p>
+                    </div>
                 </div>
             {% endfor %}
         </div>
