@@ -1,12 +1,13 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block content %}
-    <div id="app" class="container">
+    <div id="app">
+
         <h1 class="text-center">${pageTitle}</h1>
 
-        <div class="row">
+        <div class="row pizza-cards">
             {% for pizza in pizzas %}
-                <div class="card col-md-3">
+                <div class="card col-sm-6 col-md-2">
                     <img class="card-img-top img-responsive" src="{{ asset('assets/images/pizzas/' ~ pizza.image ~ '.jpg') }}" alt="{{ pizza.name }}">
                     <div class="card-block">
                         <h4 class="card-title">{{ pizza.name|upper }}</h4>
