@@ -176,7 +176,7 @@ class LoadPizzaData implements FixtureInterface
                 "name" => "Primavera",
                 "ingredients" => "tomate, mozzarella, gorgonzola, roquette, pignon de pin, copeaux de parmesan",
                 "price" => 11.50,
-                "image" => "primavera",
+                "image" => "",
             ],
 
             [
@@ -260,7 +260,7 @@ class LoadPizzaData implements FixtureInterface
                 "name" => "Tartuffe",
                 "ingredients" => "crème fraîche, fromage, mozzarella à la truffe, jambon de parme, huile de noisette.",
                 "price" => 13.00,
-                "image" => "tartuffe",
+                "image" => "",
             ],
 
             [
