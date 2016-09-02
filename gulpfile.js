@@ -41,7 +41,7 @@ gulp.task('images', function () {
 
 // Watches
 gulp.task('watch', function () {
-    gulp.watch('./src/AppBundle/Resources/js/**/*.js', ['js']);
+    gulp.watch('./src/AppBundle/Resources/**/*.js', ['js']);
     gulp.watch('./src/AppBundle/Resources/**/*.scss', ['concat-css']);
 });
 
