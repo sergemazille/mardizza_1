@@ -19,19 +19,3 @@
 
     </div>
 {% endblock %}
-
-{% block scripts %}
-    {{ parent() }}
-
-    <script type="application/javascript">
-
-        Vue.config.delimiters = ['${', '}'];
-
-        new Vue({
-            el: '#app',
-            data: {
-                pageTitle: "Mardizza !!!"
-            }
-        });
-    </script>
-{% endblock %}
