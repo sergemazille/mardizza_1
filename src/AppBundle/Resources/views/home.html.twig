@@ -5,17 +5,26 @@
 
         <h1 class="text-center">${pageTitle}</h1>
 
-        <div class="row pizza-cards">
-            {% for pizza in pizzas %}
-                <div class="card col-sm-6 col-md-2">
-                    <img class="card-img-top img-responsive" src="{{ asset('assets/images/pizzas/' ~ pizza.image ~ '.jpg') }}" alt="{{ pizza.name }}">
-                    <div class="card-block">
-                        <h4 class="card-title">{{ pizza.name|upper }}</h4>
-                        <p class="card-text">{{ pizza.ingredients }}</p>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+        <div class="row">
 
+            <div class="pizza-cards col-md-8">
+                {% for pizza in pizzas %}
+                    <div class="card">
+                        <img class="card-img-top img-responsive" src="{{ asset('assets/images/pizzas/' ~ pizza.image ~ '.jpg') }}" alt="{{ pizza.name }}">
+                        <div class="card-block">
+                            <h4 class="card-title">{{ pizza.name|upper }}</h4>
+                            <p class="card-text">{{ pizza.ingredients }}</p>
+                            <p class="card-text">{{ pizza.price|number_format('2', ',', '.') }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-4">
+                <h1>Commande</h1>
+                <p id="order"></p>
+            </div>
+
+        </div>
     </div>
 {% endblock %}

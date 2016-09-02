@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
     initFirebase();
     initVueJs();
     initApp();
@@ -32,5 +32,25 @@ function initVueJs() {
 // App logic
 function initApp() {
 
-    // TODO
+    // order object on firebase DB
+    var orderRef = firebase.database().ref('order/');
+
+    // card click event
+    $('.card').on('click', function () {
+
+        var $pizzaName = ($(this).find('.card-title').text());
+
+        // update order object on firebase DB
+        orderRef.set({
+            pizza: $pizzaName,
+        });
+    });
+
+    var $orderInfo = $('#order');
+
+    // update page order info (synchro)
+    orderRef.on('child_changed', function (data) {
+
+        $orderInfo.text(data.val());
+    });
 }
