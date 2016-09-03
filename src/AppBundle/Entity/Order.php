@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @Doctrine\ORM\Mapping\Entity(repositoryClass="OrderRepository")
- * @Doctrine\ORM\Mapping\Table(name="order")
+ * @Doctrine\ORM\Mapping\Table(name="`order`") // as a reserved word, 'order' is escaped
  */
 class Order
 {
@@ -13,7 +13,6 @@ class Order
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
-
      */
     private $id;
 
