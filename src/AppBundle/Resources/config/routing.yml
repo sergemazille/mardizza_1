@@ -7,8 +7,3 @@ order:
     path: /order
     defaults: { _controller: AppBundle:Page:order }
     methods: [GET]
-
-create_order:
-    path: /order/create
-    defaults: { _controller: AppBundle:Order:create }
-    methods: [GET]
