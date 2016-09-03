@@ -1,3 +1,6 @@
-.card:hover {
-    cursor: pointer;
+.card{
+
+    &:hover {
+        cursor: pointer;
+    }
 }
