@@ -1,4 +1,2 @@
-services:
-    mardizza.pizza:
-        class: AppBundle\Service\PizzaService
-        arguments: [ '@doctrine.orm.entity_manager' ]
+imports:
+    - { resource: '@AppBundle/Resources/config/services.yml' }
