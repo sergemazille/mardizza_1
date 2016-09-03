@@ -32,25 +32,32 @@ function initVueJs() {
 // App logic
 function initApp() {
 
-    // order object on firebase DB
-    var orderRef = firebase.database().ref('order/');
+    // Firebase database reference
+    var database = firebase.database();
 
-    // card click event
-    $('.card').on('click', function () {
+    // new order reference
+    var timestamp = Date.now();
+    var orderPath = 'orders/' + timestamp + '/';
 
-        var $pizzaName = ($(this).find('.card-title').text());
+    // new order pizzas references
+    var pizzasPath = orderPath + 'pizzas/';
+    var pizzasRef = database.ref(pizzasPath);
 
-        // update order object on firebase DB
-        orderRef.set({
-            pizza: $pizzaName,
+    // add a new pizza to the order
+    $('.card').on('click', function(){
+
+        var card = $(this);
+        var name = card.find('.pizza-name').text();
+        var price = card.find('.pizza-price').text();
+
+        // push new pizza to DB
+        var pizza = pizzasRef.push({
+            'name': name,
+            'price': price
         });
-    });
 
-    var $orderInfo = $('#order');
-
-    // update page order info (synchro)
-    orderRef.on('child_changed', function (data) {
-
-        $orderInfo.text(data.val());
+        // show new pizza on page
+        var pizzaList = $('#pizzas');
+        pizzaList.append('<li>' + name + ' : ' + price + '</li>');
     });
 }
