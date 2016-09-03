@@ -1,0 +1,40 @@
+{
+  "name": "mardizza",
+  "version": "1.0.0",
+  "description": "Gestion du choix de la pizza du mardi",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "scripts": {
+    "test": "npm-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergemazille/mardizza.git"
+  },
+  "keywords": [
+    "mardizza"
+  ],
+  "author": "Serge Mazille",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sergemazille/mardizza/issues"
+  },
+  "homepage": "https://github.com/sergemazille/mardizza#readme"
+}

@@ -34,6 +34,7 @@ function initApp() {
 
     // Firebase database reference
     var database = firebase.database();
+    console.log(database);
 
     // new order reference
     var timestamp = Date.now();

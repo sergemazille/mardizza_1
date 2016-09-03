@@ -1,32 +1,47 @@
 'use strict';
 
+// dependencies
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var del = require('del');
+var babelify = require('babelify');
+var browserify = require('browserify');
+var buffer = require('vinyl-buffer');
+var source = require('vinyl-source-stream');
+var sourcemaps = require('gulp-sourcemaps');
 
 // clear temp files
-gulp.task('clear', function(){
+gulp.task('clear', function () {
     return del([
         'web/assets/temp',
     ]);
 });
 
-// Scripts
-gulp.task('js', function () {
-    return gulp.src('./src/AppBundle/Resources/public/js/**/*.js')
-        .pipe(gulp.dest('./web/assets/js'));
+// Scripts (ES6)
+gulp.task('babelify', function () {
+    let bundler = browserify('./src/AppBundle/Resources/public/js/main.js', {debug: true}).transform(babelify);
 
+    bundler.bundle()
+        .on('error', function (err) {
+            console.error(err);
+            this.emit('end');
+        })
+        .pipe(source('app.js')) //fichier de destination
+        .pipe(buffer())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('web/assets/js'));
 });
 
-// Style
+// Style (sass)
 gulp.task('sass', ['clear'], function () {
     return gulp.src('./src/AppBundle/Resources/sass/*.scss')
         .pipe(sass())
         .pipe(gulp.dest('./web/assets/temp'));
 });
 
-gulp.task('concat-css', ['sass'], function (){
+gulp.task('concat-css', ['sass'], function () {
     return gulp.src('./web/assets/temp/**/*.css')
         .pipe(concat('style.css'))
         .pipe(gulp.dest('./web/assets/css'))
@@ -41,12 +56,12 @@ gulp.task('images', function () {
 
 // Watches
 gulp.task('watch', function () {
-    gulp.watch('./src/AppBundle/Resources/**/*.js', ['js']);
+    gulp.watch('./src/AppBundle/Resources/**/*.js', ['babelify']);
     gulp.watch('./src/AppBundle/Resources/**/*.scss', ['concat-css']);
 });
 
 // Default
-gulp.task('default', ['js', 'concat-css', 'images', 'watch']);
+gulp.task('default', ['babelify', 'concat-css', 'images', 'watch']);
 
 // Deploy only (without watch task)
-gulp.task('deploy', ['js', 'concat-css', 'images']);
+gulp.task('deploy', ['babelify', 'concat-css', 'images']);
