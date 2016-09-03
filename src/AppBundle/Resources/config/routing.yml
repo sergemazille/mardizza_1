@@ -1,0 +1,9 @@
+home:
+    path: /
+    defaults: { _controller: AppBundle:Page:home }
+    methods: [GET]
+
+order:
+    path: /order
+    defaults: { _controller: AppBundle:Page:order }
+    methods: [GET]

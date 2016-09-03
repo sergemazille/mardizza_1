@@ -1,34 +1,11 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block content %}
-    <div id="app">
 
-        <h1 class="text-center">${pageTitle}</h1>
-
-        <div class="row">
-
-            <div class="pizza-cards col-md-8">
-                {% for pizza in pizzas %}
-                    <div class="card">
-                        <img class="card-img-top img-responsive"
-                             src="{{ asset('assets/images/pizzas/' ~ pizza.image ~ '.jpg') }}" alt="{{ pizza.name }}">
-
-                        <div class="card-block">
-                            <h4 class="card-title pizza-name">{{ pizza.name|upper }}</h4>
-
-                            <p class="card-text">{{ pizza.ingredients }}</p>
-
-                            <p class="card-text pizza-price">{{ pizza.price|number_format('2', ',', '.') }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-
-            <div class="col-md-4">
-                <h1>Commande</h1>
-                <ul id="pizzas" class="list-unstyled"></ul>
-            </div>
-
+    <div class="container">
+        <div class="text-center" style="margin:5em;">
+            <a href="{{ path('order') }}" title="Nouvelle commande" class="btn btn-primary btn-lg">Nouvelle commande</a>
         </div>
     </div>
+
 {% endblock %}
