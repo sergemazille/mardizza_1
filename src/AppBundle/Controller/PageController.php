@@ -11,7 +11,14 @@ class PageController extends Controller
         return $this->render('@App/home.html.twig');
     }
 
-    public function orderAction(){
+    public function orderAction()
+    {
+        // anonymous users are sent back to login form
+        $securityContext = $this->container->get('security.authorization_checker');
+
+        if (!$securityContext->isGranted('ROLE_USER')) {
+            return $this->redirectToRoute('login');
+        }
 
         $pizzas = $this->get('mardizza.pizza')->getPizzas();
 

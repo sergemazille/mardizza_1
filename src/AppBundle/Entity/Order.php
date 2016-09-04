@@ -4,8 +4,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @Doctrine\ORM\Mapping\Entity(repositoryClass="OrderRepository")
- * @Doctrine\ORM\Mapping\Table(name="`order`") // as a reserved word, 'order' is escaped
+ * @ORM\Entity(repositoryClass="OrderRepository")
+ * @ORM\Table(name="`order`") // as a reserved word, 'order' is escaped
  */
 class Order
 {

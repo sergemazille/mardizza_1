@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="UserRepository")
  * @ORM\Table(name="user")
  */
 class User implements UserInterface
@@ -27,6 +27,14 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
     
     public function getUsername()
     {
@@ -59,14 +67,6 @@ class User implements UserInterface
         return $this->password;
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public function getSalt()
     {
         // automatic with bcrypt
@@ -74,6 +74,6 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
-        $this->password = null;
+//        $this->password = null;
     }
 }
