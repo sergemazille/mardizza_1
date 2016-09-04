@@ -14,9 +14,8 @@ class PageController extends Controller
     public function orderAction()
     {
         // anonymous users are sent back to login form
-        $securityContext = $this->container->get('security.authorization_checker');
-
-        if (!$securityContext->isGranted('ROLE_USER')) {
+        $user = $this->getUser();
+        if (!$user) {
             return $this->redirectToRoute('login');
         }
 
