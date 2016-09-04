@@ -7,3 +7,8 @@ order:
     path: /order
     defaults: { _controller: AppBundle:Page:order }
     methods: [GET]
+
+login:
+    path: /login
+    defaults: { _controller: AppBundle:Security:login }
+    methods: [GET, POST]
