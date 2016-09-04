@@ -23,7 +23,7 @@ class LoadUserData implements FixtureInterface
             $user->setFirstName($item['firstName']);
             $user->setEmail($item['email']);
 
-            $manager->persist($item);
+            $manager->persist($user);
             $manager->flush();
         }
     }
