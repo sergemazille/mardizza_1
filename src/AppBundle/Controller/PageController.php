@@ -8,7 +8,9 @@ class PageController extends Controller
 {
     public function homeAction()
     {
-        return $this->render('@App/home.html.twig');
+        return $this->render('@App/home.html.twig', [
+            'user' => $this->getUser(),
+        ]);
     }
 
     public function orderAction()
