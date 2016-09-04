@@ -4,8 +4,8 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        mardizza_users:
+            entity: { class: AppBundle\Entity\User, property: username }
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -15,6 +15,12 @@ security:
 
         main:
             anonymous: ~
+            guard:
+                authenticators:
+                    - mardizza.security.login_form_authenticator
+
+            logout:
+                path: /logout
             # activate different ways to authenticate
 
             # http_basic: ~

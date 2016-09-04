@@ -24,4 +24,10 @@ class SecurityController extends Controller
             ]
         );
     }
+
+    public function logoutAction()
+    {
+        // Symfony takes care of the logout action by itself (security.yml : firewalls > main > logout)
+        throw new \Exception('Ne peut pas être atteint...');
+    }
 }

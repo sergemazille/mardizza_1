@@ -19,23 +19,18 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string")
      */
-    private $email;
+    private $username;
 
     /**
      * @ORM\Column(type="string")
      */
-    private $firstName;
-
+    private $password;
+    
     public function getUsername()
     {
-        return $this->email;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
+        return $this->username;
     }
 
     public function getRoles()
@@ -43,14 +38,25 @@ class User implements UserInterface
         return ['ROLE_USER'];
     }
 
-    public function getFirstName()
+    public function setUsername($username)
     {
-        return $this->firstName;
+        $this->username = $username;
     }
 
-    public function setFirstName($firstName)
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
     {
-        $this->firstName = $firstName;
+        $this->password = password_hash($password, PASSWORD_BCRYPT);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     /**
@@ -61,18 +67,13 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getPassword()
-    {
-        // TODO: Implement getPassword() method.
-    }
-
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        // automatic with bcrypt
     }
 
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        $this->password = null;
     }
 }

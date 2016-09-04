@@ -13,15 +13,15 @@ class LoadUserData implements FixtureInterface
     {
         $users = [
             [
-                "firstName" => "Serge",
-                "email" => "serge.mazille@gmail.com",
+                "username" => "Serge",
+                "password" => "password",
             ]
         ];
 
         foreach($users as $item){
             $user = new User();
-            $user->setFirstName($item['firstName']);
-            $user->setEmail($item['email']);
+            $user->setUsername($item['username']);
+            $user->setPassword($item['password']);
 
             $manager->persist($user);
             $manager->flush();

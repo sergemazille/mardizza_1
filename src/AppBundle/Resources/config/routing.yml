@@ -12,3 +12,8 @@ login:
     path: /login
     defaults: { _controller: AppBundle:Security:login }
     methods: [GET, POST]
+
+logout:
+    path: /logout
+    defaults: { _controller: AppBundle:Security:logout }
+    methods: [GET]
