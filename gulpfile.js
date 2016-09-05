@@ -61,7 +61,7 @@ gulp.task('watch', function () {
 });
 
 // Default
-gulp.task('default', ['babelify', 'concat-css', 'images', 'watch']);
+gulp.task('default', ['deploy', 'watch']);
 
 // Deploy only (without watch task)
 gulp.task('deploy', ['babelify', 'concat-css', 'images']);
