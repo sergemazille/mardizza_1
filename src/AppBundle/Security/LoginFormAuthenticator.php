@@ -31,14 +31,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return;
         }
 
-        return array('_username' => $request->get('_username'), '_password' => $request->get('_password'));
+        return array('_email' => $request->get('_email'), '_password' => $request->get('_password'));
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider) : User
     {
-        $username = $credentials['_username'];
+        $email = $credentials['_email'];
 
-        return $this->em->getRepository('AppBundle:User')->findOneBy(['username' => $username]);
+        return $this->em->getRepository('AppBundle:User')->findOneBy(['email' => $email]);
     }
 
     public function checkCredentials($credentials, UserInterface $user)

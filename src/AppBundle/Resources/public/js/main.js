@@ -1,11 +1,11 @@
 import { VueJs } from './VueJs';
-import { Database } from './Database';
+import { FirebaseDb } from './FirebaseDb';
 import { App } from './App';
 
 $(document).ready(function () {
 
     // initialization
-    Database.init();
+    FirebaseDb.init();
     VueJs.init();
     App.init();
 });

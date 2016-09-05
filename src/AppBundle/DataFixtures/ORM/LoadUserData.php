@@ -15,6 +15,7 @@ class LoadUserData implements FixtureInterface
             [
                 "username" => "Serge",
                 "password" => "password",
+                "email" => "serge.mazille@gmail.com"
             ]
         ];
 
@@ -22,6 +23,7 @@ class LoadUserData implements FixtureInterface
             $user = new User();
             $user->setUsername($item['username']);
             $user->setPassword($item['password']);
+            $user->setEmail($item['email']);
 
             $manager->persist($user);
             $manager->flush();

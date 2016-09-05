@@ -25,6 +25,7 @@ class PageController extends Controller
 
         return $this->render('@App/order.html.twig', [
             'pizzas' => $pizzas,
+            'user' => $user,
         ]);
     }
 }

@@ -19,7 +19,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     private $username;
 
@@ -28,6 +28,11 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $email;
+    
     /**
      * @return int
      */
@@ -67,6 +72,22 @@ class User implements UserInterface
         return $this->password;
     }
 
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
     public function getSalt()
     {
         // automatic with bcrypt
@@ -74,6 +95,5 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
-//        $this->password = null;
     }
 }

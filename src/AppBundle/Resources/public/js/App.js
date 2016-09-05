@@ -1,33 +1,34 @@
+import { Events } from './Events';
+
 export class App {
 
     static init() {
+        
+        Events.init();
+
+        // show symfony and firebase auth checker
+        // TODO: delete on prod
+        let checkUser = setInterval(function(){
+
+            let fUser = firebase.auth().currentUser;
+
+            if(fUser != null){
+                $("p#check-auth-firebase").text('Firebase : ' + fUser.email);
+                clearInterval(checkUser);
+            }
+        }, 500);
+
+
         // Firebase database reference
-        var database = firebase.database();
+        let database = firebase.database();
 
         // new order reference
-        var timestamp = Date.now();
-        var orderPath = 'orders/' + timestamp + '/';
+        let timestamp = Date.now();
+        let orderPath = 'orders/' + timestamp + '/';
 
         // new order pizzas references
-        var pizzasPath = orderPath + 'pizzas/';
-        var pizzasRef = database.ref(pizzasPath);
-
-        // add a new pizza to the order
-        $('.card').on('click', function(){
-
-            var card = $(this);
-            var name = card.find('.pizza-name').text();
-            var price = card.find('.pizza-price').text();
-
-            // push new pizza to DB
-            var pizza = pizzasRef.push({
-                'name': name,
-                'price': price
-            });
-
-            // show new pizza on page
-            var pizzaList = $('#pizzas');
-            pizzaList.append('<li>' + name + ' : ' + price + '</li>');
-        });
+        let pizzasPath = orderPath + 'pizzas/';
+        let pizzasRef = database.ref(pizzasPath);
+        
     }
 }

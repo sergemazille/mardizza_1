@@ -11,14 +11,14 @@
                 {% endif %}
 
                 <h1>Login</h1>
-                <form action="{{ path('login') }}" method="POST">
+                <form action="{{ path('login') }}" method="POST" id="login-form">
 
                     <div class="form-group">
-                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Prénom"/>
+                        <input type="email" id="email" name="_email" class="form-control" placeholder="Email" required/>
                     </div>
 
                     <div class="form-group">
-                        <input type="password" id="password" name="_password" class="form-control" placeholder="Mot de passe" />
+                        <input type="password" id="password" name="_password" class="form-control" placeholder="Mot de passe" required/>
                     </div>
 
                     <div class="form-group">
