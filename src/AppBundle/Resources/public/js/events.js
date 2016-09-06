@@ -5,7 +5,7 @@ export class Events {
 
     static init() {
 
-        $(".card").on('click', function(){
+        $(".card").on('click', function () {
             let fUser = firebase.auth().currentUser;
 
             console.log(fUser.email);
