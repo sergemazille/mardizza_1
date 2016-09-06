@@ -1,13 +1,16 @@
-.card{
+.navbar-default {
 
-    &:hover {
-        cursor: pointer;
+    .navbar-brand {
+        font-size: 3em;
+        font-family: 'Euphoria Script', cursive;
+        color: grey;
+
+        &:hover {
+            color: black;
+        }
     }
-}
 
-#order-basket{
-    position: fixed;
-    right: 2em;
-    top: 5em;
-    z-index: 99;
+    form {
+        margin-top: 0.5em;
+    }
 }

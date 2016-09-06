@@ -2,12 +2,4 @@
 
 {% block content %}
 
-    <div class="container text-center" style="margin:5em;">
-        {% if user is not null %}
-            <a href="{{ path('order') }}" title="Nouvelle commande" class="btn btn-primary btn-lg">Nouvelle commande</a>
-        {% else %}
-            <a href="{{ path('login') }}" title="Page de login" class="btn btn-primary btn-lg">Login</a>
-        {% endif %}
-    </div>
-
 {% endblock %}
