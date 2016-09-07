@@ -40,12 +40,15 @@ export class FirebaseDb {
                 callback(); // trigger callback for Symfony error message
             });
     }
-    
-    static logOut(callback){
+
+    static logOut(callback) {
         firebase.auth().signOut()
-            .then(function(){
-                
+            .then(function () {
                 callback();
             });
+    }
+
+    static setDatabaseOrderReference(orderReference) {
+        return firebase.database().ref('orders/' + orderReference);
     }
 }

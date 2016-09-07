@@ -11,4 +11,13 @@ export class Dom {
             'password': $password
         }
     }
+    
+    static getOrderReference(){
+        return $("#order-reference").text();
+    }
+    
+    static addPizza(pizzaId, pizza){
+        let pizzaItem = `<li id="${pizzaId}">${pizza.name} : ${pizza.price}</li>`;
+        $("#pizza-list").append(pizzaItem);
+    }
 }

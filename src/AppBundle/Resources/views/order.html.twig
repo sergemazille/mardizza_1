@@ -29,8 +29,8 @@
             </div>
 
             <div class="col-md-4" id="order-basket">
-                <h1>Commande <small>{{ order.createdAt|date('d/m/y') }}</small></h1>
-                <ul id="pizzas" class="list-unstyled"></ul>
+                <h1>Commande <small id="order-reference">{{ order.createdAt|date('d-m-y') }}</small></h1>
+                <ul id="pizza-list" class="list-unstyled"></ul>
             </div>
 
         </div>
