@@ -14,3 +14,30 @@
         margin-top: 0.5em;
     }
 }
+
+// Pizza cards
+.card{
+    &:hover{
+        cursor: pointer;
+        background-color: #ddd;
+    }
+}
+
+// Order-basket
+div#order-basket{
+
+    ul#pizza-list{
+
+        li{
+            text-transform: capitalize;
+
+            .glyphicon-remove{
+                color: #bc312b;
+
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

@@ -49,6 +49,10 @@ export class FirebaseDb {
     }
 
     static setDatabaseOrderReference(orderReference) {
-        return firebase.database().ref('orders/' + orderReference);
+        return firebase.database().ref(`orders/${orderReference}`);
+    }
+
+    static getPizzaReference(orderReference, pizzaId) {
+        return firebase.database().ref(`orders/${orderReference}/${pizzaId}`);
     }
 }
