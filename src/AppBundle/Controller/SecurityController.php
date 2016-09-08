@@ -9,6 +9,11 @@ class SecurityController extends Controller
 {
     public function loginAction()
     {
+        // redirect to order page if already logged in
+        if($this->getUser()){
+            return $this->redirectToRoute('order');
+        }
+
         $authenticationUtils = $this->get('security.authentication_utils');
 
         // get the login error if there is one
