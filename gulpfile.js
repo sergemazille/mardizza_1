@@ -58,6 +58,7 @@ gulp.task('images', function () {
 gulp.task('watch', function () {
     gulp.watch('./src/AppBundle/Resources/**/*.js', ['babelify']);
     gulp.watch('./src/AppBundle/Resources/**/*.scss', ['concat-css']);
+    gulp.watch('./src/AppBundle/Resources/**/*.jpg', ['images']);
 });
 
 // Default
