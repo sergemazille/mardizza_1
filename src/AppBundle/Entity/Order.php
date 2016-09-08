@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,7 +62,7 @@ class Order
     }
 
     /**
-     * @param mixed $createdAt
+     * @param $createdAt
      */
     public function setCreatedAt($createdAt)
     {
