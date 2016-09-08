@@ -1,5 +1,6 @@
 import { VueJs } from './VueJs';
 import { FirebaseDb } from './FirebaseDb';
+import { Event } from './Event';
 import { App } from './App';
 
 $(document).ready(function () {

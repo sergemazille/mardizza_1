@@ -51,26 +51,11 @@ export class Event {
             Dom.addPizza(data.key, data.val());
 
             // refresh Dom for jquery events
-            Event.refreshDomEvents();
+            // Event.refreshDomEvents();
         });
 
         databaseReference.on('child_removed', function (data) {
             Dom.removePizza(data.key);
-        });
-    }
-
-    static refreshDomEvents() {
-
-        // current order database reference
-        let orderReference = Dom.getOrderReference();
-
-        // remove a pizza on database
-        $(".pizza-remove").on('click', function (e) {
-
-            let $pizzaId = $(e.currentTarget).parent().attr('id');
-            let pizzaReference = FirebaseDb.getPizzaReference(orderReference, $pizzaId);
-
-            pizzaReference.remove();
         });
     }
 }
