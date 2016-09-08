@@ -13,6 +13,8 @@
             <ul class="nav navbar-nav">
                 {% if user is defined and user is not null %}
                     {% include 'AppBundle:partials:_account.html.twig' %}
+                {% elseif app.request.attributes.get('_route') == 'login' %}
+                    {# hide short login form #}
                 {% else %}
                     {% include 'AppBundle:partials:_short-login.html.twig' %}
                 {% endif %}

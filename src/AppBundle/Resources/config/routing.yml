@@ -8,7 +8,7 @@ order:
     defaults: { _controller: AppBundle:Page:order }
     methods: [GET]
 
-create_account:
+account_create:
     path: /account/create
     defaults: { _controller: AppBundle:Security:create }
     methods: [GET]

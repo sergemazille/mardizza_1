@@ -1,6 +1,8 @@
-<form action="{{ path('login') }}" method="POST" class="form-inline">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token('login_form') }}"/>
-    <div class="form-group"><input type="email" name="_email" placeholder="Email" class="form-control" required/></div>
-    <div class="form-group"><input type="password" name="_password" placeholder="Mot de passe" class="form-control" required/></div>
-    <button type="submit" class="btn btn-success btn-sm">Login</button>
-</form>
+<div class="nav-right-content">
+    <form action="{{ path('login') }}" method="POST" class="form-inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token('login_form') }}"/>
+        <div class="form-group"><input type="email" name="_email" placeholder="Email" class="form-control" required/></div>
+        <div class="form-group"><input type="password" name="_password" placeholder="Mot de passe" class="form-control" required/></div>
+        <button type="submit" class="btn btn-success btn-sm">Login</button>
+    </form>
+</div>

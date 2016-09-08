@@ -10,24 +10,53 @@
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
 
-                <h1>Login</h1>
-                <form action="{{ path('login') }}" method="POST" id="login-form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>Vous avez déjà un compte ?</h1>
+                        <form action="{{ path('login') }}" method="POST" id="login-form">
 
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token('login_form') }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token('login_form') }}">
 
-                    <div class="form-group">
-                        <input type="email" id="email" name="_email" class="form-control" placeholder="Email" required/>
+                            <div class="form-group">
+                                <input type="email" id="email" name="_email" class="form-control" placeholder="Email" required/>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" id="password" name="_password" class="form-control"
+                                       placeholder="Mot de passe" required/>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-lg">login</button>
+                            </div>
+
+                        </form>
                     </div>
 
-                    <div class="form-group">
-                        <input type="password" id="password" name="_password" class="form-control" placeholder="Mot de passe" required/>
-                    </div>
+                    <div class="col-md-6">
+                        <h1>Créer un compte</h1>
+                        <form action="{{ path('account_create') }}" method="POST" id="signup-form">
 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-lg">login</button>
-                    </div>
+                            <div class="form-group">
+                                <input type="text" id="username" name="_username" class="form-control" placeholder="Prénom" required/>
+                            </div>
 
-                </form>
+                            <div class="form-group">
+                                <input type="email" id="email" name="_email" class="form-control" placeholder="Email" required/>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" id="password" name="_password" class="form-control"
+                                       placeholder="Mot de passe" required/>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-lg">Créer</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
 
             </div>
         </div>
