@@ -34,6 +34,11 @@ gulp.task('babelify', function () {
         .pipe(gulp.dest('web/assets/js'));
 });
 
+gulp.task('lib', function () {
+    return gulp.src('./src/AppBundle/Resources/public/js/lib/*.js')
+        .pipe(gulp.dest('./web/assets/js/lib'));
+});
+
 // Style (sass)
 gulp.task('sass', ['clear'], function () {
     return gulp.src('./src/AppBundle/Resources/sass/*.scss')
@@ -57,6 +62,7 @@ gulp.task('images', function () {
 // Watches
 gulp.task('watch', function () {
     gulp.watch('./src/AppBundle/Resources/**/*.js', ['babelify']);
+    gulp.watch('./src/AppBundle/Resources/public/js/lib/*.js', ['lib']);
     gulp.watch('./src/AppBundle/Resources/**/*.scss', ['concat-css']);
     gulp.watch('./src/AppBundle/Resources/**/*.jpg', ['images']);
 });
@@ -65,4 +71,4 @@ gulp.task('watch', function () {
 gulp.task('default', ['deploy', 'watch']);
 
 // Deploy only (without watch task)
-gulp.task('deploy', ['babelify', 'concat-css', 'images']);
+gulp.task('deploy', ['babelify', 'lib', 'concat-css', 'images']);

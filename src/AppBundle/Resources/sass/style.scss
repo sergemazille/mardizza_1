@@ -1,3 +1,5 @@
+$light-grey: #eeeeee;
+
 .navbar-default {
 
     .navbar-brand {
@@ -13,29 +15,112 @@
     .nav-right-content {
         margin-top: 0.5em;
     }
+
+    border-bottom: 1px solid darken($light-grey, 20%);
 }
 
-// Pizza cards
-.card{
-    &:hover{
-        cursor: pointer;
-        background-color: #ddd;
-    }
-}
+#app {
+    background-color: darken($light-grey, 4%);
 
-// Order-basket
-div#order-basket{
+    @media screen and (min-width: 48em) {
+        // Pizza cards
+        #pizza-cards {
+            margin-top: 2.5em;
+            width: 70%;
+            margin-left: 4em;
 
-    ul#pizza-list{
+            .pizza-card {
+                padding: 0;
+                background-color: lighten($light-grey, 6%);
+                margin: 0.5em;
+                width: 15em;
 
-        li{
-            text-transform: capitalize;
-
-            .glyphicon-remove{
-                color: #bc312b;
-
-                &:hover{
+                &:hover {
                     cursor: pointer;
+                    box-shadow: 2px 2px 15px 5px darken($light-grey, 20%); // box-shadow: h-pos v-pos (blur) (spread) (color) (inset);
+                    transform: translate(-1px,-1px);
+
+                    .pizza-card-footer {
+                        p {
+                            border-radius: inherit;
+                        }
+                    }
+                }
+
+                .pizza-card-content {
+                    border-top: 1px solid darken($light-grey, 20%);
+                    border-right: 1px solid darken($light-grey, 20%);
+                    border-left: 1px solid darken($light-grey, 20%);
+
+                    img.pizza-card-img {
+                        width: 100%;
+                    }
+
+                    .pizza-card-body {
+                        padding: 0.5em;
+
+                        .pizza-card-ingredients {
+                            margin: 0;
+                            height: 4em;
+                        }
+                    }
+                }
+
+                .pizza-card-footer {
+                    background-color: $light-grey;
+                    text-align: center;
+                    font-size: 1.2em;
+
+                    p {
+                        margin: 0;
+                        border: 1px solid darken($light-grey, 20%);
+                        border-radius: 0 0 5px 5px;
+                        padding: 0.15em;
+                    }
+                }
+            }
+        }
+
+        // Order-basket
+        div#order-basket {
+            margin-top: 6em;
+            position: fixed;
+            right: 3em;
+            top: 2em;
+            z-index: 99;
+            width: 29%;
+
+            #order-header {
+                padding: 1em;
+                background-color: #19233B;
+                color: white;
+
+                h1, h2 {
+                    text-align: center;
+                    margin: 0;
+                }
+
+                h1 {
+                    font-weight: bold;
+                    font-size: 2.4em;
+                }
+
+                h2 {
+                    font-size: 1.8em;
+                }
+            }
+
+            ul#pizza-list {
+                li {
+                    text-transform: capitalize;
+
+                    .glyphicon-remove {
+                        color: #bc312b;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
                 }
             }
         }

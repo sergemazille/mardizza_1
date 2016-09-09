@@ -1,7 +1,7 @@
 import { VueJs } from './VueJs';
 import { FirebaseDb } from './FirebaseDb';
 import { Event } from './Event';
-import { App } from './App';
+import { Dom } from './Dom';
 
 $(document).ready(function () {
 
@@ -9,5 +9,5 @@ $(document).ready(function () {
     FirebaseDb.init();
     VueJs.init();
     Event.init();
-    App.init();
+    Dom.init();
 });

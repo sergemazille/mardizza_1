@@ -35,7 +35,7 @@ export class Event {
         });
 
         // add a pizza on database
-        $(".card").on('click', function () {
+        $(".pizza-card").on('click', function () {
 
             let pizza = Dom.getSelectedPizza($(this));
 
@@ -49,9 +49,6 @@ export class Event {
         // watch database
         databaseReference.on('child_added', function (data) {
             Dom.addPizza(data.key, data.val());
-
-            // refresh Dom for jquery events
-            // Event.refreshDomEvents();
         });
 
         databaseReference.on('child_removed', function (data) {

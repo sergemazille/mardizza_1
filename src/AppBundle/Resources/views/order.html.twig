@@ -3,36 +3,24 @@
 {% block content %}
     <div id="app">
         
-        <h1 class="text-center">${pageTitle}</h1>
+        <h1>${pageTitle}</h1>
 
-        <div class="row">
-
-            <div class="pizza-cards col-md-8">
+            <div id="pizza-cards">
                 <ul class="list-inline list-unstyled">
                     {% for pizza in pizzas %}
-                        <li>
-                            <div class="card">
-                                <img class="card-img-top img-responsive"
-                                     src="{{ asset('assets/images/pizzas/' ~ pizza.image ~ '.jpg') }}" alt="{{ pizza.name }}">
-
-                                <div class="card-block">
-                                    <h4 class="card-title pizza-name">{{ pizza.name|upper }}</h4>
-
-                                    <p class="card-text">{{ pizza.ingredients }}</p>
-
-                                    <p class="card-text pizza-price">{{ pizza.price|number_format('2', ',', '.') }}</p>
-                                </div>
-                            </div>
-                        </li>
+                        {% include 'AppBundle:partials:_pizza-card.html.twig' %}
                     {% endfor %}
                 </ul>
             </div>
 
-            <div class="col-md-4" id="order-basket">
-                <h1>Commande <small id="order-reference">{{ order.createdAt|date('d-m-y') }}</small></h1>
+            <div id="order-basket">
+                <div id="order-basket-header">
+                    <h1>Commande</h1>
+                    <h2 id="order-reference">{{ order.createdAt|date('d-m-y') }}</h2>
+                </div>
+
                 <ul id="pizza-list" class="list-unstyled"></ul>
             </div>
 
-        </div>
     </div>
 {% endblock %}

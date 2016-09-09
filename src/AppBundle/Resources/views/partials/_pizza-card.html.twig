@@ -1,0 +1,15 @@
+<li class="pizza-card">
+    <div class="pizza-card-content">
+        <img class="pizza-card-img img-responsive"
+             src="{{ asset('assets/images/pizzas/' ~ pizza.image ~ '.jpg') }}" alt="{{ pizza.name }}">
+
+        <div class="pizza-card-body">
+            <h4 class="pizza-card-name pizza-name">{{ pizza.name|upper }}</h4>
+            <p class="pizza-card-ingredients">{{ pizza.ingredients }}</p>
+        </div>
+    </div>
+
+    <div class="pizza-card-footer">
+        <p class="pizza-card-price pizza-price">{{ pizza.price|number_format('2', ',', '.') }}&nbsp;€</p>
+    </div>
+</li>
