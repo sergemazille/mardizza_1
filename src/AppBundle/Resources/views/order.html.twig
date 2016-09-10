@@ -7,7 +7,7 @@
 
             <div id="pizza-cards">
                 <ul class="list-inline list-unstyled">
-                    {% for pizza in pizzas | slice(1,9) %}
+                    {% for pizza in pizzas %}
                         {% include 'AppBundle:partials:_pizza-card.html.twig' %}
                     {% endfor %}
                 </ul>
