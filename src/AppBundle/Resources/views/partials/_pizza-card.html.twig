@@ -7,15 +7,15 @@
         </div>
 
         <div class="pizza-card-body">
-            <h4 class="pizza-card-name pizza-name">{{ pizza.name|upper }}</h4>
-            <p class="pizza-card-ingredients">{{ pizza.ingredients }}</p>
+            <h4 class="pizza-card-name pizza-name" data-name="{{ pizza.name}}">{{ pizza.name|upper }}</h4>
+            <p class="pizza-card-ingredients" data-ingredients="{{ pizza.ingredients}}">{{ pizza.ingredients }}</p>
         </div>
     </div>
 
     <div class="pizza-card-footer">
 
         <p>&nbsp;&nbsp;&nbsp;&nbsp;</p> {# temp #}
-        <p class="pizza-card-price pizza-price">{{ pizza.price|number_format('2', ',', '.') }}&nbsp;€</p>
+        <p class="pizza-card-price pizza-price" data-price="{{ pizza.price}}">{{ pizza.price|number_format('2', ',', '.') }}&nbsp;€</p>
         <a class="add-favorite"><span class="glyphicon glyphicon-heart-empty"></span></a>
 
     </div>

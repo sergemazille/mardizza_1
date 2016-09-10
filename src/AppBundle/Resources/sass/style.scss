@@ -133,13 +133,33 @@ $light-grey: #eeeeee;
 
                 td {
                     .glyphicon-remove {
+                        padding-left: 1em;
                         color: #bc312b;
 
                         &:hover {
                             cursor: pointer;
                         }
                     }
+
+                    &.pizza-price {
+                        padding-right: 1em;
+                        text-align: end;
+                    }
                 }
+            }
+
+            #basket-message {
+                background-color: $light-grey;
+                padding: 1em;
+            }
+
+            #basket-total {
+                border-top: 2px solid $light-grey;
+                background-color: lighten($light-grey, 4%);
+                padding: 1em;
+                font-size: 1.2em;
+                font-weight: bold;
+                text-align: end;
             }
         }
     }

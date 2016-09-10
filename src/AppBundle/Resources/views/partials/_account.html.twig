@@ -3,7 +3,7 @@
        aria-expanded="false">
         <span class="glyphicon glyphicon-user"></span>
         {% if user is defined and user is not null %}
-            <span id="username">{{ user.username }}</span>
+            <span id="username" data-username="{{ user.username }}">{{ user.username }}</span>
         {% else %}
             Mon compte
         {% endif %}

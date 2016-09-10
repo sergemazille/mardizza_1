@@ -68,12 +68,21 @@ export class Event {
         databaseReference.on('child_added', function (data) {
             Dom.addPizza(data.key, data.val());
 
+            // show message if table is empty
+            Dom.showOrHideEmptyBasketMessage();
+            
+            // show or hide 'total' row if table is not empty
+            Dom.showOrHideBasketTotal();
+
             // register 'remove from Dom' event
             Event.removePizza(data.key);
         });
 
         databaseReference.on('child_removed', function (data) {
             Dom.removePizza(data.key);
+
+            // show or hide 'total' row if table is not empty
+            Dom.showOrHideBasketTotal();
         });
     }
 
@@ -87,6 +96,9 @@ export class Event {
 
             // removed from firebase
             pizzaReference.remove();
+
+            // show message if table is empty
+            Dom.showOrHideEmptyBasketMessage();
         });
     }
 }
