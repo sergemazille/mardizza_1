@@ -2,7 +2,7 @@ import {FirebaseDb} from "./FirebaseDb";
 export class Dom {
 
     static init() {
-        $(".pizza-card").each(function(){
+        $(".pizza-card").each(function () {
             Dom.cropLongText(this);
         });
     }
@@ -35,26 +35,27 @@ export class Dom {
         }
     }
 
-    static addPizza(pizzaId, pizza) {
-        let pizzaItem = `<li id="${pizzaId}" class="pizza-item"><span class="glyphicon glyphicon-remove pizza-remove"></span>&nbsp;</a>${pizza.username} - ${pizza.name} : ${pizza.price}</li>`;
-        $("#pizza-list").append(pizzaItem);
-
-        // Pizza removal behaviour from db
-        $("#pizza-list").find('.pizza-remove').on('click', function (e) {
-
-            let $pizzaId = $(e.currentTarget).parent().attr('id');
-            let pizzaReference = FirebaseDb.getPizzaReference(Dom.getOrderReference(), $pizzaId);
-
-            // removed from firebase
-            pizzaReference.remove();
-        });
+    static getSelectedPizzaRow(pizzaId){
+        return $(`tr#${pizzaId}`);
     }
 
-    static removePizza(pizzaId) {
-        let $pizzaListItem = $(`li#${pizzaId}`);
+    // add pizza on DOM
+    static addPizza(pizzaId, pizza) {
+        let pizzaRow = `<tr id="${pizzaId}">
+            <td class="pizza-item"><span class="glyphicon glyphicon-remove pizza-remove"></span></td>
+            <td class="userName">${pizza.username}</td>
+             <td class="pizzaName">${pizza.name}</td>
+             <td class="pizzaPrice">${pizza.price}</td>
+             </tr>`;
 
-        // removed from dom
-        $pizzaListItem.remove();
+        $("#pizza-list").append(pizzaRow);
+    }
+
+    // remove pizza from DOM
+    static removePizza(pizzaId) {
+        let $pizzaRow = Dom.getSelectedPizzaRow(pizzaId);
+
+        $pizzaRow.remove();
     }
 
     static cropLongText(pizzaCard) {

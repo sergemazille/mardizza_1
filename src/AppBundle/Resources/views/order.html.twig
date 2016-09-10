@@ -13,14 +13,7 @@
                 </ul>
             </div>
 
-            <div id="order-basket">
-                <div id="order-basket-header">
-                    <h1>Commande</h1>
-                    <h2 id="order-reference">{{ order.createdAt|date('d-m-y') }}</h2>
-                </div>
-
-                <ul id="pizza-list" class="list-unstyled"></ul>
-            </div>
+        {% include 'AppBundle:partials:_basket.html.twig' %}
 
     </div>
 {% endblock %}

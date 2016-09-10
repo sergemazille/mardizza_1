@@ -4,14 +4,12 @@ import {FirebaseDb} from "./FirebaseDb";
 export class Event {
 
     static init() {
-
         // current order database reference
         let orderReference = Dom.getOrderReference();
         let databaseReference = FirebaseDb.setDatabaseOrderReference(orderReference);
 
         // login form hook
         $("#login-form").on('submit', function (e) {
-
             e.preventDefault();
 
             let credentials = Dom.getCredentials();
@@ -36,7 +34,6 @@ export class Event {
 
         // click on a pizza card
         $(".pizza-card").on('click', function (e) {
-
             let pizza = Dom.getSelectedPizzaInfo($(this));
         });
 
@@ -70,10 +67,26 @@ export class Event {
         // watch database
         databaseReference.on('child_added', function (data) {
             Dom.addPizza(data.key, data.val());
+
+            // register 'remove from Dom' event
+            Event.removePizza(data.key);
         });
 
         databaseReference.on('child_removed', function (data) {
             Dom.removePizza(data.key);
+        });
+    }
+
+    // Pizza removal behaviour
+    static removePizza(pizzaId) {
+        let $pizzaRow = Dom.getSelectedPizzaRow(pizzaId);
+
+        // remove from database
+        $pizzaRow.find('.pizza-remove').on('click', function () {
+            let pizzaReference = FirebaseDb.getPizzaReference(Dom.getOrderReference(), pizzaId);
+
+            // removed from firebase
+            pizzaReference.remove();
         });
     }
 }

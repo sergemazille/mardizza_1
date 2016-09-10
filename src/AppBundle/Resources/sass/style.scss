@@ -25,7 +25,7 @@ $light-grey: #eeeeee;
     @media screen and (min-width: 48em) {
         #pizza-cards {
             margin-top: 2.5em;
-            width: 70%;
+            width: 80%;
             margin-left: 4em;
 
             .pizza-card {
@@ -96,8 +96,8 @@ $light-grey: #eeeeee;
                         margin-top: 0.5em;
                     }
 
-                    .add-favorite{
-                        &:hover{
+                    .add-favorite {
+                        &:hover {
                             color: crimson;
                         }
                     }
@@ -105,38 +105,33 @@ $light-grey: #eeeeee;
             }
         }
 
-        div#order-basket {
+        #order-basket {
             margin-top: 6em;
             position: fixed;
             right: 3em;
             top: 2em;
             z-index: 99;
-            width: 29%;
+            width: 20%;
 
-            #order-header {
-                padding: 1em;
-                background-color: #19233B;
-                color: white;
-
-                h1, h2 {
-                    text-align: center;
-                    margin: 0;
-                }
+            #order-basket-header {
+                text-align: center;
+                font-family: 'Euphoria Script', cursive;
+                background-color: #B28E75;
+                border-radius: 5px 5px 0 0;
 
                 h1 {
-                    font-weight: bold;
-                    font-size: 2.4em;
-                }
-
-                h2 {
-                    font-size: 1.8em;
+                    font-size: 3em;
+                    color: white;
+                    padding: 0.2em;
+                    margin-bottom: 0;
                 }
             }
 
-            ul#pizza-list {
-                li {
-                    text-transform: capitalize;
+            #pizza-list {
+                margin: 0;
+                background-color: white;
 
+                td {
                     .glyphicon-remove {
                         color: #bc312b;
 
