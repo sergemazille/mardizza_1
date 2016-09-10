@@ -17,3 +17,6 @@
 /.idea
 /node_modules/
 /web/assets/
+/log
+Capfile
+config/
