@@ -30,7 +30,6 @@ $light-grey: #eeeeee;
 
             .pizza-card {
                 padding: 0;
-                background-color: lighten($light-grey, 6%);
                 margin: 0.5em;
                 width: 15em;
 
@@ -40,9 +39,7 @@ $light-grey: #eeeeee;
                     transform: translate(-1px, -1px);
 
                     .pizza-card-footer {
-                        p {
-                            border-radius: inherit;
-                        }
+                        border-radius: inherit;
                     }
                 }
 
@@ -71,8 +68,14 @@ $light-grey: #eeeeee;
 
                     .pizza-card-body {
                         padding: 0.5em;
+                        background-color: lighten($light-grey, 6%);
+
+                        .pizza-card-name {
+                            font-family: 'Coming Soon', cursive;
+                        }
 
                         .pizza-card-ingredients {
+                            font-family: 'Roboto Condensed', sans-serif;
                             margin: 0;
                             height: 4em;
                         }
@@ -81,14 +84,22 @@ $light-grey: #eeeeee;
 
                 .pizza-card-footer {
                     background-color: $light-grey;
-                    text-align: center;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border: 1px solid darken($light-grey, 20%);
+                    border-radius: 0 0 5px 5px;
                     font-size: 1.2em;
+                    padding: 0.2em 0.6em 0 0.6em;
 
-                    p {
-                        margin: 0;
-                        border: 1px solid darken($light-grey, 20%);
-                        border-radius: 0 0 5px 5px;
-                        padding: 0.15em;
+                    .pizza-card-price {
+                        margin-top: 0.5em;
+                    }
+
+                    .add-favorite{
+                        &:hover{
+                            color: crimson;
+                        }
                     }
                 }
             }

@@ -54,6 +54,19 @@ export class Event {
             });
         });
 
+        // change fav icon on hover
+        $(".glyphicon-heart-empty").hover(
+            // hover
+            function (e) {
+                $(e.currentTarget).removeClass('glyphicon-heart-empty');
+                $(e.currentTarget).addClass('glyphicon-heart');
+            },
+            // leave
+            function (e) {
+                $(e.currentTarget).removeClass('glyphicon-heart');
+                $(e.currentTarget).addClass('glyphicon-heart-empty');
+            });
+
         // watch database
         databaseReference.on('child_added', function (data) {
             Dom.addPizza(data.key, data.val());
