@@ -6,6 +6,9 @@ services:
     mardizza.order:
         class: AppBundle\Entity\Order
 
+    mardizza.user:
+        class: AppBundle\Entity\User
+
     mardizza.security.login_form_authenticator:
         class: AppBundle\Security\LoginFormAuthenticator
         autowire: true

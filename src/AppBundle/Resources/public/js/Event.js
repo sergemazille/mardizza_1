@@ -12,7 +12,7 @@ export class Event {
         $("#login-form").on('submit', function (e) {
             e.preventDefault();
 
-            let credentials = Dom.getCredentials();
+            let credentials = Dom.getCredentials('login');
 
             // login first on Firebase server
             FirebaseDb.logIn(credentials.email, credentials.password, function (data) {
@@ -30,6 +30,24 @@ export class Event {
                 // then logout from mardizza.com
                 window.location.href = "/logout";
             });
+        });
+
+        // create user form hook
+        $("#signup-form").on('submit', function (e) {
+            e.preventDefault();
+
+            let credentials = Dom.getCredentials('create');
+
+            // create user first on Firebase server
+            firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password)
+
+                .then(function () {
+                    // then create user on mardizza.com
+                    e.currentTarget.submit();
+                })
+                .catch(function (error) {
+                    $(".messages").append(`<div class="alert alert-danger">${error.message}</div>`);
+                });
         });
 
         // click on a pizza card
@@ -70,7 +88,7 @@ export class Event {
 
             // show message if table is empty
             Dom.showOrHideEmptyBasketMessage();
-            
+
             // show or hide 'total' row if table is not empty
             Dom.showOrHideBasketTotal();
 

@@ -11,7 +11,7 @@ order:
 account_create:
     path: /account/create
     defaults: { _controller: AppBundle:Security:create }
-    methods: [GET]
+    methods: [POST]
 
 login:
     path: /login

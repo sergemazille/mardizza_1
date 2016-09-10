@@ -12,15 +12,26 @@ export class Dom {
         Dom.showOrHideEmptyBasketMessage();
     }
 
-    static getCredentials() {
-        let $email = $("#email").val();
-        let $username = $("#username").val();
-        let $password = $("#password").val();
+    static getCredentials(loginOrCreate) {
 
-        return {
+        let $email;
+        let $username;
+        let $password;
+
+        if (loginOrCreate === 'login'){
+            $email = $("#login-email").val();
+            $password = $("#login-password").val();
+            
+        } else {
+            $email = $("#create-email").val();
+            $username = $("#create-username").val();
+            $password = $("#create-password").val();
+        }
+
+       return {
             'email': $email,
             'username': $username,
-            'password': $password
+            'password': $password,
         }
     }
 
