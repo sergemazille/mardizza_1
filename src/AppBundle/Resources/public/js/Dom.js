@@ -23,7 +23,7 @@ export class Dom {
         return $("#order-reference").text();
     }
 
-    static getSelectedPizza($pizzaCard) {
+    static getSelectedPizzaInfo($pizzaCard) {
         let pizzaName = $pizzaCard.find(".pizza-name").text();
         let pizzaPrice = $pizzaCard.find(".pizza-price").text();
         let userName = $("#username").text(); // can't get with twig because of ES6 compiler

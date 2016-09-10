@@ -34,15 +34,23 @@ export class Event {
             });
         });
 
-        // add a pizza on database
-        $(".pizza-card").on('click', function () {
+        // click on a pizza card
+        $(".pizza-card").on('click', function (e) {
 
-            let pizza = Dom.getSelectedPizza($(this));
+            let pizza = Dom.getSelectedPizzaInfo($(this));
+        });
+
+        // add a pizza on database
+        $(".add-pizza").on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            let pizzaInfo = Dom.getSelectedPizzaInfo($(this).closest('.pizza-card'));
 
             databaseReference.push({
-                name: pizza.name,
-                price: pizza.price,
-                username: pizza.username,
+                name: pizzaInfo.name,
+                price: pizzaInfo.price,
+                username: pizzaInfo.username,
             });
         });
 

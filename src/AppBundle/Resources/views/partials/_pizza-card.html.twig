@@ -1,7 +1,10 @@
 <li class="pizza-card">
     <div class="pizza-card-content">
-        <img class="pizza-card-img img-responsive"
-             src="{{ asset('assets/images/pizzas/' ~ pizza.image ~ '.jpg') }}" alt="{{ pizza.name }}">
+        <div class="pizza-card-header">
+            <img class="pizza-card-img img-responsive"
+                 src="{{ asset('assets/images/pizzas/' ~ pizza.image ~ '.jpg') }}" alt="{{ pizza.name }}">
+            <a href="#" class="btn btn-success btn-xs add-pizza"><span class="glyphicon glyphicon-plus"></span></a>
+        </div>
 
         <div class="pizza-card-body">
             <h4 class="pizza-card-name pizza-name">{{ pizza.name|upper }}</h4>

@@ -23,7 +23,6 @@ $light-grey: #eeeeee;
     background-color: darken($light-grey, 4%);
 
     @media screen and (min-width: 48em) {
-        // Pizza cards
         #pizza-cards {
             margin-top: 2.5em;
             width: 70%;
@@ -38,7 +37,7 @@ $light-grey: #eeeeee;
                 &:hover {
                     cursor: pointer;
                     box-shadow: 2px 2px 15px 5px darken($light-grey, 20%); // box-shadow: h-pos v-pos (blur) (spread) (color) (inset);
-                    transform: translate(-1px,-1px);
+                    transform: translate(-1px, -1px);
 
                     .pizza-card-footer {
                         p {
@@ -52,8 +51,22 @@ $light-grey: #eeeeee;
                     border-right: 1px solid darken($light-grey, 20%);
                     border-left: 1px solid darken($light-grey, 20%);
 
-                    img.pizza-card-img {
-                        width: 100%;
+                    .pizza-card-header {
+                        position: relative;
+
+                        .pizza-card-img {
+                            width: 100%;
+                        }
+
+                        .add-pizza {
+                            position: absolute;
+                            right: 10px;
+                            top: 10px;
+                            border-radius: 100px;
+                            line-height: 0.85;
+                            padding: 2px 3px 3px 4px;
+                            font-size: large;
+                        }
                     }
 
                     .pizza-card-body {
@@ -81,7 +94,6 @@ $light-grey: #eeeeee;
             }
         }
 
-        // Order-basket
         div#order-basket {
             margin-top: 6em;
             position: fixed;
