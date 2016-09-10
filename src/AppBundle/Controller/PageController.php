@@ -9,8 +9,14 @@ class PageController extends Controller
 {
     public function homeAction()
     {
+        // already logged in users are sent directly to order page
+        $user = $this->getUser();
+        if ($user) {
+            return $this->redirectToRoute('order');
+        }
+
         return $this->render('@App/home.html.twig', [
-            'user' => $this->getUser(),
+            'user' => $user,
         ]);
     }
 
