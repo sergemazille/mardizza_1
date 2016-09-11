@@ -1,9 +1,10 @@
-import * as constantes from "./constantes";
+import * as Constante from "./constantes";
 
 export class FirebaseDb {
 
-    static init() {
-        firebase.initializeApp(constantes.firebaseConfig);
+    static init(env) {
+        let dbConfig = Constante.firebaseConfigs[env];
+        firebase.initializeApp(dbConfig);
     }
 
     static signIn(email, password) {
