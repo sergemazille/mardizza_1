@@ -211,12 +211,15 @@ body {
         top: 6em;
         left: 2em;
         z-index: 1000;
-        min-width: 30em;
-        transform: translate(-50em,0); // out of sight
-        transition: 3s ease-out;
+        min-width: 20em;
 
-        .animated{
-            transform: translate(55em,0);
+        .alert {
+            transform: translate(-25em, 0); // out of sight
+            transition: transform 0.5s ease-in-out;
+
+            &.animated {
+                transform: translate(5em, 0);
+            }
         }
     }
 
