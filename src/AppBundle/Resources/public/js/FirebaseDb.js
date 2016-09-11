@@ -9,8 +9,6 @@ export class FirebaseDb {
         console.log(env);
 
         let dbConfig = Const.firebaseConfigs[env];
-        console.log(dbConfig);
-
         firebase.initializeApp(dbConfig);
     }
 
