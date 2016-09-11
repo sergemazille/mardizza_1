@@ -23,6 +23,9 @@ class SecurityController extends Controller
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        // Welcome message
+        $this->addFlash("success", "Bon appétit !!!");
+        
         return $this->render(
             '@App/login.html.twig', [
                 'last_username' => $lastUsername,
@@ -77,7 +80,7 @@ class SecurityController extends Controller
 
         return $this->json($isUniqueUsername);
     }
-    
+
     private function checkUniqueUsername($username)
     {
         $userRepository = $em = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');

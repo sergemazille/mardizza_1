@@ -45,9 +45,6 @@ class PageController extends Controller
             $em->flush();
         }
 
-        // Welcome message
-        $this->addFlash("success", "Bon appétit !!!");
-
         $pizzas = $this->get('mardizza.pizza')->getPizzas();
 
         return $this->render('@App/order.html.twig', [
