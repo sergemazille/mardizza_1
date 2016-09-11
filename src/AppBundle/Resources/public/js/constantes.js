@@ -13,6 +13,6 @@ export const firebaseConfigs = {
         apiKey: "AIzaSyDB-HQDIYeVyUtqYfDe3T9IeTPH4dC1q1w",
         authDomain: "mardizza-dev.firebaseapp.com",
         databaseURL: "https://mardizza-dev.firebaseio.com",
-        storageBucket: ""
+        storageBucket: "mardizza-dev.appspot.com",
     }
 };

@@ -1,3 +1,5 @@
+import * as Const from "./constantes";
+
 export class Helper {
 
     static formatPrice(price) {
@@ -25,5 +27,16 @@ export class Helper {
         });
 
         return total;
+    }
+
+    static getEnvVariable(){
+        let url = window.location.href;
+        let isProd = url.indexOf(":") == -1;
+
+        if (isProd){
+            return Const.ENV_PROD;
+        }else{
+            return Const.ENV_DEV;
+        }
     }
 }
