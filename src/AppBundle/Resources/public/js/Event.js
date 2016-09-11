@@ -40,16 +40,24 @@ export class Event {
 
             let credentials = Dom.getCredentials('create');
 
-            // create user first on Firebase server
-            firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password)
+            // check on server first if username is unique
+            Helper.checkUniqueUsername(credentials.username, function (response) {
 
-                .then(function () {
-                    // then create user on mardizza.com
-                    e.currentTarget.submit();
-                })
-                .catch(function (error) {
-                    Dom.createNotification(error.message, Const.ALERT_ERROR);
-                });
+                if (true === response) {
+                    // create user first on Firebase server
+                    firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password)
+
+                        .then(function () {
+                            // then create user on mardizza.com
+                            e.currentTarget.submit();
+                        })
+                        .catch(function (error) {
+                            Dom.createNotification(error.message, Const.ALERT_ERROR);
+                        });
+                }else{
+                    Dom.createNotification("Ce prénom est déjà utilisé", Const.ALERT_ERROR);
+                }
+            });
         });
 
         // click on a pizza card
@@ -121,7 +129,7 @@ export class Event {
             // check if current user is owner
             let pizzaOwner = Dom.getPizzaOwnerUsername(pizzaId);
 
-            if(Helper.isOwner(pizzaOwner)){
+            if (Helper.isOwner(pizzaOwner)) {
                 let pizzaReference = FirebaseDb.getPizzaReference(Dom.getOrderReference(), pizzaId);
                 pizzaReference.remove();
             }

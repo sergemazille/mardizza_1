@@ -45,6 +45,14 @@ export class Helper {
         let currentUsername = Dom.getCurrentUsername();
         return currentUsername == ownerUsername;
     }
-    
 
+    static checkUniqueUsername(username, callback) {
+
+        $.ajax({
+                url: `/check/username?username=${username}`
+            })
+            .done(function (response) {
+                callback(response);
+            });
+    }
 }

@@ -68,9 +68,17 @@ class SecurityController extends Controller
             );
     }
 
+    public function checkAjaxUniqueUsernameAction(Request $request)
+    {
+        $username = $request->get('username');
+        $isUniqueUsername = $this->checkUniqueUsername($username);
+
+        return $this->json($isUniqueUsername);
+    }
+    
     private function checkUniqueUsername($username)
     {
         $userRepository = $em = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
-        return ! $userRepository->findOneBy(["username" => $username]);
+        return !$userRepository->findOneBy(["username" => $username]);
     }
 }

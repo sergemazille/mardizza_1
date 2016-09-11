@@ -22,3 +22,8 @@ logout:
     path: /logout
     defaults: { _controller: AppBundle:Security:logout }
     methods: [GET]
+
+check_unique_username:
+    path: /check/username
+    defaults: { _controller: AppBundle:Security:checkAjaxUniqueUsername }
+    methods: [GET]
