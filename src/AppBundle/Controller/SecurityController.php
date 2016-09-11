@@ -46,7 +46,6 @@ class SecurityController extends Controller
 
         // other fields are check by Firebase
         if (!$isUniqueUsername) {
-
             $this->addFlash('error', "Ce prénom est déjà utilisé.");
             return $this->redirectToRoute('login');
         }
@@ -58,6 +57,9 @@ class SecurityController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
+
+        // Welcome message
+        $this->addFlash("success", "Bienvenue sur Mardizza !!!");
 
         return $this->get('security.authentication.guard_handler')
             ->authenticateUserAndHandleSuccess(

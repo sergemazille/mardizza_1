@@ -10,6 +10,9 @@ export class Dom {
 
         // show a message if the order basket is empty
         Dom.showOrHideEmptyBasketMessage();
+
+        // manage notifications
+        Dom.cleanNotifications();
     }
 
     static getCredentials(loginOrCreate) {
@@ -136,7 +139,7 @@ export class Dom {
 
             // show total element
             $("#basket-total").removeClass('hidden');
-            
+
             // show phone number
             $("#phone-number").removeClass('hidden');
 
@@ -158,8 +161,30 @@ export class Dom {
         $(`#${pizzaId}`).find('.glyphicon-remove').addClass("hidden");
     }
 
-    static createNotification(msgBody, msgClass){
-        let domElement = `<div class="alert ${msgClass}">${msgBody}</div>`;
+    static createNotification(msgBody, msgClass) {
+        let domElement = `<div class="hidden alert ${msgClass}">${msgBody}</div>`;
         $(".messages").append(domElement);
+        Dom.cleanNotifications();
+    }
+
+    static cleanNotifications() {
+        let $messages = $(".messages").children();
+
+        if ($messages.length > 0) {
+            $messages.each(function(){
+                let that = $(this);
+
+                // first fadein and animate
+                that.addClass('animated');
+                that.fadeIn(600);
+
+                // and then fadeOut after some time
+                setTimeout(function(){
+                    that.fadeOut(600, function(){
+                        that.remove();
+                    });
+                }, 5000);
+            });
+        }
     }
 }

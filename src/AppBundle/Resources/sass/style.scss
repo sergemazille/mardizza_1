@@ -211,6 +211,13 @@ body {
         top: 6em;
         left: 2em;
         z-index: 1000;
+        min-width: 30em;
+        transform: translate(-50em,0); // out of sight
+        transition: 3s ease-out;
+
+        .animated{
+            transform: translate(55em,0);
+        }
     }
 
     #login-create-forms {
