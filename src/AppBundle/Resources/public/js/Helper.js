@@ -1,4 +1,5 @@
 import * as Const from "./constantes";
+import {Dom} from "./Dom";
 
 export class Helper {
 
@@ -29,14 +30,19 @@ export class Helper {
         return total;
     }
 
-    static getEnvVariable(){
+    static getEnvVariable() {
         let url = window.location.href;
         let isDev = url.indexOf("mardizza.com") == -1;
 
-        if (isDev){
+        if (isDev) {
             return Const.ENV_DEV;
-        }else{
+        } else {
             return Const.ENV_PROD;
         }
+    }
+
+    static isOwner(ownerUsername) {
+        let currentUsername = Dom.getCurrentUsername();
+        return currentUsername == ownerUsername;
     }
 }

@@ -1,7 +1,7 @@
 import {Helper} from "./Helper";
 
 export class Dom {
-    
+
     static init() {
         // shorten too long text for pizza ingredients
         $(".pizza-card").each(function () {
@@ -18,17 +18,17 @@ export class Dom {
         let $username;
         let $password;
 
-        if (loginOrCreate === 'login'){
+        if (loginOrCreate === 'login') {
             $email = $("#login-email").val();
             $password = $("#login-password").val();
-            
+
         } else {
             $email = $("#create-email").val();
             $username = $("#create-username").val();
             $password = $("#create-password").val();
         }
 
-       return {
+        return {
             'email': $email,
             'username': $username,
             'password': $password,
@@ -63,12 +63,20 @@ export class Dom {
 
         let pizzaRow = `<tr id="${pizzaId}">
             <td class="pizza-item"><span class="glyphicon glyphicon-remove pizza-remove"></span></td>
-            <td class="user-name">${pizza.username}</td>
-             <td class="pizza-name">${pizza.name}</td>
+            <td class="user-name" data-username="${pizza.username}">${pizza.username}</td>
+             <td class="pizza-name" data-name="${pizza.name}">${pizza.name}</td>
              <td class="pizza-price" data-price="${pizza.price}">${formattedPrice}</td>
              </tr>`;
 
+        // append pizza on DOM
         $("#pizza-list").append(pizzaRow);
+
+        let owner = Dom.getPizzaOwnerUsername(pizzaId);
+
+        // hide delete button if current user is not the owner of the newly added pizza
+        if (! Helper.isOwner(owner)) {
+            Dom.hideDeleteButtons(pizzaId);
+        }
     }
 
     // remove pizza from DOM
@@ -117,7 +125,7 @@ export class Dom {
         let $table = $("#pizza-list");
 
         if ($table.find('tr').length >= 1) {
-            
+
             // calculate total
             let total = Helper.calculateBasketTotal();
 
@@ -125,12 +133,24 @@ export class Dom {
             total = Helper.formatPrice(total);
 
             // insert total on DOM element
-            $("#price-total").text(total) ;
+            $("#price-total").text(total);
 
             // show total element
             $("#basket-total").removeClass('hidden');
-        }else{
+        } else {
             $("#basket-total").addClass('hidden');
         }
+    }
+
+    static getCurrentUsername() {
+        return $("#username").data("username");
+    }
+
+    static getPizzaOwnerUsername(pizzaId) {
+        return $(`#${pizzaId}`).find('.user-name').data("username");
+    }
+
+    static hideDeleteButtons(pizzaId) {
+        $(`#${pizzaId}`).find('.glyphicon-remove').addClass("hidden");
     }
 }

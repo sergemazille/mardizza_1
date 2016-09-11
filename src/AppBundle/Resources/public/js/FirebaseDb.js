@@ -6,7 +6,6 @@ export class FirebaseDb {
     static init() {
         // get environment for firebaseDB access
         let env = Helper.getEnvVariable();
-        console.log(env);
 
         let dbConfig = Const.firebaseConfigs[env];
         firebase.initializeApp(dbConfig);
