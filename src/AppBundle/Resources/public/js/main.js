@@ -9,7 +9,9 @@ $(document).ready(function () {
     // Switch between ENV_DEV and ENV_PROD for appropriate database access
     let env = Const.ENV_DEV;
     // let env = Constante.ENV_PROD;
-    
+
+    console.log(Const.ENV_DEV);
+
     // initialization
     FirebaseDb.init(env);
     VueJs.init();
