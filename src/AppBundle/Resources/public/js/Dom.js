@@ -157,4 +157,9 @@ export class Dom {
     static hideDeleteButtons(pizzaId) {
         $(`#${pizzaId}`).find('.glyphicon-remove').addClass("hidden");
     }
+
+    static createNotification(msgBody, msgClass){
+        let domElement = `<div class="alert ${msgClass}">${msgBody}</div>`;
+        $(".messages").append(domElement);
+    }
 }

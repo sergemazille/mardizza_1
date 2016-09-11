@@ -1,5 +1,7 @@
 export const ENV_DEV = 'dev';
 export const ENV_PROD = 'prod';
+export const ALERT_ERROR = 'alert-danger';
+export const ALERT_SUCCESS = 'alert-success';
 
 export const firebaseConfigs = {
     "prod": {

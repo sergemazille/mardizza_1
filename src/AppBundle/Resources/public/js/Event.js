@@ -1,4 +1,5 @@
 import {Dom} from "./Dom";
+import * as Const from "./constantes";
 import {FirebaseDb} from "./FirebaseDb";
 import {Helper} from "./Helper";
 
@@ -47,7 +48,7 @@ export class Event {
                     e.currentTarget.submit();
                 })
                 .catch(function (error) {
-                    $(".messages").append(`<div class="alert alert-danger">${error.message}</div>`);
+                    Dom.createNotification(error.message, Const.ALERT_ERROR);
                 });
         });
 

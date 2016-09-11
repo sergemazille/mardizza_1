@@ -45,4 +45,6 @@ export class Helper {
         let currentUsername = Dom.getCurrentUsername();
         return currentUsername == ownerUsername;
     }
+    
+
 }
