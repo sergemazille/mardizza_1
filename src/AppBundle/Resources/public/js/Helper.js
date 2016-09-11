@@ -31,7 +31,7 @@ export class Helper {
 
     static getEnvVariable(){
         let url = window.location.href;
-        let isDev = url.indexOf("//mardizza.com") == -1;
+        let isDev = url.indexOf("mardizza.com") == -1;
 
         if (isDev){
             return Const.ENV_DEV;
