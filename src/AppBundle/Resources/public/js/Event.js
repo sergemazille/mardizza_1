@@ -84,6 +84,7 @@ export class Event {
 
         // watch database
         databaseReference.on('child_added', function (data) {
+            // add pizza on DOM
             Dom.addPizza(data.key, data.val());
 
             // show message if table is empty
@@ -97,7 +98,11 @@ export class Event {
         });
 
         databaseReference.on('child_removed', function (data) {
+            // remove pizza from DOM
             Dom.removePizza(data.key);
+
+            // show message if table is empty
+            Dom.showOrHideEmptyBasketMessage();
 
             // show or hide 'total' row if table is not empty
             Dom.showOrHideBasketTotal();
@@ -112,11 +117,7 @@ export class Event {
         $pizzaRow.find('.pizza-remove').on('click', function () {
             let pizzaReference = FirebaseDb.getPizzaReference(Dom.getOrderReference(), pizzaId);
 
-            // removed from firebase
             pizzaReference.remove();
-
-            // show message if table is empty
-            Dom.showOrHideEmptyBasketMessage();
         });
     }
 }
