@@ -31,16 +31,12 @@ export class Helper {
 
     static getEnvVariable(){
         let url = window.location.href;
-        let isProd = url.indexOf("http://mardizza.com") == -1;
+        let isDev = url.indexOf("//mardizza.com") == -1;
 
-        console.log("isProd : " + isProd);
-        console.log("indexOf : " + url.indexOf(":"));
-        console.log("url : " + url);
-
-        if (isProd){
-            return Const.ENV_PROD;
-        }else{
+        if (isDev){
             return Const.ENV_DEV;
+        }else{
+            return Const.ENV_PROD;
         }
     }
 }
