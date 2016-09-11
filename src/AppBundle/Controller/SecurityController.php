@@ -22,9 +22,6 @@ class SecurityController extends Controller
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
-        // Welcome message
-        $this->addFlash("success", "Bon appétit !!!");
         
         return $this->render(
             '@App/login.html.twig', [
