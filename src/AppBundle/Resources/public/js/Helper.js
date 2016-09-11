@@ -33,6 +33,8 @@ export class Helper {
         let url = window.location.href;
         let isProd = url.indexOf(":") == -1;
 
+        console.log(isProd);
+
         if (isProd){
             return Const.ENV_PROD;
         }else{
