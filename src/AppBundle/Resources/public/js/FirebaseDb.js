@@ -1,9 +1,14 @@
-import * as Constante from "./constantes";
+import * as Const from "./constantes";
+import { Helper } from './Helper';
 
 export class FirebaseDb {
 
-    static init(env) {
-        let dbConfig = Constante.firebaseConfigs[env];
+    static init() {
+        // get environment for firebaseDB access
+        let env = Helper.getEnvVariable();
+        console.log(env);
+
+        let dbConfig = Const.firebaseConfigs[env];
         firebase.initializeApp(dbConfig);
     }
 
