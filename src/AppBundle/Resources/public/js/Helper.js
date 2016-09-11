@@ -34,6 +34,7 @@ export class Helper {
         let isProd = url.indexOf(":") == -1;
 
         console.log(isProd);
+        console.log(url.indexOf(":"));
 
         if (isProd){
             return Const.ENV_PROD;
