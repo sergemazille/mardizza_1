@@ -1,10 +1,11 @@
 $light-grey: #eeeeee;
+$principal: #953720;
 
 body {
     background-image: url("../../assets/images/bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: #953720;
+    background-color: $principal;
 
     #slogan {
         margin-top: 10em;
@@ -141,7 +142,7 @@ body {
             #order-basket-header {
                 text-align: center;
                 font-family: 'Euphoria Script', cursive;
-                background-color: #953720;
+                background-color: $principal;
                 border-radius: 5px 5px 0 0;
 
                 h1 {
@@ -159,7 +160,7 @@ body {
                 td {
                     .glyphicon-remove {
                         padding-left: 1em;
-                        color: #bc312b;
+                        color: $principal;
 
                         &:hover {
                             cursor: pointer;
@@ -178,13 +179,29 @@ body {
                 padding: 1em;
             }
 
-            #basket-total {
-                border-top: 2px solid $light-grey;
-                background-color: lighten($light-grey, 4%);
-                padding: 1em;
-                font-size: 1.2em;
-                font-weight: bold;
-                text-align: end;
+            #basket-footer {
+
+                #basket-total {
+                    border-top: 2px solid $light-grey;
+                    background-color: lighten($light-grey, 4%);
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    text-align: end;
+
+                    margin: 0;
+                    padding: 0.5em;
+                }
+
+                #phone-number {
+                    background-color: $principal;
+                    border-radius: 0 0 5px 5px;
+                    font-size: 1.2em;
+                    text-align: center;
+                    color: white;
+
+                    margin: 0;
+                    padding: 0.4em;
+                }
             }
         }
     }

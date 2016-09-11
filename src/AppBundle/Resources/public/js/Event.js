@@ -92,7 +92,7 @@ export class Event {
             Dom.showOrHideEmptyBasketMessage();
 
             // show or hide 'total' row if table is not empty
-            Dom.showOrHideBasketTotal();
+            Dom.showOrHideBasketFooter();
 
             // register 'remove from Dom' event
             Event.removePizza(data.key);
@@ -106,7 +106,7 @@ export class Event {
             Dom.showOrHideEmptyBasketMessage();
 
             // show or hide 'total' row if table is not empty
-            Dom.showOrHideBasketTotal();
+            Dom.showOrHideBasketFooter();
         });
     }
 

@@ -74,7 +74,7 @@ export class Dom {
         let owner = Dom.getPizzaOwnerUsername(pizzaId);
 
         // hide delete button if current user is not the owner of the newly added pizza
-        if (! Helper.isOwner(owner)) {
+        if (!Helper.isOwner(owner)) {
             Dom.hideDeleteButtons(pizzaId);
         }
     }
@@ -120,12 +120,11 @@ export class Dom {
     }
 
     // show or hide 'total' row if table is not empty
-    static showOrHideBasketTotal() {
+    static showOrHideBasketFooter() {
 
         let $table = $("#pizza-list");
 
         if ($table.find('tr').length >= 1) {
-
             // calculate total
             let total = Helper.calculateBasketTotal();
 
@@ -137,8 +136,13 @@ export class Dom {
 
             // show total element
             $("#basket-total").removeClass('hidden');
+            
+            // show phone number
+            $("#phone-number").removeClass('hidden');
+
         } else {
             $("#basket-total").addClass('hidden');
+            $("#phone-number").addClass('hidden');
         }
     }
 
