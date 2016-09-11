@@ -1,5 +1,6 @@
 import {Dom} from "./Dom";
 import {FirebaseDb} from "./FirebaseDb";
+import {Helper} from "./Helper";
 
 export class Event {
 
@@ -115,9 +116,14 @@ export class Event {
 
         // remove from database
         $pizzaRow.find('.pizza-remove').on('click', function () {
-            let pizzaReference = FirebaseDb.getPizzaReference(Dom.getOrderReference(), pizzaId);
 
-            pizzaReference.remove();
+            // check if current user is owner
+            let pizzaOwner = Dom.getPizzaOwnerUsername(pizzaId);
+
+            if(Helper.isOwner(pizzaOwner)){
+                let pizzaReference = FirebaseDb.getPizzaReference(Dom.getOrderReference(), pizzaId);
+                pizzaReference.remove();
+            }
         });
     }
 }
