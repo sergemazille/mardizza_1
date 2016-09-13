@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +37,11 @@ class Pizza
      * @ORM\Column(type="string")
      */
     private $image;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="favoritePizzas")
+     */
+    private $userFavorites;
 
     /**
      * @return int
@@ -109,5 +115,11 @@ class Pizza
         $this->image = $image;
     }
 
-
+    /**
+     * @return ArrayCollection
+     */
+    public function getUserFavorites()
+    {
+        return $this->userFavorites;
+    }
 }

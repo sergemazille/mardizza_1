@@ -54,7 +54,7 @@ export class Event {
                         .catch(function (error) {
                             Dom.createNotification(error.message, Const.ALERT_ERROR);
                         });
-                }else{
+                } else {
                     Dom.createNotification("Ce prénom est déjà utilisé", Const.ALERT_ERROR);
                 }
             });
@@ -78,19 +78,6 @@ export class Event {
                 username: pizzaInfo.username,
             });
         });
-
-        // change fav icon on hover
-        $(".glyphicon-heart-empty").hover(
-            // hover
-            function (e) {
-                $(e.currentTarget).removeClass('glyphicon-heart-empty');
-                $(e.currentTarget).addClass('glyphicon-heart');
-            },
-            // leave
-            function (e) {
-                $(e.currentTarget).removeClass('glyphicon-heart');
-                $(e.currentTarget).addClass('glyphicon-heart-empty');
-            });
 
         // watch database
         databaseReference.on('child_added', function (data) {
@@ -117,6 +104,29 @@ export class Event {
             // show or hide 'total' row if table is not empty
             Dom.showOrHideBasketFooter();
         });
+
+        // add pizza to user favorites
+        $(".add-favorite").on('click', function (e) {
+            e.preventDefault();
+
+            Helper.switchFavoritesClasses(e.currentTarget);
+
+            let pizzaId = $(this).closest(".pizza-card").data("pizza_id");
+            Helper.addPizzaToFavorites(pizzaId, function () {
+            });
+        });
+
+        // remove pizza to user favorites
+        $(".remove-favorite").on('click', function (e) {
+            e.preventDefault();
+            
+            Helper.switchFavoritesClasses(e.currentTarget);
+
+            let pizzaId = $(this).closest(".pizza-card").data("pizza_id");
+            Helper.removePizzaFromFavorites(pizzaId, function () {
+            });
+        });
+
     }
 
     // Pizza removal behaviour

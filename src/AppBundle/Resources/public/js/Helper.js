@@ -46,6 +46,7 @@ export class Helper {
         return currentUsername == ownerUsername;
     }
 
+    // ajax call to check if user username is unique
     static checkUniqueUsername(username, callback) {
 
         $.ajax({
@@ -54,5 +55,50 @@ export class Helper {
             .done(function (response) {
                 callback(response);
             });
+    }
+
+    // ajax call to add favorite pizza
+    static addPizzaToFavorites(pizzaId, callback) {
+        $.ajax({
+                url: `/user/add/pizza/${pizzaId}`
+            })
+            .done(function () {
+                callback();
+            });
+    }
+
+    // ajax call to remove favorite pizza
+    static removePizzaFromFavorites(pizzaId, callback) {
+        $.ajax({
+                url: `/user/remove/pizza/${pizzaId}`
+            })
+            .done(function () {
+                callback();
+            });
+    }
+    
+    static switchFavoritesClasses(link){
+        
+        let $link = $(link);
+        let $linkIcon = $link.find(".glyphicon");
+        
+        // switch classes
+        if($link.hasClass("add-favorite")){
+            $link
+                .removeClass("add-favorite")
+                .addClass("remove-favorite");
+
+            $linkIcon
+                .removeClass("glyphicon-heart-empty")
+                .addClass("glyphicon-heart");
+        }else{
+            $link
+                .removeClass("remove-favorite")
+                .addClass("add-favorite");
+
+            $linkIcon
+                .removeClass("glyphicon-heart")
+                .addClass("glyphicon-heart-empty");
+        }
     }
 }

@@ -122,9 +122,15 @@ body {
                         margin-top: 0.5em;
                     }
 
-                    .add-favorite {
-                        &:hover {
-                            color: crimson;
+                    .add-favorite, .remove-favorite {
+                        color: crimson;
+
+                        .glyphicon-heart-empty{
+                            color: darken($light-grey, 20%);
+
+                            &:hover{
+                                color: crimson;
+                            }
                         }
                     }
                 }

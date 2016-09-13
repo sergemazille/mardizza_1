@@ -27,3 +27,13 @@ check_unique_username:
     path: /check/username
     defaults: { _controller: AppBundle:Security:checkAjaxUniqueUsername }
     methods: [GET]
+
+add_favorite_pizza:
+    path: /user/add/pizza/{id}
+    defaults: { _controller: AppBundle:Pizza:addFavorite }
+    methods: [GET]
+
+remove_favorite_pizza:
+    path: /user/remove/pizza/{id}
+    defaults: { _controller: AppBundle:Pizza:removeFavorite }
+    methods: [GET]

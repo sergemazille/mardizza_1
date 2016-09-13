@@ -2,8 +2,9 @@
 
 namespace AppBundle\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="UserRepository")
@@ -32,7 +33,13 @@ class User implements UserInterface
      * @ORM\Column(type="string", unique=true)
      */
     private $email;
-    
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Pizza", inversedBy="userFavorites")
+     * @ORM\JoinTable(name="users_favorite_pizzas")
+     */
+    private $favoritePizzas;
+
     /**
      * @return int
      */
@@ -40,15 +47,10 @@ class User implements UserInterface
     {
         return $this->id;
     }
-    
+
     public function getUsername()
     {
         return $this->username;
-    }
-
-    public function getRoles()
-    {
-        return ['ROLE_USER'];
     }
 
     public function setUsername($username)
@@ -56,12 +58,9 @@ class User implements UserInterface
         $this->username = $username;
     }
 
-    /**
-     * @param string $password
-     */
-    public function setPassword($password)
+    public function getRoles()
     {
-        $this->password = password_hash($password, PASSWORD_BCRYPT);
+        return ['ROLE_USER'];
     }
 
     /**
@@ -70,6 +69,14 @@ class User implements UserInterface
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = password_hash($password, PASSWORD_BCRYPT);
     }
 
     /**
@@ -86,6 +93,14 @@ class User implements UserInterface
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return Pizza ArrayCollection
+     */
+    public function getFavoritePizzas()
+    {
+        return $this->favoritePizzas;
     }
 
     public function getSalt()
