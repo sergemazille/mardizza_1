@@ -60,7 +60,7 @@ export class Helper {
     // ajax call to add favorite pizza
     static addPizzaToFavorites(pizzaId, callback) {
         $.ajax({
-                url: `/user/add/pizza/${pizzaId}`
+                url: "/user/add/pizza/" + pizzaId
             })
             .done(function () {
                 callback();
@@ -70,7 +70,7 @@ export class Helper {
     // ajax call to remove favorite pizza
     static removePizzaFromFavorites(pizzaId, callback) {
         $.ajax({
-                url: `/user/remove/pizza/${pizzaId}`
+                url: "/user/remove/pizza/" + pizzaId
             })
             .done(function () {
                 callback();
