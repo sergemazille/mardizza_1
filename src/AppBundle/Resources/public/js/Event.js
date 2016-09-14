@@ -111,7 +111,7 @@ export class Event {
 
             Helper.switchFavoritesClasses(e.currentTarget);
 
-            let pizzaId = $(this).closest(".pizza-card").data("pizza_id");
+            let pizzaId = $(this).closest(".pizza-card").data("pizzaId");
             Helper.addPizzaToFavorites(pizzaId, function () {
             });
         });
@@ -122,7 +122,7 @@ export class Event {
             
             Helper.switchFavoritesClasses(e.currentTarget);
 
-            let pizzaId = $(this).closest(".pizza-card").data("pizza_id");
+            let pizzaId = $(this).closest(".pizza-card").data("pizzaId");
             Helper.removePizzaFromFavorites(pizzaId, function () {
             });
         });
