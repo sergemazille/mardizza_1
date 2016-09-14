@@ -111,7 +111,7 @@ export class Event {
 
             Helper.switchFavoritesClasses(e.currentTarget);
 
-            let pizzaId = $(this).closest(".pizza-card").data("pizzaId");
+            let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
             Helper.addPizzaToFavorites(pizzaId, function () {
             });
         });
@@ -122,7 +122,7 @@ export class Event {
             
             Helper.switchFavoritesClasses(e.currentTarget);
 
-            let pizzaId = $(this).closest(".pizza-card").data("pizzaId");
+            let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
             Helper.removePizzaFromFavorites(pizzaId, function () {
             });
         });
@@ -131,13 +131,13 @@ export class Event {
 
     // Pizza removal behaviour
     static removePizza(pizzaId) {
-        let $pizzaRow = Dom.getSelectedPizzaRow(pizzaid);
+        let $pizzaRow = Dom.getSelectedPizzaRow(pizzaId);
 
         // remove from database
         $pizzaRow.find('.pizza-remove').on('click', function () {
 
             // check if current user is owner
-            let pizzaOwner = Dom.getPizzaOwnerUsername(pizzaid);
+            let pizzaOwner = Dom.getPizzaOwnerUsername(pizzaId);
 
             if (Helper.isOwner(pizzaOwner)) {
                 let pizzaReference = FirebaseDb.getPizzaReference(Dom.getOrderReference(), pizzaId);
