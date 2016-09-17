@@ -1,275 +1,300 @@
+// colors
 $light-grey: #eeeeee;
 $principal: #953720;
 
-body {
-    background-image: url("../../assets/images/bg.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: $principal;
+// distances
+$left-offset: 4em;
+$main-navbar-height: 4.5em;
+$secondary-navbar-height: $main-navbar-height;
+$complete-navbar-height: $main-navbar-height + $secondary-navbar-height;
 
-    #slogan {
-        margin-top: 10em;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: white;
+body {
+  background-image: url("../../assets/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: $principal;
+
+  #slogan {
+    margin-top: 10em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+
+    h1 {
+      font-family: 'Euphoria Script', cursive;
+      font-size: 5em;
+    }
+
+    h2 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 2.5em;
+      margin-bottom: 2em;
+    }
+  }
+
+  .navbar-default {
+
+    height: $main-navbar-height;
+
+    .navbar-brand {
+      font-size: 3em;
+      font-family: 'Euphoria Script', cursive;
+      color: lighten($principal, 20%);
+
+      &:hover {
+        color: $principal;
+      }
+    }
+
+    #navbar {
+      background-color: $light-grey;
+    }
+  }
+
+  .navbar-lower {
+    margin-top: $main-navbar-height;
+    padding: 1em;
+    z-index: 0;
+    height: $secondary-navbar-height;
+    background-color: darken($light-grey, 50%);
+    padding-left: $left-offset;
+    border-bottom: 1px solid darken($light-grey, 20%);
+
+    .glyphicon-heart {
+      color: crimson;
+    }
+  }
+
+  #app {
+    background-color: darken($light-grey, 4%);
+    padding-top: 12em;
+    padding-bottom: 6em;
+
+    #pizza-cards {
+      width: 80%;
+      margin-left: $left-offset;
+
+      .pizza-card {
+        padding: 0;
+        margin: 0.5em;
+        width: 15em;
+
+        &:hover {
+          cursor: pointer;
+          box-shadow: 2px 2px 15px 5px darken($light-grey, 20%); // box-shadow: h-pos v-pos (blur) (spread) (color) (inset);
+          transform: translate(-1px, -1px);
+
+          .pizza-card-footer {
+            border-radius: inherit;
+          }
+        }
+
+        .pizza-card-content {
+          border-top: 1px solid darken($light-grey, 20%);
+          border-right: 1px solid darken($light-grey, 20%);
+          border-left: 1px solid darken($light-grey, 20%);
+
+          .pizza-card-header {
+            position: relative;
+
+            .pizza-card-img {
+              width: 100%;
+            }
+
+            .add-pizza {
+              position: absolute;
+              right: 10px;
+              top: 10px;
+              border-radius: 100px;
+              line-height: 0.85;
+              padding: 2px 3px 3px 4px;
+              font-size: large;
+            }
+          }
+
+          .pizza-card-body {
+            padding: 0.5em;
+            background-color: lighten($light-grey, 6%);
+
+            .pizza-card-name {
+              font-family: 'Coming Soon', cursive;
+              color: $principal;
+            }
+
+            .pizza-card-ingredients {
+              font-family: 'Indie Flower', cursive;
+              margin: 0;
+              height: 4em;
+            }
+          }
+        }
+
+        .pizza-card-footer {
+          background-color: $light-grey;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border: 1px solid darken($light-grey, 20%);
+          border-radius: 0 0 5px 5px;
+          font-size: 1.2em;
+          padding: 0.2em 0.6em 0 0.6em;
+
+          .pizza-card-price {
+            margin-top: 0.5em;
+          }
+
+          .add-favorite, .remove-favorite {
+            color: crimson;
+
+            .glyphicon-heart-empty {
+              color: darken($light-grey, 20%);
+
+              &:hover {
+                color: crimson;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    #order-basket {
+      margin-top: 10em;
+      position: fixed;
+      right: 3em;
+      top: 2em;
+      z-index: 99;
+      width: 20%;
+
+      #order-basket-header {
+        text-align: center;
+        font-family: 'Euphoria Script', cursive;
+        background-color: $principal;
+        border-radius: 5px 5px 0 0;
 
         h1 {
-            font-family: 'Euphoria Script', cursive;
-            font-size: 5em;
+          font-size: 3em;
+          color: white;
+          padding: 0.2em;
+          margin-bottom: 0;
         }
+      }
 
-        h2 {
-            font-family: 'Roboto', sans-serif;
-            font-size: 2.5em;
-            margin-bottom: 2em;
-        }
-    }
+      #pizza-list {
+        margin: 0;
+        background-color: white;
 
-    .navbar-default {
-
-        .navbar-brand {
-            font-size: 3em;
-            font-family: 'Euphoria Script', cursive;
-            color: grey;
+        td {
+          .glyphicon-remove {
+            padding-left: 1em;
+            color: $principal;
 
             &:hover {
-                color: black;
+              cursor: pointer;
             }
+          }
+
+          &.pizza-price {
+            padding-right: 1em;
+            text-align: end;
+          }
+        }
+      }
+
+      #basket-message {
+        background-color: $light-grey;
+        padding: 1em;
+      }
+
+      #basket-footer {
+
+        #basket-total {
+          border-top: 2px solid $light-grey;
+          background-color: lighten($light-grey, 4%);
+          font-size: 1.2em;
+          font-weight: bold;
+          text-align: end;
+
+          margin: 0;
+          padding: 0.5em;
         }
 
-        .nav-right-content {
-            margin-top: 0.5em;
-        }
+        #phone-number {
+          background-color: $principal;
+          border-radius: 0 0 5px 5px;
+          font-size: 1.2em;
+          text-align: center;
+          color: white;
 
-        border-bottom: 1px solid darken($light-grey, 20%);
+          margin: 0;
+          padding: 0.4em;
+        }
+      }
     }
+  }
 
-    #app {
-        background-color: darken($light-grey, 4%);
-        padding-top: 6em;
-        padding-bottom: 6em;
+  .messages {
+    position: fixed;
+    top: $complete-navbar-height;
+    left: 2em;
+    z-index: 9999;
+    min-width: 20em;
 
-        #pizza-cards {
-            width: 80%;
-            margin-left: 4em;
+    .alert {
+      position: fixed;
+      opacity: 0.90;
 
-            .pizza-card {
-                padding: 0;
-                margin: 0.5em;
-                width: 15em;
+      transform: translate(-25em, 0); // out of sight
+      transition: transform 0.3s ease-in-out;
 
-                &:hover {
-                    cursor: pointer;
-                    box-shadow: 2px 2px 15px 5px darken($light-grey, 20%); // box-shadow: h-pos v-pos (blur) (spread) (color) (inset);
-                    transform: translate(-1px, -1px);
-
-                    .pizza-card-footer {
-                        border-radius: inherit;
-                    }
-                }
-
-                .pizza-card-content {
-                    border-top: 1px solid darken($light-grey, 20%);
-                    border-right: 1px solid darken($light-grey, 20%);
-                    border-left: 1px solid darken($light-grey, 20%);
-
-                    .pizza-card-header {
-                        position: relative;
-
-                        .pizza-card-img {
-                            width: 100%;
-                        }
-
-                        .add-pizza {
-                            position: absolute;
-                            right: 10px;
-                            top: 10px;
-                            border-radius: 100px;
-                            line-height: 0.85;
-                            padding: 2px 3px 3px 4px;
-                            font-size: large;
-                        }
-                    }
-
-                    .pizza-card-body {
-                        padding: 0.5em;
-                        background-color: lighten($light-grey, 6%);
-
-                        .pizza-card-name {
-                            font-family: 'Coming Soon', cursive;
-                        }
-
-                        .pizza-card-ingredients {
-                            font-family: 'Indie Flower', cursive;
-                            margin: 0;
-                            height: 4em;
-                        }
-                    }
-                }
-
-                .pizza-card-footer {
-                    background-color: $light-grey;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    border: 1px solid darken($light-grey, 20%);
-                    border-radius: 0 0 5px 5px;
-                    font-size: 1.2em;
-                    padding: 0.2em 0.6em 0 0.6em;
-
-                    .pizza-card-price {
-                        margin-top: 0.5em;
-                    }
-
-                    .add-favorite, .remove-favorite {
-                        color: crimson;
-
-                        .glyphicon-heart-empty{
-                            color: darken($light-grey, 20%);
-
-                            &:hover{
-                                color: crimson;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        #order-basket {
-            margin-top: 6em;
-            position: fixed;
-            right: 3em;
-            top: 2em;
-            z-index: 99;
-            width: 20%;
-
-            #order-basket-header {
-                text-align: center;
-                font-family: 'Euphoria Script', cursive;
-                background-color: $principal;
-                border-radius: 5px 5px 0 0;
-
-                h1 {
-                    font-size: 3em;
-                    color: white;
-                    padding: 0.2em;
-                    margin-bottom: 0;
-                }
-            }
-
-            #pizza-list {
-                margin: 0;
-                background-color: white;
-
-                td {
-                    .glyphicon-remove {
-                        padding-left: 1em;
-                        color: $principal;
-
-                        &:hover {
-                            cursor: pointer;
-                        }
-                    }
-
-                    &.pizza-price {
-                        padding-right: 1em;
-                        text-align: end;
-                    }
-                }
-            }
-
-            #basket-message {
-                background-color: $light-grey;
-                padding: 1em;
-            }
-
-            #basket-footer {
-
-                #basket-total {
-                    border-top: 2px solid $light-grey;
-                    background-color: lighten($light-grey, 4%);
-                    font-size: 1.2em;
-                    font-weight: bold;
-                    text-align: end;
-
-                    margin: 0;
-                    padding: 0.5em;
-                }
-
-                #phone-number {
-                    background-color: $principal;
-                    border-radius: 0 0 5px 5px;
-                    font-size: 1.2em;
-                    text-align: center;
-                    color: white;
-
-                    margin: 0;
-                    padding: 0.4em;
-                }
-            }
-        }
+      &.animated {
+        transform: translate(5em, 0);
+      }
     }
+  }
 
-    .messages {
-        position: fixed;
-        top: 6em;
-        left: 2em;
-        z-index: 1000;
-        min-width: 20em;
+  #login-create-forms {
 
-        .alert {
-            transform: translate(-25em, 0); // out of sight
-            transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 
-            &.animated {
-                transform: translate(5em, 0);
-            }
-        }
+    .login-form, .create-form {
+      min-width: 30em;
+      padding: 1.5em;
+      margin: 5em 1em 1em 0;
+      background-color: rgba(96, 20, 6, 0.55);
+
+      h1 {
+        color: white;
+        font-size: 1.8em;
+        margin-bottom: 1em;
+      }
+
+      .btn {
+        margin-top: 1.5em;
+      }
     }
-
-    #login-create-forms {
-
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-
-        .login-form, .create-form {
-            min-width: 30em;
-            padding: 1.5em;
-            margin: 5em 1em 1em 0;
-            background-color: rgba(96, 20, 6, 0.55);
-
-            h1 {
-                color: white;
-                font-size: 1.8em;
-                margin-bottom: 1em;
-            }
-
-            .btn {
-                margin-top: 1.5em;
-            }
-        }
-    }
+  }
 }
 
 @media (max-width: 992px) {
-    body {
-        #login-create-forms {
-            flex-direction: column;
-            align-items: center;
-        }
+  body {
+    #login-create-forms {
+      flex-direction: column;
+      align-items: center;
     }
+  }
 }
 
 @media (max-width: 768px) {
-    body {
-    }
+  body {
+  }
 }
 
 @media (max-width: 480px) {
-    body {
-    }
+  body {
+  }
 }

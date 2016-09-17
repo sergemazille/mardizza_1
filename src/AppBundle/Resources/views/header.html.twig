@@ -23,16 +23,3 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
-{# Message block #}
-<div class="messages">
-    {% for msg in app.session.flashBag.get('success') %}
-        <div class="alert alert-success">{{ msg }}</div>
-    {% endfor %}
-    {% for msg in app.session.flashBag.get('error') %}
-        <div class="alert alert-danger">{{ msg }}</div>
-    {% endfor %}
-    {% if error is defined and error is not null %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-</div>
