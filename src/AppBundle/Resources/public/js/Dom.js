@@ -190,4 +190,10 @@ export class Dom {
             });
         }
     }
+
+    static cameraEffect($pizzaCard) {
+        $pizzaCard.fadeOut(100, function(){
+            $(this).show();
+        });
+    }
 }

@@ -112,37 +112,37 @@ export class Event {
             Helper.switchFavoritesClasses(e.currentTarget);
 
             let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
-                Helper.addPizzaToFavorites(pizzaId, function () {
+            Helper.addPizzaToFavorites(pizzaId, function () {
             });
         });
 
         // remove pizza to user favorites
         $(".remove-favorite").on('click', function (e) {
             e.preventDefault();
-            
+
             Helper.switchFavoritesClasses(e.currentTarget);
 
             let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
-                Helper.removePizzaFromFavorites(pizzaId, function () {
+            Helper.removePizzaFromFavorites(pizzaId, function () {
             });
         });
 
-        // copy card to clipboard
+        // copy pizza screenshot image into clipboard
+        let screenshotLinks = document.querySelectorAll('.pizza-clipboard');
+        let clipboard = new Clipboard(screenshotLinks);
+        clipboard.on('success', function (e) {
+            console.log(e);
+        });
+        clipboard.on('error', function (e) {
+            console.log(e);
+        });
+
+        // add camera effect for pizza card clipboard copy
         $(".pizza-clipboard").on('click', function (e) {
             e.preventDefault();
 
-            var btns = document.querySelectorAll('.pizza-clipboard');
-            var clipboard = new Clipboard(btns);
-            clipboard.on('success', function(e) {
-                console.log(e);
-            });
-            clipboard.on('error', function(e) {
-                console.log(e);
-            });
-
-            let pizzaImgSrc = $(this).closest(".pizza-card").find(".pizza-card-img").data("screenshotpath");//.data("pizzaid");
-
-            Helper.copyCardToClipboard(pizzaImgSrc);
+            let $pizzaCard = $(this).closest(".pizza-card");
+            Dom.cameraEffect($pizzaCard);
         });
     }
 
