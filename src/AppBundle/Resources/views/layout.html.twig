@@ -15,7 +15,10 @@
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     {% endblock %}
 </head>
-<body>
+{#<body  {{ app.request.attributes.get('_route') }}>#}
+
+{% set homeBody = app.request.attributes.get('_route') == 'home' %}
+<body  {% if homeBody %} class="home-body" {% endif %}>
 {% block header %}
     {% include 'AppBundle::header.html.twig' %}
 {% endblock %}
@@ -33,7 +36,6 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <script src="{{ asset('assets/js/lib/jquery.dotdotdot.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
     <script src="{{ asset('assets/js/lib/clipboard.min.js') }}"></script>
 

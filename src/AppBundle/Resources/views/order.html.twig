@@ -3,8 +3,8 @@
 {% block header %}
     {{ parent() }}
 
-    <nav class="navbar navbar-lower navbar-fixed-top" role="navigation">
-        <button class="btn btn-default">Filtrer par <span class="glyphicon glyphicon-heart"></span></button>
+    <nav class="navbar navbar-lower navbar-fixed-top">
+        <button id="filter-favorites" class="btn btn-default" role="checkbox">Filtrer par <span class="glyphicon glyphicon-heart"></span></button>
     </nav>
 {% endblock %}
 
@@ -13,7 +13,7 @@
 
         <div id="pizza-cards">
             <ul class="list-inline list-unstyled">
-                {% for pizza in pizzas |slice(1,6) %}
+                {% for pizza in pizzas |slice(1,26) %}
                     {% include 'AppBundle:partials:_pizza-card.html.twig' %}
                 {% endfor %}
             </ul>
@@ -22,4 +22,11 @@
         {% include 'AppBundle:partials:_basket.html.twig' %}
 
     </div>
+
+    {#<script>#}
+        {#var vue = new Vue({#}
+            {#el: "#app",#}
+
+        {#});#}
+    {#</script>#}
 {% endblock %}

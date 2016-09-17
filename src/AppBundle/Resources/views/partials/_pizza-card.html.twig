@@ -1,4 +1,6 @@
-<li class="pizza-card" data-pizzaid="{{ pizza.id }}">
+{% set favorite = pizza.name in favorites %}
+
+<li class="pizza-card {% if favorite %}pizza-favorite{% endif %}" data-pizzaid="{{ pizza.id }}">
     <div class="pizza-card-content">
         <div class="pizza-card-header">
             <img class="pizza-card-img img-responsive"
@@ -16,7 +18,7 @@
         <a href="#" class="pizza-clipboard" data-clipboard-text="https://{{ app.request.host }}:{{ app.request.port }}{{ asset('assets/images/pizzas/screenshots/' ~ pizza.image ~ '.jpg') }}"><span class="glyphicon glyphicon-camera"></span></a>
         <p class="pizza-card-price pizza-price" data-price="{{ pizza.price}}">{{ pizza.price|number_format('2', ',', '.') }}&nbsp;€</p>
 
-        {% if pizza.name in favorites %}
+        {% if favorite %}
             <a href="#" class="remove-favorite"><span class="glyphicon glyphicon-heart"></span></a>
         {% else %}
             <a href="#" class="add-favorite"><span class="glyphicon glyphicon-heart-empty"></span></a>

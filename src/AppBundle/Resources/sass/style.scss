@@ -1,6 +1,6 @@
 // colors
 $light-grey: #eeeeee;
-$principal: #953720;
+$main: #953720;
 
 // distances
 $left-offset: 4em;
@@ -9,10 +9,14 @@ $secondary-navbar-height: $main-navbar-height;
 $complete-navbar-height: $main-navbar-height + $secondary-navbar-height;
 
 body {
-  background-image: url("../../assets/images/bg.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: $principal;
+  background-color: darken($light-grey, 4%);
+
+  &.home-body {
+    background-image: url("../../assets/images/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: $main;
+  }
 
   #slogan {
     margin-top: 10em;
@@ -40,10 +44,10 @@ body {
     .navbar-brand {
       font-size: 3em;
       font-family: 'Euphoria Script', cursive;
-      color: lighten($principal, 20%);
+      color: lighten($main, 10%);
 
       &:hover {
-        color: $principal;
+        color: $main;
       }
     }
 
@@ -61,8 +65,26 @@ body {
     padding-left: $left-offset;
     border-bottom: 1px solid darken($light-grey, 20%);
 
-    .glyphicon-heart {
-      color: crimson;
+    #filter-favorites {
+      &.btn-default {
+        &.active {
+          color: white;
+          background-color: lighten($main, 20%);
+          border: 2px solid white;
+
+          &:link {
+            border: 0;
+          }
+
+          .glyphicon-heart {
+            color: white;
+          }
+        }
+      }
+
+      .glyphicon-heart {
+        color: crimson;
+      }
     }
   }
 
@@ -119,7 +141,7 @@ body {
 
             .pizza-card-name {
               font-family: 'Coming Soon', cursive;
-              color: $principal;
+              color: $main;
             }
 
             .pizza-card-ingredients {
@@ -170,7 +192,7 @@ body {
       #order-basket-header {
         text-align: center;
         font-family: 'Euphoria Script', cursive;
-        background-color: $principal;
+        background-color: $main;
         border-radius: 5px 5px 0 0;
 
         h1 {
@@ -188,7 +210,7 @@ body {
         td {
           .glyphicon-remove {
             padding-left: 1em;
-            color: $principal;
+            color: $main;
 
             &:hover {
               cursor: pointer;
@@ -221,7 +243,7 @@ body {
         }
 
         #phone-number {
-          background-color: $principal;
+          background-color: $main;
           border-radius: 0 0 5px 5px;
           font-size: 1.2em;
           text-align: center;

@@ -144,6 +144,23 @@ export class Event {
         clipboard.on('error', function () {
             Dom.createNotification("Erreur lors de la copie dans le presse papier.", "alert-danger");
         });
+
+        // filter by favorites
+        $("#filter-favorites").on("click", function (e) {
+            e.preventDefault();
+
+            let $checkbox = $(e.currentTarget);
+            $checkbox.toggleClass("active");
+
+            console.log($checkbox.hasClass("active"));
+
+            if ($checkbox.hasClass("active")) {
+                $(".pizza-card").not(".pizza-favorite").hide();
+            } else {
+                $(".pizza-card").show();
+            }
+            // $(".pizza-favorite").hide();
+        });
     }
 
     // Pizza removal behaviour
