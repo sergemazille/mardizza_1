@@ -50,40 +50,35 @@ export class Helper {
     static checkUniqueUsername(username, callback) {
 
         $.ajax({
-                url: `/check/username?username=${username}`
-            })
+            url: `/check/username?username=${username}`
+        })
             .done(function (response) {
                 callback(response);
             });
     }
 
     // ajax call to add favorite pizza
-    static addPizzaToFavorites(pizzaId, callback) {
+    static addPizzaToFavorites(pizzaId) {
         $.ajax({
-                url: "/user/add/pizza/" + pizzaId
-            })
-            .done(function () {
-                callback();
-            });
+            url: "/user/add/pizza/" + pizzaId
+        });
     }
 
     // ajax call to remove favorite pizza
-    static removePizzaFromFavorites(pizzaId, callback) {
+    static removePizzaFromFavorites(pizzaId) {
         $.ajax({
-                url: "/user/remove/pizza/" + pizzaId
-            })
-            .done(function () {
-                callback();
-            });
+            url: "/user/remove/pizza/" + pizzaId
+        });
     }
-    
-    static switchFavoritesClasses(link){
-        
+
+    static switchFavoritesClasses(link) {
+
         let $link = $(link);
         let $linkIcon = $link.find(".glyphicon");
-        
+        $link.closest(".pizza-card").toggleClass("pizza-favorite");
+
         // switch classes
-        if($link.hasClass("add-favorite")){
+        if ($link.hasClass("add-favorite")) {
             $link
                 .removeClass("add-favorite")
                 .addClass("remove-favorite");
@@ -91,7 +86,7 @@ export class Helper {
             $linkIcon
                 .removeClass("glyphicon-heart-empty")
                 .addClass("glyphicon-heart");
-        }else{
+        } else {
             $link
                 .removeClass("remove-favorite")
                 .addClass("add-favorite");

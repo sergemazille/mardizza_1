@@ -13,6 +13,9 @@ export class Dom {
 
         // manage notifications
         Dom.cleanNotifications();
+
+        // deactivate favorite pizzas filter if no favorite
+        Dom.favoriteFilterActivation();
     }
 
     static getCredentials(loginOrCreate) {
@@ -193,5 +196,30 @@ export class Dom {
         $pizzaCard.fadeOut(100, function(){
             $(this).show();
         });
+    }
+
+    static filterFavorites(){
+
+        let $checkbox = $("#filter-favorites");
+        let $allPizzas = $(".pizza-card")
+        let $favoritePizzas = $(".pizza-favorite");
+
+        if ($checkbox.hasClass("active") && $favoritePizzas.length >= 1) {
+            $allPizzas.not($favoritePizzas).hide();
+        } else {
+            $allPizzas.show();
+        }
+    }
+
+    static favoriteFilterActivation() {
+        let $favoritePizzas = $(".pizza-favorite");
+        let $checkbox = $("#filter-favorites")
+
+        if ($favoritePizzas.length <= 0){
+            $checkbox.attr("disabled", true);
+            $checkbox.removeClass("active");
+        }else{
+            $checkbox.attr("disabled", false);
+        }
     }
 }

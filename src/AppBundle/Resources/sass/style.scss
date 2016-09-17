@@ -59,7 +59,7 @@ body {
   .navbar-lower {
     margin-top: $main-navbar-height;
     padding: 1em;
-    z-index: 0;
+    z-index: 1;
     height: $secondary-navbar-height;
     background-color: darken($light-grey, 50%);
     padding-left: $left-offset;

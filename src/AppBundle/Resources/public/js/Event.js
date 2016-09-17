@@ -112,8 +112,10 @@ export class Event {
             Helper.switchFavoritesClasses(e.currentTarget);
 
             let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
-            Helper.addPizzaToFavorites(pizzaId, function () {
-            });
+            Helper.addPizzaToFavorites(pizzaId);
+
+            Dom.favoriteFilterActivation();
+            Dom.filterFavorites();
         });
 
         // remove pizza to user favorites
@@ -123,8 +125,10 @@ export class Event {
             Helper.switchFavoritesClasses(e.currentTarget);
 
             let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
-            Helper.removePizzaFromFavorites(pizzaId, function () {
-            });
+            Helper.removePizzaFromFavorites(pizzaId);
+
+            Dom.favoriteFilterActivation();
+            Dom.filterFavorites();
         });
 
         // add camera effect for pizza card clipboard copy
@@ -152,14 +156,8 @@ export class Event {
             let $checkbox = $(e.currentTarget);
             $checkbox.toggleClass("active");
 
-            console.log($checkbox.hasClass("active"));
-
-            if ($checkbox.hasClass("active")) {
-                $(".pizza-card").not(".pizza-favorite").hide();
-            } else {
-                $(".pizza-card").show();
-            }
-            // $(".pizza-favorite").hide();
+            Dom.favoriteFilterActivation();
+            Dom.filterFavorites();
         });
     }
 
