@@ -1,7 +1,11 @@
 services:
-    mardizza.pizza:
+    mardizza.pizza_service:
         class: AppBundle\Service\PizzaService
         arguments: [ '@doctrine.orm.entity_manager' ]
+
+    mardizza.order_service:
+        class: AppBundle\Service\OrderService
+        arguments: [ '@doctrine.orm.entity_manager', '@router', '@mardizza.order' ]
 
     mardizza.order:
         class: AppBundle\Entity\Order

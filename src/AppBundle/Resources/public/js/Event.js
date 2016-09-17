@@ -127,22 +127,22 @@ export class Event {
             });
         });
 
-        // copy pizza screenshot image into clipboard
-        let screenshotLinks = document.querySelectorAll('.pizza-clipboard');
-        let clipboard = new Clipboard(screenshotLinks);
-        clipboard.on('success', function (e) {
-            console.log(e);
-        });
-        clipboard.on('error', function (e) {
-            console.log(e);
-        });
-
         // add camera effect for pizza card clipboard copy
         $(".pizza-clipboard").on('click', function (e) {
             e.preventDefault();
 
             let $pizzaCard = $(this).closest(".pizza-card");
             Dom.cameraEffect($pizzaCard);
+        });
+
+        // copy pizza screenshot image into clipboard
+        let screenshotLinks = document.querySelectorAll('.pizza-clipboard');
+        let clipboard = new Clipboard(screenshotLinks);
+        clipboard.on('success', function () {
+            Dom.createNotification("Pizza copiée dans le presse-papier.", "alert-success");
+        });
+        clipboard.on('error', function () {
+            Dom.createNotification("Erreur lors de la copie dans le presse papier.", "alert-danger");
         });
     }
 

@@ -1,11 +1,11 @@
 <?php
 
 namespace AppBundle\Entity;
-use DateTime;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="OrderRepository")
+ * @ORM\Entity
  * @ORM\Table(name="`order`") // as a reserved word, 'order' is escaped
  */
 class Order

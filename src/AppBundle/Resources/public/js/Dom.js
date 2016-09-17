@@ -174,19 +174,17 @@ export class Dom {
             $messages.each(function(){
                 let that = $(this);
 
-                console.log(that.text());
-
                 // first fadein and animate
                 that.removeClass('hidden');
-                that.hide().fadeIn(800);
+                that.hide().fadeIn(700);
                 that.addClass('animated');
 
                 // and then fadeOut after some time
                 setTimeout(function(){
-                    that.fadeOut(600, function(){
+                    that.fadeOut(500, function(){
                         that.remove();
                     });
-                }, 5000);
+                }, 3000);
             });
         }
     }
