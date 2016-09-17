@@ -101,4 +101,8 @@ export class Helper {
                 .addClass("glyphicon-heart-empty");
         }
     }
+
+    static copyCardToClipboard(pizzaImgSrc) {
+
+    }
 }

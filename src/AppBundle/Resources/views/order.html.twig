@@ -15,3 +15,8 @@
 
     </div>
 {% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/lib/clipboard.min.js') }}"></script>
+{% endblock %}

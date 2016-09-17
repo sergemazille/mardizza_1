@@ -112,7 +112,7 @@ export class Event {
             Helper.switchFavoritesClasses(e.currentTarget);
 
             let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
-            Helper.addPizzaToFavorites(pizzaId, function () {
+                Helper.addPizzaToFavorites(pizzaId, function () {
             });
         });
 
@@ -123,10 +123,27 @@ export class Event {
             Helper.switchFavoritesClasses(e.currentTarget);
 
             let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
-            Helper.removePizzaFromFavorites(pizzaId, function () {
+                Helper.removePizzaFromFavorites(pizzaId, function () {
             });
         });
 
+        // copy card to clipboard
+        $(".pizza-clipboard").on('click', function (e) {
+            e.preventDefault();
+
+            var btns = document.querySelectorAll('.pizza-clipboard');
+            var clipboard = new Clipboard(btns);
+            clipboard.on('success', function(e) {
+                console.log(e);
+            });
+            clipboard.on('error', function(e) {
+                console.log(e);
+            });
+
+            let pizzaImgSrc = $(this).closest(".pizza-card").find(".pizza-card-img").data("screenshotpath");//.data("pizzaid");
+
+            Helper.copyCardToClipboard(pizzaImgSrc);
+        });
     }
 
     // Pizza removal behaviour
