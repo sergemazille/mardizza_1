@@ -12,7 +12,7 @@ export class Helper {
         price = price.replace(/\./g, ',');
 
         // add euro sign
-        price = `${price} €`;
+        price = price + String.fromCharCode(160) + "€";
 
         return price;
     }

@@ -104,7 +104,7 @@ export class Dom {
     }
 
     static showOrHideEmptyBasketMessage() {
-        if ($("#pizza-list tr").length < 1) {
+        if ($("#pizza-list tr").length < 1 && $(window).width() > 768) {
 
             let messages = [
                 "C'est l'heure de commander une pizza !!!",
@@ -113,15 +113,17 @@ export class Dom {
                 "Sélectionnez au moins une pizza... allez, pour me faire plaisir !",
                 "Vincent recommande la pizza tartiflette !!!",
                 "Eric recommande d'ajouter un supplément merguez !",
+                "Le mardi c'est permis !",
                 "Kowabunga, les Tortues Ninjas recommandent de ne pas choisir et de toutes les prendre !!!"
             ];
 
+            // doesn't display funny messages on small devices
             let randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            let message = `<p id="basket-message">${randomMessage}</p>`;
-            $("#order-basket").append(message);
+            $("#basket-message").show();
+            $("#basket-message").text(randomMessage);
 
         } else {
-            $("#basket-message").remove();
+            $("#basket-message").hide();
         }
     }
 
@@ -174,7 +176,7 @@ export class Dom {
         let $messages = $(".messages").children();
 
         if ($messages.length > 0) {
-            $messages.each(function(){
+            $messages.each(function () {
                 let that = $(this);
 
                 // first fadein and animate
@@ -183,8 +185,8 @@ export class Dom {
                 that.addClass('animated');
 
                 // and then fadeOut after some time
-                setTimeout(function(){
-                    that.fadeOut(500, function(){
+                setTimeout(function () {
+                    that.fadeOut(500, function () {
                         that.remove();
                     });
                 }, 3000);
@@ -193,12 +195,12 @@ export class Dom {
     }
 
     static cameraEffect($pizzaCard) {
-        $pizzaCard.fadeOut(100, function(){
+        $pizzaCard.fadeOut(100, function () {
             $(this).show();
         });
     }
 
-    static filterFavorites(){
+    static filterFavorites() {
 
         let $checkbox = $("#filter-favorites");
         let $allPizzas = $(".pizza-card")
@@ -215,10 +217,10 @@ export class Dom {
         let $favoritePizzas = $(".pizza-favorite");
         let $checkbox = $("#filter-favorites")
 
-        if ($favoritePizzas.length <= 0){
+        if ($favoritePizzas.length <= 0) {
             $checkbox.attr("disabled", true);
             $checkbox.removeClass("active");
-        }else{
+        } else {
             $checkbox.attr("disabled", false);
         }
     }
