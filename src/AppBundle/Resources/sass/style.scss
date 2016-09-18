@@ -164,11 +164,12 @@ body {
       margin-left: $left-offset;
 
       @media #{$phone-tablet}{
-        margin: 5em 0 1em 2em;
+        margin: 5em 0 1em 2.25em;
+        //margin-top: 5em;
       }
 
       @media #{$phone}{
-        width: 100%
+        width: 95%
       }
 
       .pizza-card {
@@ -197,7 +198,6 @@ body {
 
         @media #{$phone}{
           width: 90%;
-          margin: 1.4em 0;
         }
 
         .pizza-card-content {
@@ -241,7 +241,7 @@ body {
               color: $main;
 
               @media #{$phone}{
-                font-size: 1.7em;
+                font-size: 1.4em;
               }
             }
 
@@ -352,6 +352,8 @@ body {
 
           tr {
             td {
+              vertical-align: baseline;
+
               .glyphicon-remove {
                 padding-left: 1em;
                 color: $main;
@@ -363,6 +365,8 @@ body {
 
               &.pizza-price{
                 text-align: right;
+                padding: 0;
+                padding-right: 1.5em;
               }
             }
           }
