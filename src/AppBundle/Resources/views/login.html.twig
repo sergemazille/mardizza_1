@@ -3,9 +3,10 @@
 {% block content %}
 
     <div class="container" id="login-create-forms" style="margin-top:5em;">
+        <div class="row">
 
-            <div class="login-form">
-                <h1>Vous avez déjà un compte ?</h1>
+            <div class="login-form col-xs-10 col-md-5">
+                <h1>Vous avez déjà un compte&nbsp;?</h1>
                 <form action="{{ path('login') }}" method="POST" id="login-form">
 
                     <input type="hidden" name="csrf_token" value="{{ csrf_token('login_form') }}">
@@ -27,7 +28,7 @@
                 </form>
             </div>
 
-            <div class="create-form">
+            <div class="create-form col-xs-10 col-md-5 col-md-offset-2">
                 <h1>Créer un compte</h1>
                 <form action="{{ path('account_create') }}" method="POST" id="signup-form">
 
@@ -52,6 +53,7 @@
 
                 </form>
             </div>
+        </div>
     </div>
 
 {% endblock %}

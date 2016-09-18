@@ -17,6 +17,7 @@ $desktop: $break-desktop-min;
 $tablet: $break-tablet-min and $break-tablet-max;
 $tablet-desktop: $break-tablet-min;
 $phone: $break-phone-max;
+$phone-tablet: $break-tablet-max;
 
 body {
   background-color: darken($light-grey, 4%);
@@ -319,25 +320,33 @@ body {
 
   #login-create-forms {
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-
     .login-form, .create-form {
-      min-width: 30em;
       padding: 1.5em;
       margin: 5em 1em 1em 0;
-      background-color: rgba(96, 20, 6, 0.55);
+      background-color: $main;
 
-      h1 {
-        color: white;
-        font-size: 1.8em;
-        margin-bottom: 1em;
+      @media #{$phone-tablet} {
+        margin: 0.5em;
       }
+    }
 
-      .btn {
-        margin-top: 1.5em;
+    h1 {
+      color: white;
+      font-size: 1.8em;
+      margin-bottom: 1em;
+
+      @media #{$phone-tablet}{
+        margin: 0.35em;
+      }
+    }
+
+    .btn {
+      margin-top: 1.5em;
+
+      @media #{$phone} {
+        margin: 0;
+        width: 100%;
+        font-size: 1.6em;
       }
     }
   }
