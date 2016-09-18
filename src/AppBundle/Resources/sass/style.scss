@@ -326,7 +326,7 @@ body {
       background-color: $main;
 
       @media #{$phone-tablet} {
-        margin: 0.5em;
+        margin: 0.5em 0;
       }
     }
 
