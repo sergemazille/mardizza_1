@@ -16,7 +16,6 @@
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     {% endblock %}
 </head>
-{#<body  {{ app.request.attributes.get('_route') }}>#}
 
 {% set homeBody = app.request.attributes.get('_route') == 'home' %}
 <body  {% if homeBody %} class="home-body" {% endif %}>
