@@ -160,7 +160,7 @@ body {
     }
 
     #pizza-cards {
-      width: 70%;
+      width: 65%;
       margin-left: $left-offset;
 
       @media #{$phone-tablet}{
@@ -174,8 +174,8 @@ body {
 
       .pizza-card {
         padding: 0;
-        margin: 0.5em;
-        width: 20em;
+        margin: 0.45em;
+        width: 19em;
 
         &:hover {
           cursor: pointer;
