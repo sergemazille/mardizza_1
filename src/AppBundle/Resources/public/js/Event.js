@@ -18,6 +18,9 @@ export class Event {
 
             // login first on Firebase server
             FirebaseDb.logIn(credentials.email, credentials.password, function (data) {
+
+                console.log(data);
+
                 // then login on mardizza.com
                 e.currentTarget.submit();
             });
