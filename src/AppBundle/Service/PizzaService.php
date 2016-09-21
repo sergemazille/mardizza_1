@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -19,7 +20,7 @@ class PizzaService
         return $this->em->getRepository('AppBundle:Pizza')->findAll();
     }
 
-    public function getJsonPizzas()
+    public function getJsonPizzas($user)
     {
         $normalizer = array(new ObjectNormalizer());
         $encoder = array(new JsonEncoder());
@@ -27,11 +28,14 @@ class PizzaService
 
         $pizzas = $this->em->getRepository('AppBundle:Pizza')->findAll();
 
-        $pizzasTab = [];
+        $userFavoritePizzas = $user->getFavoritePizzas();
+
+        $jsonPizzas = [];
         foreach($pizzas as $pizza){
-            $pizzasTab[] = $serializer->serialize($pizza, 'json');
+            $pizza->isFavorite = $userFavoritePizzas->contains($pizza);
+            $jsonPizzas[] = $serializer->serialize($pizza, 'json');
         }
 
-        return $serializer->serialize($pizzas, 'json');
+        return $jsonPizzas;
     }
 }

@@ -23,12 +23,12 @@
 
 {% endblock %}
 
-{% block javascripts %}
+{% block scripts %}
     {{ parent() }}
 
     <script>
         $(document).ready(function () {
-            Vue.config.delimiters = ['<<', '>>'];
+            Vue.config.delimiters = ['$<', '>'];
 
             Vue.component('pizzas', {
                 props: ['pizzas'], // just binding...

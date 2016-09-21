@@ -43,6 +43,10 @@ class Pizza
      */
     private $userFavorites;
 
+
+    // only for frontend purpose
+    public $isFavorite = false;
+
     /**
      * @return int
      */
@@ -115,11 +119,11 @@ class Pizza
         $this->image = $image;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getUserFavorites()
-    {
-        return $this->userFavorites;
-    }
+//    /**
+//     * @return ArrayCollection
+//     */
+//    public function getUserFavorites()
+//    {
+//        return $this->userFavorites;
+//    }
 }
