@@ -49,7 +49,7 @@ class PageController extends Controller
         $this->addFlash("success", "Bon appétit !!!");
 
         // get pizzas
-        $pizzas = $this->get('mardizza.pizza_service')->getPizzas();
+        $pizzas = $this->get('mardizza.pizza_service')->getJsonPizzas();
 
         // get favorite pizzas
         $favorites = [];
