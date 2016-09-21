@@ -49,17 +49,10 @@ class PageController extends Controller
         $this->addFlash("success", "Bon appétit !!!");
 
         // get pizzas
-        $pizzas = $this->get('mardizza.pizza_service')->getJsonPizzas($user);
-
-        // get favorite pizzas
-        $favorites = [];
-        foreach($user->getFavoritePizzas() as $pizza){
-            array_push($favorites, $pizza->getName());
-        }
+        $pizzas = json_encode($this->get('mardizza.pizza_service')->getPizzasWithFavorites($user));
 
         return $this->render('@App/order.html.twig', [
             'pizzas' => $pizzas,
-            'favorites' => $favorites,
             'user' => $user,
             'order' => $todaysOrder,
         ]);

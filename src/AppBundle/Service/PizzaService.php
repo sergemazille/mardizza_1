@@ -2,11 +2,7 @@
 
 namespace AppBundle\Service;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class PizzaService
 {
@@ -20,22 +16,26 @@ class PizzaService
         return $this->em->getRepository('AppBundle:Pizza')->findAll();
     }
 
-    public function getJsonPizzas($user)
+    public function getPizzasWithFavorites($user)
     {
-        $normalizer = array(new ObjectNormalizer());
-        $encoder = array(new JsonEncoder());
-        $serializer = new Serializer($normalizer, $encoder);
-
-        $pizzas = $this->em->getRepository('AppBundle:Pizza')->findAll();
+        $pizzas = $this->getPizzas();
 
         $userFavoritePizzas = $user->getFavoritePizzas();
 
-        $jsonPizzas = [];
-        foreach($pizzas as $pizza){
-            $pizza->isFavorite = $userFavoritePizzas->contains($pizza);
-            $jsonPizzas[] = $serializer->serialize($pizza, 'json');
+        // add favorite info
+        $pizzaItems = [];
+        foreach ($pizzas as $pizza) {
+
+            $pizzaItem['id'] = $pizza->getId();
+            $pizzaItem['image'] = $pizza->getImage();
+            $pizzaItem['ingredients'] = $pizza->getIngredients();
+            $pizzaItem['name'] = $pizza->getName();
+            $pizzaItem['price'] = $pizza->getPrice();
+            $pizzaItem['isFavorite'] = $userFavoritePizzas->contains($pizza);
+
+            $pizzaItems[] = $pizzaItem;
         }
 
-        return $jsonPizzas;
+        return $pizzaItems;
     }
 }

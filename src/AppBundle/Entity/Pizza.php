@@ -43,10 +43,6 @@ class Pizza
      */
     private $userFavorites;
 
-
-    // only for frontend purpose
-    public $isFavorite = false;
-
     /**
      * @return int
      */
