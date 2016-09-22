@@ -13,10 +13,21 @@ export class VueJs {
         Vue.component('pizzas', {
             props: ['pizzas'],
             template: '#pizza-card',
+
         });
 
-        new Vue({
+        let vm = new Vue({
             el: '#app',
+
+
+            // methods:{
+            //     sortByPrice(){
+            //         let list = pizzas;
+            //         console.log(pizzas);
+            //
+            //     }
+            // },
+
             ready: function(){
 
                 // launch regular javascript
