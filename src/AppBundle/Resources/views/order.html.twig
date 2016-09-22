@@ -1,15 +1,11 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
-{% block header %}
-    {{ parent() }}
-
-    <nav class="navbar navbar-lower navbar-fixed-top">
-        <button id="filter-favorites" class="btn btn-default" role="checkbox"><span class="button-text">Filtrer par </span><span class="glyphicon glyphicon-heart"></span></button>
-    </nav>
-{% endblock %}
-
 {% block content %}
     <div id="app">
+
+        <nav class="navbar navbar-lower navbar-fixed-top">
+            <button id="filter-favorites" class="btn btn-default" role="checkbox"><span class="button-text">Filtrer par </span><span class="glyphicon glyphicon-heart"></span></button>
+        </nav>
 
         {# pizzas #}
         {% include 'AppBundle:partials:_pizza-card.html.twig' %}
