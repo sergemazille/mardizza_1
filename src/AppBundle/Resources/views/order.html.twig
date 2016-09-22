@@ -18,26 +18,4 @@
         {% include 'AppBundle:partials:_basket.html.twig' %}
 
     </div>
-
-
-
-{% endblock %}
-
-{% block scripts %}
-    {{ parent() }}
-
-    <script>
-        $(document).ready(function () {
-            Vue.config.delimiters = ['$<', '>'];
-
-            Vue.component('pizzas', {
-                props: ['pizzas'], // just binding...
-                template: '#pizza-card'
-            });
-
-            new Vue({
-                el: '#app'
-            });
-        });
-    </script>
 {% endblock %}

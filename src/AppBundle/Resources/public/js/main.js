@@ -1,11 +1,7 @@
-import { FirebaseDb } from './FirebaseDb';
-import { Event } from './Event';
-import { Dom } from './Dom';
+import { VueJs } from './VueJs';
 
 $(document).ready(function () {
-    
-    // initialization
-    FirebaseDb.init();
-    Event.init();
-    Dom.init();
+
+    // everything starts with vue.js
+    VueJs.init();
 });
