@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Pizza;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PizzaController extends Controller
 {
@@ -46,5 +47,14 @@ class PizzaController extends Controller
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json(true);
+    }
+
+    public function getPizzasAction(){
+
+        $user = $this->getUser();
+
+        // get pizzas
+        $pizzas = $this->get('mardizza.pizza_service')->getPizzasWithFavorites($user);
+        return $this->json($pizzas);
     }
 }

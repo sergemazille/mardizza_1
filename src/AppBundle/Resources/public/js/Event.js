@@ -11,7 +11,7 @@ export class Event {
         let databaseReference = FirebaseDb.setDatabaseOrderReference(orderReference);
 
         // login form hook
-        $("#login-form").on('submit', function (e) {
+        $(document).on('submit', '#login-form', function (e) {
             e.preventDefault();
 
             let credentials = Dom.getCredentials('login');
@@ -27,7 +27,7 @@ export class Event {
         });
 
         // logout hook
-        $("a#logout").on('click', function (e) {
+        $(document).on('click', "a#logout", function (e) {
             e.preventDefault();
 
             // logout first from Firebase server
@@ -38,7 +38,7 @@ export class Event {
         });
 
         // create user form hook
-        $("#signup-form").on('submit', function (e) {
+        $(document).on('submit', "#signup-form", function (e) {
             e.preventDefault();
 
             let credentials = Dom.getCredentials('create');
@@ -64,12 +64,12 @@ export class Event {
         });
 
         // click on a pizza card
-        $(".pizza-card").on('click', function (e) {
+        $(document).on('click', ".pizza-card", function (e) {
             let pizza = Dom.getSelectedPizzaInfo($(this));
         });
 
         // add a pizza on database
-        $(".add-pizza").on('click', function (e) {
+        $(document).on('click', ".add-pizza", function (e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -109,7 +109,7 @@ export class Event {
         });
 
         // add pizza to user favorites
-        $(".add-favorite").on('click', function (e) {
+        $(document).on('click', ".add-favorite", function (e) {
             e.preventDefault();
 
             Helper.switchFavoritesClasses(e.currentTarget);
@@ -122,7 +122,7 @@ export class Event {
         });
 
         // remove pizza to user favorites
-        $(".remove-favorite").on('click', function (e) {
+        $(document).on('click', ".remove-favorite", function (e) {
             e.preventDefault();
 
             Helper.switchFavoritesClasses(e.currentTarget);
@@ -135,25 +135,15 @@ export class Event {
         });
 
         // add camera effect for pizza card clipboard copy
-        $(".pizza-clipboard").on('click', function (e) {
+        $(document).on('click', ".pizza-clipboard", function (e) {
             e.preventDefault();
 
             let $pizzaCard = $(this).closest(".pizza-card");
             Dom.cameraEffect($pizzaCard);
         });
 
-        // copy pizza screenshot image into clipboard
-        let screenshotLinks = document.querySelectorAll('.pizza-clipboard');
-        let clipboard = new Clipboard(screenshotLinks);
-        clipboard.on('success', function () {
-            Dom.createNotification("Pizza copiée dans le presse-papier.", "alert-success");
-        });
-        clipboard.on('error', function () {
-            Dom.createNotification("Erreur lors de la copie dans le presse papier.", "alert-danger");
-        });
-
         // filter by favorites
-        $("#filter-favorites").on("click", function (e) {
+        $(document).on("click", "#filter-favorites", function (e) {
             e.preventDefault();
 
             let $checkbox = $(e.currentTarget);

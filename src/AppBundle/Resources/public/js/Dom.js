@@ -224,4 +224,16 @@ export class Dom {
             $checkbox.attr("disabled", false);
         }
     }
+
+    // load clipboard lib behaviour
+    static loadClipboard(){
+        let snapshotLinks = document.querySelectorAll('.pizza-clipboard');
+        let clipboard = new Clipboard(snapshotLinks);
+        clipboard.on('success', function () {
+            Dom.createNotification("Pizza copiée dans le presse-papier.", "alert-success");
+        });
+        clipboard.on('error', function () {
+            Dom.createNotification("Erreur lors de la copie dans le presse papier.", "alert-danger");
+        });
+    }
 }

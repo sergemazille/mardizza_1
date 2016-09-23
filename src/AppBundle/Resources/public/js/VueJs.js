@@ -1,6 +1,6 @@
-import { FirebaseDb } from './FirebaseDb';
-import { Event } from './Event';
-import { Dom } from './Dom';
+import {FirebaseDb} from './FirebaseDb';
+import {Event} from './Event';
+import {Dom} from './Dom';
 
 export class VueJs {
 
@@ -10,20 +10,41 @@ export class VueJs {
             return ((price.toFixed(2)).replace('.', ',') + '\xa0€');
         });
 
-        Vue.component('pizzas',{
-            props: ['pizzas'],
-            template: '#pizzas-template'
+        Vue.component('pizzas', {
+
+            template: '#pizzas-template',
+
+            data: function () {
+                return {
+                    pizzas: []
+                };
+            },
+
+            created: function () {
+                this.fetchPizzas();
+            },
+
+            methods: {
+                fetchPizzas(){
+                    let that = this;
+                    $.get('/pizzas', function (pizzas) {
+                        that.pizzas = pizzas;
+
+                        // load functions that needs pizzas to be on DOM to work
+                        that.$nextTick(function(){
+                            Dom.loadClipboard();
+                        });
+                    });
+                },
+            }
         });
 
         let vm = new Vue({
             el: '#app',
 
-            ready: function(){
+            ready(){
+                // launch other scripts
 
-                // launch regular javascript
-                FirebaseDb.init();
-                Event.init();
-                Dom.init();
             }
         });
     }

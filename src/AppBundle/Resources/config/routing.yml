@@ -31,9 +31,14 @@ check_unique_username:
 add_favorite_pizza:
     path: /user/add/pizza/{id}
     defaults: { _controller: AppBundle:Pizza:addFavorite }
-    methods: [GET]
+    methods: [GET, POST]
 
 remove_favorite_pizza:
     path: /user/remove/pizza/{id}
     defaults: { _controller: AppBundle:Pizza:removeFavorite }
+    methods: [GET, POST]
+
+get_pizzas:
+    path: /pizzas
+    defaults: { _controller: AppBundle:Pizza:getPizzas }
     methods: [GET]
