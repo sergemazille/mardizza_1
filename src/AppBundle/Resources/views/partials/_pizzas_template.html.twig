@@ -1,0 +1,30 @@
+<template id="pizzas-template">
+    <ul id="pizza-cards" class="list-inline list-unstyled">
+        <li class="pizza-card" data-pizzaid="$< pizza.id >" v-for="pizza in pizzas">
+            <div class="pizza-card-content">
+                <div class="pizza-card-header">
+                    <img class="pizza-card-img img-responsive"
+                         :src="pizza.image" alt="$< pizza.name >">
+                    <a href="#" class="btn btn-success btn-xs add-pizza"><span
+                                class="glyphicon glyphicon-plus"></span></a>
+                </div>
+
+                <div class="pizza-card-body">
+                    <h4 class="pizza-card-name pizza-name" data-name="$< pizza.name >">$< pizza.name | uppercase
+                        ></h4>
+                    <p class="pizza-card-ingredients" data-ingredients="$< pizza.ingredients>">$< pizza.ingredients
+                        | capitalize></p>
+                </div>
+            </div>
+
+            <div class="pizza-card-footer">
+                <a href="#" class="pizza-clipboard"
+                   data-clipboard-text="{{ app.request.host }}$<pizza.imageSnapshot>"><span
+                            class="glyphicon glyphicon-camera"></span></a>
+                <p class="pizza-card-price pizza-price" data-price="$< pizza.price>">$< pizza.price|euro ></p>
+                <a href="#" :class="{'remove-favorite': pizza.isFavorite, 'add-favorite': !pizza.isFavorite}"><span
+                            :class="['glyphicon', {'glyphicon-heart': pizza.isFavorite, 'glyphicon-heart-empty': !pizza.isFavorite}]"></span></a>
+            </div>
+        </li>
+    </ul>
+</template>

@@ -10,14 +10,9 @@ export class VueJs {
             return ((price.toFixed(2)).replace('.', ',') + '\xa0€');
         });
 
-        Vue.component('pizzas', {
+        Vue.component('pizzas',{
             props: ['pizzas'],
-            template: '#pizza-cards-container',
-        });
-
-        Vue.component('pizza',{
-            props: ['pizza'],
-            template: '#pizza-card'
+            template: '#pizzas-template'
         });
 
         let vm = new Vue({
