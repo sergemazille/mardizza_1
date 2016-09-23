@@ -12,8 +12,12 @@ export class VueJs {
 
         Vue.component('pizzas', {
             props: ['pizzas'],
-            template: '#pizza-card',
+            template: '#pizza-cards-container',
+        });
 
+        Vue.component('pizza',{
+            props: ['pizza'],
+            template: '#pizza-card'
         });
 
         let vm = new Vue({
