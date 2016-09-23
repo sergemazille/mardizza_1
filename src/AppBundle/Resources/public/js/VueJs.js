@@ -23,15 +23,6 @@ export class VueJs {
         let vm = new Vue({
             el: '#app',
 
-
-            // methods:{
-            //     sortByPrice(){
-            //         let list = pizzas;
-            //         console.log(pizzas);
-            //
-            //     }
-            // },
-
             ready: function(){
 
                 // launch regular javascript
