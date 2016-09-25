@@ -162,6 +162,18 @@ export class Event {
             Dom.favoriteFilterActivation();
             Dom.filterFavorites();
         });
+
+        // expand account dropdown on hover
+        $(".dropdown.nav-right-content").hover(
+            // hover
+            function () {
+                $(this).addClass('open');
+            },
+            // leave
+            function () {
+                $(this).removeClass('open');
+            }
+        );
     }
 
     // Pizza removal behaviour
