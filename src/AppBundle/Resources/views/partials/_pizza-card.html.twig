@@ -19,9 +19,9 @@
         <p class="pizza-card-price pizza-price" data-price="{{ pizza.price}}">{{ pizza.price|number_format('2', ',', '.') }}&nbsp;€</p>
 
         {% if favorite %}
-            <a href="#" class="remove-favorite"><span class="glyphicon glyphicon-heart"></span></a>
+            <a href="#" class="fav remove-favorite"><span class="glyphicon glyphicon-heart"></span></a>
         {% else %}
-            <a href="#" class="add-favorite"><span class="glyphicon glyphicon-heart-empty"></span></a>
+            <a href="#" class="fav add-favorite"><span class="glyphicon glyphicon-heart-empty"></span></a>
         {% endif %}
     </div>
 </li>

@@ -110,7 +110,7 @@ body {
     border-bottom: 1px solid darken($light-grey, 20%);
 
     #filter-favorites {
-      .button-text{
+      .button-text {
         @media #{$phone}{
           display: none;
         }
@@ -270,18 +270,6 @@ body {
           .pizza-card-price {
             margin-top: 0.5em;
           }
-
-          .add-favorite, .remove-favorite {
-            color: crimson;
-
-            .glyphicon-heart-empty {
-              color: darken($light-grey, 20%);
-
-              &:hover {
-                color: crimson;
-              }
-            }
-          }
         }
       }
     }
@@ -363,7 +351,7 @@ body {
                 }
               }
 
-              &.pizza-price{
+              &.pizza-price {
                 text-align: right;
                 padding: 0;
                 padding-right: 1.5em;
@@ -456,4 +444,60 @@ body {
       }
     }
   }
+
+  #pizza-modal {
+    .modal-content {
+      max-width: 40em;
+
+      .pizza-modal-title {
+        margin: 0;
+        font-family: 'Coming Soon', cursive;
+        font-size: 2em;
+        color: $main;
+      }
+
+      .modal-body {
+        display: flex;
+        flex-direction: row;
+
+        img {
+          margin-right: 1.5em;
+        }
+
+        .pizza-modal-ingredients {
+          font-family: 'Indie Flower', cursive;
+          font-size: 1.8em;
+        }
+      }
+
+      .modal-footer {
+        ul {
+          font-size: 1.8em;
+          text-align: left;
+          margin: 0;
+          display: flex;
+          justify-content: space-between;
+
+          .pizza-price {
+            display: inline-block;
+            margin: auto;
+          }
+        }
+      }
+    }
+  }
+
+  // components
+  .add-favorite, .remove-favorite {
+    color: crimson;
+
+    .glyphicon-heart-empty {
+      color: darken($light-grey, 20%);
+
+      &:hover {
+        color: crimson;
+      }
+    }
+  }
+
 }

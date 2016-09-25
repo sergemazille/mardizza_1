@@ -10,6 +10,8 @@ export class Event {
         let orderReference = Dom.getOrderReference();
         let databaseReference = FirebaseDb.setDatabaseOrderReference(orderReference);
 
+        Event.snapshot();
+
         // login form hook
         $("#login-form").on('submit', function (e) {
             e.preventDefault();
@@ -63,9 +65,24 @@ export class Event {
             });
         });
 
+
         // click on a pizza card
-        $(".pizza-card").on('click', function (e) {
-            let pizza = Dom.getSelectedPizzaInfo($(this));
+        $(".pizza-card-content").on('click', function (e) {
+            e.preventDefault();
+
+            let pizza = Dom.getSelectedPizzaInfo($(this).parent());
+
+            $.post(`/pizza/${pizza.id}`)
+                .done(function (pizzaInfos) {
+                    $('body').append(pizzaInfos);
+                    $("#pizza-modal").modal("show");
+                    Event.snapshot();
+
+                    // Remove modal from the DOM in case user click an other pizza card
+                    $("#pizza-modal").on("hidden.bs.modal", function(){
+                        $(this).remove();
+                    });
+                })
         });
 
         // add a pizza on database
@@ -109,26 +126,28 @@ export class Event {
         });
 
         // add pizza to user favorites
-        $(".add-favorite").on('click', function (e) {
+        $(document).on('click', '.add-favorite', function (e) {
             e.preventDefault();
-
-            Helper.switchFavoritesClasses(e.currentTarget);
+            e.stopPropagation();
 
             let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
             Helper.addPizzaToFavorites(pizzaId);
+
+            Helper.switchFavoritesClassesBehaviour(e.currentTarget);
 
             Dom.favoriteFilterActivation();
             Dom.filterFavorites();
         });
 
         // remove pizza to user favorites
-        $(".remove-favorite").on('click', function (e) {
+        $(document).on('click', '.remove-favorite', function (e) {
             e.preventDefault();
-
-            Helper.switchFavoritesClasses(e.currentTarget);
+            e.stopPropagation();
 
             let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
             Helper.removePizzaFromFavorites(pizzaId);
+
+            Helper.switchFavoritesClassesBehaviour(e.currentTarget);
 
             Dom.favoriteFilterActivation();
             Dom.filterFavorites();
@@ -137,19 +156,10 @@ export class Event {
         // add camera effect for pizza card clipboard copy
         $(".pizza-clipboard").on('click', function (e) {
             e.preventDefault();
+            e.stopPropagation();
 
             let $pizzaCard = $(this).closest(".pizza-card");
             Dom.cameraEffect($pizzaCard);
-        });
-
-        // copy pizza screenshot image into clipboard
-        let screenshotLinks = document.querySelectorAll('.pizza-clipboard');
-        let clipboard = new Clipboard(screenshotLinks);
-        clipboard.on('success', function () {
-            Dom.createNotification("Pizza copiée dans le presse-papier.", "alert-success");
-        });
-        clipboard.on('error', function () {
-            Dom.createNotification("Erreur lors de la copie dans le presse papier.", "alert-danger");
         });
 
         // filter by favorites
@@ -190,6 +200,18 @@ export class Event {
                 let pizzaReference = FirebaseDb.getPizzaReference(Dom.getOrderReference(), pizzaId);
                 pizzaReference.remove();
             }
+        });
+    }
+
+    // copy pizza snapshot image into clipboard
+    static snapshot() {
+        let screenshotLinks = document.querySelectorAll('.pizza-clipboard');
+        let clipboard = new Clipboard(screenshotLinks);
+        clipboard.on('success', function () {
+            Dom.createNotification("Pizza copiée dans le presse-papier.", "alert-success");
+        });
+        clipboard.on('error', function () {
+            Dom.createNotification("Erreur lors de la copie dans le presse papier.", "alert-danger");
         });
     }
 }

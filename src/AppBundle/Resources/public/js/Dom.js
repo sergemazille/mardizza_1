@@ -46,11 +46,14 @@ export class Dom {
     }
 
     static getSelectedPizzaInfo($pizzaCard) {
+
+        let pizzaId = $pizzaCard.attr("data-pizzaid");
         let pizzaName = $pizzaCard.find(".pizza-name").data('name');
         let pizzaPrice = $pizzaCard.find(".pizza-price").data('price');
         let userName = $("#username").data('username'); // can't get with twig because of ES6 compiler
 
         return {
+            id: pizzaId,
             name: pizzaName,
             price: pizzaPrice,
             username: userName,
