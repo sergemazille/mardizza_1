@@ -70,7 +70,7 @@ export class Event {
         $(".pizza-card-content").on('click', function (e) {
             e.preventDefault();
 
-            let pizza = Dom.getSelectedPizzaInfo($(this).parent());
+            let pizza = Dom.getSelectedPizzaInfo($(this).parent('.pizza-card'));
 
             $.post(`/pizza/${pizza.id}`)
                 .done(function (pizzaInfos) {
