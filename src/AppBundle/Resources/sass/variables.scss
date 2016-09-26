@@ -1,0 +1,22 @@
+// colors
+$light-grey: #eeeeee;
+$main: #953720;
+
+// distances
+$left-offset: 4em;
+$main-navbar-height: 4.5em;
+$secondary-navbar-height: $main-navbar-height;
+$complete-navbar-height: $main-navbar-height + $secondary-navbar-height;
+
+// breakpoints
+$break-desktop-min: "(min-width: 992px)";
+$break-tablet-max: "(max-width: 991px)";
+$break-tablet-min: "(min-width: 768px)";
+$break-phone-max: "(max-width: 767px)";
+$break-phone-min: "(max-width: 480px)";
+$break-small-phone-max: "(max-width: 479px)";
+$desktop: $break-desktop-min;
+$tablet: $break-tablet-min and $break-tablet-max;
+$tablet-desktop: $break-tablet-min;
+$phone: $break-phone-max;
+$phone-tablet: $break-phone-min and $break-tablet-max;

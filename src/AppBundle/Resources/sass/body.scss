@@ -1,0 +1,46 @@
+@import 'variables';
+
+body {
+  background-color: darken($light-grey, 4%);
+
+  &.home-body {
+
+    background-color: $main;
+
+    @media #{$tablet-desktop} {
+      background-image: url("../../assets/images/bg.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+}
+
+.messages {
+  position: fixed;
+  top: $complete-navbar-height;
+  left: 2em;
+  z-index: 9999;
+  min-width: 25em;
+
+  .alert {
+    position: fixed;
+    opacity: 0.90;
+
+    transform: translate(-25em, 0); // out of sight
+    transition: transform 0.3s ease-in-out;
+
+    &.animated {
+      transform: translate(4em, 0);
+    }
+  }
+}
+
+#app {
+  background-color: darken($light-grey, 4%);
+  padding-top: 12em;
+  padding-bottom: 6em;
+
+  @media #{$phone-tablet}{
+    padding-top: 8em;
+  }
+}

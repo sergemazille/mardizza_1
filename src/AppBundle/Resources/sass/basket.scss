@@ -1,0 +1,119 @@
+@import 'variables';
+
+#basket {
+  position: fixed;
+  right: 3em;
+  top: 12em;
+  z-index: 99;
+  width: 30%;
+
+  @media #{$tablet}{
+    right: 1em;
+    width: 40%;
+  }
+
+  @media #{$phone}{
+    width: 100%;
+    right: auto;
+    top: 8em;
+    position: fixed;
+  }
+
+  #basket-header {
+    text-align: center;
+    font-family: 'Euphoria Script', cursive;
+    background-color: $main;
+    border-radius: 5px 5px 0 0;
+
+    @media #{$phone}{
+      margin-top: 1em;
+      border-radius: 0;
+    }
+
+    .glyphicon-menu-hamburger {
+      margin-right: 1em;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: white;
+      padding: 0.2em;
+      margin: 0;
+
+      @media #{$phone}{
+        font-size: 4em;
+      }
+
+      a {
+        color: $light-grey;
+      }
+    }
+  }
+
+  #basket-message {
+    background-color: $light-grey;
+    padding: 1em;
+  }
+
+  #basket-body {
+    @media #{$phone}{
+      font-size: 1.6em;
+    }
+
+    #pizza-list {
+      margin: 0;
+      background-color: white;
+
+      tr {
+        td {
+          vertical-align: baseline;
+
+          .glyphicon-remove {
+            padding-left: 1em;
+            color: $main;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+
+          &.pizza-price {
+            text-align: right;
+            padding: 0;
+            padding-right: 1.5em;
+          }
+        }
+      }
+    }
+
+    #basket-total {
+      border-top: 2px solid $light-grey;
+      background-color: lighten($light-grey, 4%);
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: end;
+
+      margin: 0;
+      padding: 0.5em;
+
+      @media #{$phone}{
+        padding-right: 2em;
+      }
+    }
+
+    #phone-number {
+      background-color: $main;
+      border-radius: 0 0 5px 5px;
+      font-size: 1.2em;
+      text-align: center;
+      color: white;
+
+      margin: 0;
+      padding: 0.4em;
+
+      @media #{$phone}{
+        border-radius: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+@import 'variables';
+
+.navbar-default {
+  height: $main-navbar-height;
+  margin-bottom: 0;
+
+  .navbar-brand {
+    font-size: 3em;
+    font-family: 'Euphoria Script', cursive;
+    color: lighten($main, 10%);
+
+    &:hover {
+      color: $main;
+    }
+  }
+
+  #navbar {
+    .navbar-nav {
+
+      padding: 0.55em;
+
+      @media #{$phone}{
+        margin-top: 0;
+        background-color: $light-grey;
+      }
+    }
+  }
+}
+
+.navbar-lower {
+  margin-top: $main-navbar-height;
+  padding: 1em;
+  z-index: 1;
+  height: $secondary-navbar-height;
+  background-color: darken($light-grey, 50%);
+  padding-left: $left-offset;
+  border-bottom: 1px solid darken($light-grey, 20%);
+
+  #filter-favorites {
+    .button-text {
+      @media #{$phone}{
+        display: none;
+      }
+    }
+
+    @media #{$phone}{
+      padding-bottom: 0;
+    }
+
+    &.btn-default {
+      &.active {
+        color: white;
+        background-color: lighten($main, 20%);
+        border: 2px solid white;
+
+        &:link {
+          border: 0;
+        }
+
+        .glyphicon-heart {
+          color: white;
+        }
+      }
+    }
+
+    .glyphicon-heart {
+      color: crimson;
+
+      @media #{$phone}{
+        font-size: 2em;
+        padding: 0;
+        margin: 0;
+        //line-height: 0.2em;
+        //padding-top: 0.35em;
+      }
+    }
+  }
+}
