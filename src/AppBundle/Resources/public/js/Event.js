@@ -74,6 +74,9 @@ export class Event {
 
             $.post(`/pizza/${pizza.id}`)
                 .done(function (pizzaInfos) {
+
+                    console.log(pizzaInfos);
+
                     $('body').append(pizzaInfos);
                     $("#pizza-modal").modal("show");
                     Event.snapshot();

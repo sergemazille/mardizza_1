@@ -15,14 +15,17 @@ class PizzaController extends Controller
      */
     public function getPizzaAction(Pizza $pizza) : Response
     {
-        $user = $this->getUser();
-        $favorites = $user->getFavoritePizzas();
-        $favorite = $favorites->contains($pizza);
+        $pizza = $this->get('mardizza.pizza_service')->getPizzaWithFavorite($pizza->getId());
 
         return $this->render('@App/partials/_pizza_detail_modal.html.twig', [
-            'favorite' => $favorite,
             'pizza' => $pizza,
         ]);
+    }
+
+    public function getPizzasAction()
+    {
+        $pizzas = $this->get('mardizza.pizza_service')->getPizzasWithFavorites();
+        return $this->json($pizzas);
     }
 
     public function addFavoriteAction(Pizza $pizza)
