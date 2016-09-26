@@ -1,25 +1,33 @@
-<li class="pizza-card {% if pizza.isFavorite %}pizza-favorite{% endif %}" data-pizzaid="{{ pizza.id }}">
-    <div class="pizza-card-content">
-        <div class="pizza-card-header">
-            <img class="pizza-card-img img-responsive"
-                 src="{{ pizza.imageUrl }}" alt="{{ pizza.name }}">
-            <a href="#" class="btn btn-success btn-xs add-pizza"><span class="glyphicon glyphicon-plus"></span></a>
-        </div>
-
-        <div class="pizza-card-body">
-            <h4 class="pizza-card-name pizza-name" data-name="{{ pizza.name}}">{{ pizza.name|upper }}</h4>
-            <p class="pizza-card-ingredients" data-ingredients="{{ pizza.ingredients}}">{{ pizza.ingredients }}</p>
+<template id="pizza-template">
+    <div class="pizza">
+        <div class="pizza-header">
+            <img src="${image}" alt="name">
+            {#<h1 :class="{'text-success': favorite}" @click="toggleFavorite">${name}</h1>#}
         </div>
     </div>
-
-    <div class="pizza-card-footer">
-        <a href="#" class="pizza-clipboard" data-clipboard-text="https://{{ app.request.host }}{{ pizza.imageSnapshotUrl }}"><span class="glyphicon glyphicon-camera"></span></a>
-        <p class="pizza-card-price pizza-price" data-price="{{ pizza.price}}">{{ pizza.price|number_format('2', ',', '.') }}&nbsp;€</p>
-
-        {% if pizza.isFavorite %}
-            <a href="#" class="fav remove-favorite"><span class="glyphicon glyphicon-heart"></span></a>
-        {% else %}
-            <a href="#" class="fav add-favorite"><span class="glyphicon glyphicon-heart-empty"></span></a>
-        {% endif %}
-    </div>
-</li>
+    {#<li class="pizza-card {% if pizza.isFavorite %}pizza-favorite{% endif %}" data-pizzaid="{{ pizza.id }}">#}
+        {#<div class="pizza-card-content">#}
+            {#<div class="pizza-card-header">#}
+                {#<img class="pizza-card-img img-responsive"#}
+                     {#src="{{ pizza.imageUrl }}" alt="{{ pizza.name }}">#}
+                {#<a href="#" class="btn btn-success btn-xs add-pizza"><span class="glyphicon glyphicon-plus"></span></a>#}
+            {#</div>#}
+    {##}
+            {#<div class="pizza-card-body">#}
+                {#<h4 class="pizza-card-name pizza-name" data-name="{{ pizza.name}}">{{ pizza.name|upper }}</h4>#}
+                {#<p class="pizza-card-ingredients" data-ingredients="{{ pizza.ingredients}}">{{ pizza.ingredients }}</p>#}
+            {#</div>#}
+        {#</div>#}
+    {##}
+        {#<div class="pizza-card-footer">#}
+            {#<a href="#" class="pizza-clipboard" data-clipboard-text="https://{{ app.request.host }}{{ pizza.imageSnapshotUrl }}"><span class="glyphicon glyphicon-camera"></span></a>#}
+            {#<p class="pizza-card-price pizza-price" data-price="{{ pizza.price}}">{{ pizza.price|number_format('2', ',', '.') }}&nbsp;€</p>#}
+    {##}
+            {#{% if pizza.isFavorite %}#}
+                {#<a href="#" class="fav remove-favorite"><span class="glyphicon glyphicon-heart"></span></a>#}
+            {#{% else %}#}
+                {#<a href="#" class="fav add-favorite"><span class="glyphicon glyphicon-heart-empty"></span></a>#}
+            {#{% endif %}#}
+        {#</div>#}
+    {#</li>#}
+</template>
