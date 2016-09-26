@@ -1,7 +1,7 @@
 <template id="pizza-template">
     <div class="pizza">
         <div class="pizza-header">
-            <img src="${image}" alt="name">
+            <h1 :class="{'text-success': pizza.isFavorite}" @click="toggleFavorite()">${pizza.name}</h1>
             {#<h1 :class="{'text-success': favorite}" @click="toggleFavorite">${name}</h1>#}
         </div>
     </div>

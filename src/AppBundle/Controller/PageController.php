@@ -48,11 +48,7 @@ class PageController extends Controller
         // Welcome message
         $this->addFlash("success", "Bon appétit !!!");
 
-        // get pizzas
-        $pizzas = $this->get('mardizza.pizza_service')->getPizzasWithFavorites();
-
         return $this->render('@App/order.html.twig', [
-            'pizzas' => $pizzas,
             'user' => $user,
             'order' => $todaysOrder,
         ]);

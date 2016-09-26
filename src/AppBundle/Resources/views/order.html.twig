@@ -12,20 +12,7 @@
 {% block content %}
     <div id="app">
 
-        {% for pizza in pizzas %}
-            <pizza
-                    :id="{{ pizza.id|json_encode }}"
-                    :name="{{ pizza.name|json_encode }}"
-                    :image="{{ pizza.imageUrl|json_encode }}"
-                    :snapshot="{{ pizza.imageSnapshotUrl|json_encode }}"
-                    :ingredients="{{ pizza.ingredients|json_encode }}"
-                    :price="{{ pizza.price|json_encode }}"
-                    :favorite="{{ pizza.isFavorite|json_encode }}"
-            >
-
-            </pizza>
-        {% endfor %}
-
+        <pizza v-for="pizza in pizzas" :pizza="pizza"></pizza>
 
         {% include 'AppBundle:partials:_basket.html.twig' %}
 
