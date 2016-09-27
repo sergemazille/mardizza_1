@@ -8,26 +8,14 @@ export class Vuejs {
             return ((price.toFixed(2)).replace('.', ',') + '\xa0€');
         });
 
-        let pizzaComponent = Vue.component('pizza', {
+        Vue.component('pizza', {
             template: '#pizza-template',
             props: ['pizza'],
-            // props: ['id', 'name', 'image', 'snapshot', 'ingredients', 'price', 'favorite'],
             methods: {
-                toggleFavorite(){
+                toggleIsFavorite(){
                     this.pizza.isFavorite = !this.pizza.isFavorite;
                 },
             },
-            // data(){
-            //     return {
-            //         id: '',
-            //         name: '',
-            //         image: '',
-            //         snapshot: '',
-            //         ingredients: '',
-            //         price: '',
-            //         favorite: '',
-            //     }
-            // }
         });
 
         let vm = new Vue({
