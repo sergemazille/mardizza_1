@@ -1,0 +1,9 @@
+@import 'variables';
+
+#basket{
+  position: fixed;
+  top: $complete-navbar-height + 1.5em;
+  margin-right: 1em;
+  z-index: 1;
+  background-color: $main;
+}

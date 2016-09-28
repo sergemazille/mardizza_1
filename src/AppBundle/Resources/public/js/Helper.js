@@ -71,13 +71,25 @@ export class Helper {
         });
     }
 
-    static switchFavoritesClasses(link) {
+    static switchFavoritesClassesBehaviour(link) {
 
+        // find pizza id
         let $link = $(link);
-        let $linkIcon = $link.find(".glyphicon");
-        $link.closest(".pizza-card").toggleClass("pizza-favorite");
+        let pizzaId = $link.closest(".pizza-card").data("pizzaid");
+        let pizzaCards = $(document).find("[data-pizzaid='" + pizzaId + "']");
 
-        // switch classes
+        // switch the favorite classes of each pizza with this id
+        pizzaCards.each(function(i, pizza){
+
+            $(pizza).toggleClass("pizza-favorite");
+
+            let $link = $(pizza).find('.fav');
+            let $linkIcon = $link.find('.glyphicon');
+            Helper.switchFavoritesClasses($link, $linkIcon);
+        });
+    }
+
+    static switchFavoritesClasses($link, $linkIcon) {
         if ($link.hasClass("add-favorite")) {
             $link
                 .removeClass("add-favorite")

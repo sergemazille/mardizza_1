@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mardizza</title>
     {% block css %}
-        <link href="https://fonts.googleapis.com/css?family=Euphoria+Script|Coming+Soon|Roboto:100|Indie+Flower"
+        <link href="https://fonts.googleapis.com/css?family=Euphoria+Script|Satisfy"
               rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css"
               integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY"
@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     {% endblock %}
 </head>
+<script src="https://use.fontawesome.com/5ededed43b.js"></script>
+
 
 {% set homeBody = app.request.attributes.get('_route') == 'home' %}
 <body  {% if homeBody %} class="home-body" {% endif %}>
@@ -35,12 +37,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.27/vue.js"></script>
     <script src="{{ asset('assets/js/lib/jquery.dotdotdot.min.js') }}"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
     <script src="{{ asset('assets/js/lib/clipboard.min.js') }}"></script>
 
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ 'assets/js/app.js' }}"></script>
 {% endblock %}
 </body>
 </html>

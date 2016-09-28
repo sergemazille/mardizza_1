@@ -10,8 +10,10 @@ export class Event {
         let orderReference = Dom.getOrderReference();
         let databaseReference = FirebaseDb.setDatabaseOrderReference(orderReference);
 
+        Event.snapshot();
+
         // login form hook
-        $(document).on('submit', '#login-form', function (e) {
+        $("#login-form").on('submit', function (e) {
             e.preventDefault();
 
             let credentials = Dom.getCredentials('login');
@@ -27,7 +29,7 @@ export class Event {
         });
 
         // logout hook
-        $(document).on('click', "a#logout", function (e) {
+        $("a#logout").on('click', function (e) {
             e.preventDefault();
 
             // logout first from Firebase server
@@ -38,7 +40,7 @@ export class Event {
         });
 
         // create user form hook
-        $(document).on('submit', "#signup-form", function (e) {
+        $("#signup-form").on('submit', function (e) {
             e.preventDefault();
 
             let credentials = Dom.getCredentials('create');
@@ -63,13 +65,31 @@ export class Event {
             });
         });
 
+
         // click on a pizza card
-        $(document).on('click', ".pizza-card", function (e) {
-            let pizza = Dom.getSelectedPizzaInfo($(this));
+        $(".pizza-card-content").on('click', function (e) {
+            e.preventDefault();
+
+            let pizza = Dom.getSelectedPizzaInfo($(this).parent('.pizza-card'));
+
+            $.post(`/pizza/${pizza.id}`)
+                .done(function (pizzaInfos) {
+
+                    console.log(pizzaInfos);
+
+                    $('body').append(pizzaInfos);
+                    $("#pizza-modal").modal("show");
+                    Event.snapshot();
+
+                    // Remove modal from the DOM in case user click an other pizza card
+                    $("#pizza-modal").on("hidden.bs.modal", function(){
+                        $(this).remove();
+                    });
+                })
         });
 
         // add a pizza on database
-        $(document).on('click', ".add-pizza", function (e) {
+        $(".add-pizza").on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -109,41 +129,44 @@ export class Event {
         });
 
         // add pizza to user favorites
-        $(document).on('click', ".add-favorite", function (e) {
+        $(document).on('click', '.add-favorite', function (e) {
             e.preventDefault();
-
-            Helper.switchFavoritesClasses(e.currentTarget);
+            e.stopPropagation();
 
             let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
             Helper.addPizzaToFavorites(pizzaId);
+
+            Helper.switchFavoritesClassesBehaviour(e.currentTarget);
 
             Dom.favoriteFilterActivation();
             Dom.filterFavorites();
         });
 
         // remove pizza to user favorites
-        $(document).on('click', ".remove-favorite", function (e) {
+        $(document).on('click', '.remove-favorite', function (e) {
             e.preventDefault();
-
-            Helper.switchFavoritesClasses(e.currentTarget);
+            e.stopPropagation();
 
             let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
             Helper.removePizzaFromFavorites(pizzaId);
+
+            Helper.switchFavoritesClassesBehaviour(e.currentTarget);
 
             Dom.favoriteFilterActivation();
             Dom.filterFavorites();
         });
 
         // add camera effect for pizza card clipboard copy
-        $(document).on('click', ".pizza-clipboard", function (e) {
+        $(".pizza-clipboard").on('click', function (e) {
             e.preventDefault();
+            e.stopPropagation();
 
             let $pizzaCard = $(this).closest(".pizza-card");
             Dom.cameraEffect($pizzaCard);
         });
 
         // filter by favorites
-        $(document).on("click", "#filter-favorites", function (e) {
+        $("#filter-favorites").on("click", function (e) {
             e.preventDefault();
 
             let $checkbox = $(e.currentTarget);
@@ -152,6 +175,18 @@ export class Event {
             Dom.favoriteFilterActivation();
             Dom.filterFavorites();
         });
+
+        // expand account dropdown on hover
+        $(".dropdown.nav-right-content").hover(
+            // hover
+            function () {
+                $(this).addClass('open');
+            },
+            // leave
+            function () {
+                $(this).removeClass('open');
+            }
+        );
     }
 
     // Pizza removal behaviour
@@ -168,6 +203,18 @@ export class Event {
                 let pizzaReference = FirebaseDb.getPizzaReference(Dom.getOrderReference(), pizzaId);
                 pizzaReference.remove();
             }
+        });
+    }
+
+    // copy pizza snapshot image into clipboard
+    static snapshot() {
+        let screenshotLinks = document.querySelectorAll('.pizza-clipboard');
+        let clipboard = new Clipboard(screenshotLinks);
+        clipboard.on('success', function () {
+            Dom.createNotification("Pizza copiée dans le presse-papier.", "alert-success");
+        });
+        clipboard.on('error', function () {
+            Dom.createNotification("Erreur lors de la copie dans le presse papier.", "alert-danger");
         });
     }
 }

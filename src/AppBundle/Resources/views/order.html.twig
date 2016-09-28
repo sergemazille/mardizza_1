@@ -1,8 +1,8 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block content %}
-    <div id="app">
 
+    <div id="app">
         <nav class="navbar navbar-lower navbar-fixed-top">
             <button id="filter-favorites" class="btn btn-default" role="checkbox"><span
                         class="button-text">Filtrer par </span><span class="glyphicon glyphicon-heart"></span></button>
@@ -10,15 +10,18 @@
 
         <div class="container-fluid">
             <div class="row">
-                <pizzas></pizzas>
+                <div id="pizzas" class="col-md-9 col-lg-8">
+                    <div class="row">
+                        <pizza v-for="pizza in pizzas" :pizza="pizza" class="col-sm-5 col-md-4 col-lg-3"></pizza>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-4 pull-right">
+                    {% include 'AppBundle:partials:_basket.html.twig' %}
+                </div>
             </div>
         </div>
 
-        {# pizzas #}
-        {% include 'AppBundle:partials:_pizzas_template.html.twig' %}
-
-        {# basket #}
-        {% include 'AppBundle:partials:_basket.html.twig' %}
-
+        {# includes template #}
+        {% include 'AppBundle:templates:pizza.html.twig' %}
     </div>
 {% endblock %}

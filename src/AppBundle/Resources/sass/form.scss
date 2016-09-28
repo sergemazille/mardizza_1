@@ -1,0 +1,33 @@
+@import 'variables';
+
+#login-create-forms {
+  .login-form, .create-form {
+    padding: 1.5em;
+    margin: 5em 1em 1em 0;
+    background-color: $main;
+
+    @media #{$phone-tablet} {
+      margin: 0.5em 0;
+    }
+  }
+
+  h1 {
+    color: white;
+    font-size: 1.8em;
+    margin-bottom: 1em;
+
+    @media #{$phone-tablet}{
+      margin: 0.35em;
+    }
+  }
+
+  .btn {
+    margin-top: 1.5em;
+
+    @media #{$phone} {
+      margin: 0;
+      width: 100%;
+      font-size: 1.6em;
+    }
+  }
+}
