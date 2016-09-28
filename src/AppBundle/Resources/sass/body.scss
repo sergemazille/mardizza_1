@@ -1,10 +1,9 @@
 @import 'variables';
 
 body {
-  background-color: darken($light-grey, 4%);
+  background-color: $dark-grey;
 
   &.home-body {
-
     background-color: $main;
 
     @media #{$tablet-desktop} {
@@ -36,9 +35,9 @@ body {
 }
 
 #app {
-  background-color: darken($light-grey, 4%);
-  padding-top: 12em;
-  padding-bottom: 6em;
+  background-color: $dark-grey;
+  padding-top: $complete-navbar-height;
+  //padding-bottom: 6em;
 
   @media #{$phone-tablet}{
     padding-top: 8em;

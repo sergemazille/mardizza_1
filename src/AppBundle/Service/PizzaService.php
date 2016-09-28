@@ -56,6 +56,7 @@ class PizzaService
             $pizzaItems[] = $this->getPizzaWithFavorite($pizza->getId());
         }
 
-        return $pizzaItems;
+        return array_slice($pizzaItems, 0, 10);
+//        return $pizzaItems;
     }
 }

@@ -2,12 +2,14 @@
 
 .navbar-default {
   height: $main-navbar-height;
-  margin-bottom: 0;
+  margin: 0;
+  border: none;
 
   .navbar-brand {
     font-size: 3em;
     font-family: 'Euphoria Script', cursive;
     color: lighten($main, 10%);
+    margin: 0;
 
     &:hover {
       color: $main;
@@ -21,7 +23,7 @@
 
       @media #{$phone}{
         margin-top: 0;
-        background-color: $light-grey;
+        background-color: $grey;
       }
     }
   }
@@ -32,9 +34,8 @@
   padding: 1em;
   z-index: 1;
   height: $secondary-navbar-height;
-  background-color: darken($light-grey, 50%);
+  background-color: $darker-grey;
   padding-left: $left-offset;
-  border-bottom: 1px solid darken($light-grey, 20%);
 
   #filter-favorites {
     .button-text {

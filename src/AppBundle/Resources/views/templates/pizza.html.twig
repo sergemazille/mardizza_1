@@ -1,19 +1,23 @@
 <template id="pizza-template">
     <div class="pizza">
-        <div class="pizza-header">
-            <p class="text-success"><i class="fa fa-plus-circle"></i></p>
-            <img :src="pizza.imageUrl" alt="${pizza.name}">
+        <div class="pizza-header clearfix">
+            <a href="#" role="button" class="btn btn-success"><span class="fa fa-plus"></span></a>
+            <img class="img-responsive img-thumbnail" :src="pizza.imageUrl" alt="${pizza.name}">
         </div>
         <div class="pizza-body">
             <h2>${pizza.name}</h2>
-            <p>${pizza.ingredients}</p>
+            <p>${pizza.ingredients | capitalize}</p>
         </div>
         <div class="pizza-footer">
-            <ul class="list-unstyled list-inline">
-                <li><a href="#"><span class="fa fa-camera"></span></a></li>
-                <li>${pizza.price|euro}</li>
-                <li><a href="#" @click.prevent="toggleIsFavorite"><i class="fa" :class="{'fa-heart':pizza.isFavorite, 'fa-heart-o':!pizza.isFavorite}"></i></a></li>
-            </ul>
+            <div>
+                <a href="#"><span class="fa fa-camera"></span></a>
+            </div>
+            <div>
+                <p>${pizza.price|euro}</p>
+            </div>
+            <div>
+                <a href="#" @click.prevent="toggleIsFavorite"><span class="fa" :class="{'fa-heart':pizza.isFavorite, 'fa-heart-o':!pizza.isFavorite}"></span></a>
+            </div>
         </div>
     </div>
 </template>
