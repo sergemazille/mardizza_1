@@ -3,18 +3,7 @@
 #basket {
   position: fixed;
   top: $complete-navbar-height + 2em;
-
-  @media #{$tablet}{
-    right: 1em;
-    width: 40%;
-  }
-
-  @media #{$phone}{
-    width: 100%;
-    right: auto;
-    top: 8em;
-    position: fixed;
-  }
+  width: 30%;
 
   #basket-header {
     text-align: center;

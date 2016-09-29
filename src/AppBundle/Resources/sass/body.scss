@@ -14,6 +14,10 @@ body {
   }
 }
 
+.col-container{
+  padding: 0.3em
+}
+
 .messages {
   position: fixed;
   top: $complete-navbar-height;
