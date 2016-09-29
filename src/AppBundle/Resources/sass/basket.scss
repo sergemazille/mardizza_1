@@ -2,8 +2,20 @@
 
 #basket {
   position: fixed;
-  top: $complete-navbar-height + 2em;
-  width: 30%;
+
+  // Desktop and tablet
+  @media #{$break-tablet-min}{
+    top: $complete-navbar-height + 2em;
+    width: 30%;
+    margin-left: 2em;
+  }
+
+  // tablet
+  @media #{$tablet}{
+    top: $complete-navbar-height + 1em;
+    right: 2em;
+    text-align: left;
+  }
 
   #basket-header {
     text-align: center;
