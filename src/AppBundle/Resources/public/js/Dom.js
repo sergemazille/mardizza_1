@@ -107,17 +107,17 @@ export class Dom {
     }
 
     static showOrHideEmptyBasketMessage() {
-        if ($("#pizza-list tr").length < 1 && $(window).width() > 768) {
+        if ($("tr").length < 1 && $(window).width() > 768) {
 
             let messages = [
-                "C'est l'heure de commander une pizza !!!",
+                "C'est l'heure de commander une pizza\xa0!!!",
                 "Pour l'instant je suis un peu inutile...",
-                "Mieux vaut une pizza que... heu... qu'aucune !!!",
-                "Sélectionnez au moins une pizza... allez, pour me faire plaisir !",
-                "Vincent recommande la pizza tartiflette !!!",
-                "Eric recommande d'ajouter un supplément merguez !",
-                "Le mardi c'est permis !",
-                "Kowabunga, les Tortues Ninjas recommandent de ne pas choisir et de toutes les prendre !!!"
+                "Mieux vaut une pizza que... heu... qu'aucune\xa0!!!",
+                "Sélectionnez au moins une pizza... allez, pour me faire plaisir\xa0!",
+                "Vincent recommande la pizza tartiflette\xa0!!!",
+                "Eric recommande d'ajouter un supplément merguez\xa0!",
+                "Le mardi c'est permis\xa0!",
+                "Kowabunga, les Tortues Ninjas recommandent de ne pas choisir et de toutes les prendre\xa0!!!"
             ];
 
             // doesn't display funny messages on small devices
