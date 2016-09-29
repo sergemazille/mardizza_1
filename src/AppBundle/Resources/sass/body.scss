@@ -52,7 +52,7 @@ body {
   }
 }
 
-.col-container {
+.pizza-container {
   padding: 0.3em
 }
 
@@ -79,6 +79,7 @@ body {
 #app {
   background-color: $dark-grey;
   background-image: url("../../assets/images/textures/bg_pattern.jpg");
+  //background-repeat: repeat-y;
   padding-top: $complete-navbar-height;
 
   @media #{$phone-tablet}{

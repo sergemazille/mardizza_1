@@ -1,3 +1,5 @@
+import {Dom} from './Dom';
+
 export class Vuejs {
 
     static init() {
@@ -30,6 +32,11 @@ export class Vuejs {
             ready(){
                 $.get('/pizzas', function(pizzas){
                     vm.pizzas = pizzas;
+
+                    // load functions that needs pizzas to be on DOM to work
+                    vm.$nextTick(function(){
+
+                    });
                 });
             }
         });

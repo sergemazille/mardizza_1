@@ -239,4 +239,9 @@ export class Dom {
             Dom.createNotification("Erreur lors de la copie dans le presse papier.", "alert-danger");
         });
     }
+
+    static rotateCards() {
+        var a = Math.random() * 10 - 5;
+        $(".pizza-container").css('transform', 'rotate(' + a + 'deg) scale(1.25)');
+    }
 }
