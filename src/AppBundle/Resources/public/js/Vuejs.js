@@ -15,6 +15,9 @@ export class Vuejs {
                 toggleIsFavorite(){
                     this.pizza.isFavorite = !this.pizza.isFavorite;
                 },
+                addToBasket(){
+                    console.log(this.pizza.name);
+                },
             },
         });
 
