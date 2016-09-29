@@ -11,6 +11,7 @@
 
 .pizza{
   background-color: $light-grey;
+  background-image: url("../images/textures/old_paper.jpg");
   border: 2px solid white;
   border-radius: 5px;
   margin: 0.5em;
@@ -47,6 +48,8 @@
 
   // body
   .pizza-body{
+    overflow: hidden;
+
     h2{
       font-family: 'Euphoria Script', cursive;
       color: $bright-main;
@@ -54,8 +57,11 @@
       margin: 0.1em 0 0.25em 0;
     }
     p{
+      overflow: auto;
+      padding-right: 20px;
       font-family: 'Satisfy', cursive;
       font-size: 1.2em;
+      height: 3em;
     }
   }
 
