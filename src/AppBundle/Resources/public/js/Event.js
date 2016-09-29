@@ -10,6 +10,7 @@ export class Event {
         let orderReference = Dom.getOrderReference();
         let databaseReference = FirebaseDb.setDatabaseOrderReference(orderReference);
 
+        // initialize snapshot behaviour
         Event.snapshot();
 
         // login form hook

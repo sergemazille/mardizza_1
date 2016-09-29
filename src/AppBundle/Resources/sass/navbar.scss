@@ -4,29 +4,36 @@
   height: $main-navbar-height;
   margin: 0;
   border: none;
+  background-color: $main;
 
   .navbar-brand {
     font-size: 3em;
     font-family: 'Euphoria Script', cursive;
-    color: lighten($main, 10%);
+    color: white;
     margin: 0;
 
     &:hover {
-      color: $main;
+      color: $main-dark;
+    }
+    &:active{
+      color: $main-inverse;
     }
   }
 
   #navbar {
     .navbar-nav {
-
       padding: 0.55em;
 
-      @media #{$phone}{
-        margin-top: 0;
-        background-color: $grey;
+      .dropdown-toggle{
+        color: white;
       }
     }
   }
+}
+
+// prevent account menu to change background color on leave
+.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  background-color: $main;
 }
 
 .navbar-lower {
@@ -34,7 +41,7 @@
   padding: 1em;
   z-index: 1;
   height: $secondary-navbar-height;
-  background-color: $darker-grey;
+  background-color: $main-light;
   padding-left: $left-offset;
 
   #filter-favorites {

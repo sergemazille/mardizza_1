@@ -1,10 +1,10 @@
 @import 'variables';
 
 body {
-  background-color: $dark-grey;
+  background-color: $main;
 
-  &.home-body {
-    background-color: $main;
+  .home {
+    height: 50em;
 
     @media #{$tablet-desktop} {
       background-image: url("../../assets/images/bg.jpg");
@@ -14,7 +14,45 @@ body {
   }
 }
 
-.col-container{
+#slogan {
+  color: white;
+  margin-top: 8em;
+  text-align: center;
+
+  @media #{$phone}{
+    margin-top: 6em;
+  }
+
+  a {
+    margin-bottom: 2em;
+
+    @media #{$phone}{
+      font-size: 1.6em;
+    }
+  }
+
+  h1 {
+    font-family: 'Euphoria Script', cursive;
+    font-size: 5em;
+
+    @media #{$phone}{
+      display: none;
+    }
+  }
+
+  h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 4em;
+    margin: 0.5em 0 1.5em 0;
+
+    @media #{$phone}{
+      font-size: 2em;
+      margin-bottom: 1em;
+    }
+  }
+}
+
+.col-container {
   padding: 0.3em
 }
 
@@ -41,7 +79,6 @@ body {
 #app {
   background-color: $dark-grey;
   padding-top: $complete-navbar-height;
-  //padding-bottom: 6em;
 
   @media #{$phone-tablet}{
     padding-top: 8em;
