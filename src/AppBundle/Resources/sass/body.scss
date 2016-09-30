@@ -41,10 +41,21 @@ body {
 #app {
   background-color: $dark-grey;
   background-image: url("../../assets/images/textures/bg_pattern.jpg");
-  //background-repeat: repeat-y;
   padding-top: $complete-navbar-height;
 
   @media #{$phone-tablet}{
     padding-top: 8em;
+  }
+
+  // heart icon
+  .fa-heart-o{
+    color: lighten(black, 20%);
+
+    &:hover{
+      color: crimson;
+    }
+  }
+  .fa-heart{
+    color: crimson;
   }
 }
