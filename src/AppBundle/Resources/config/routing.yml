@@ -53,3 +53,7 @@ get_pizzas:
     path: /pizzas
     defaults: { _controller: AppBundle:Pizza:getPizzas }
     methods: [GET]
+
+get_username:
+    path: /username
+    defaults: { _controller: AppBundle:User:getUsername }

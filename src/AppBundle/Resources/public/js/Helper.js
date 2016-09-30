@@ -1,5 +1,6 @@
 import * as Const from "./constantes";
 import {Dom} from "./Dom";
+import {FirebaseDb} from "./FirebaseDb";
 
 export class Helper {
 
@@ -107,5 +108,16 @@ export class Helper {
                 .removeClass("glyphicon-heart")
                 .addClass("glyphicon-heart-empty");
         }
+    }
+
+    static addPizzaOnOrderDatabase(pizza, username){
+        let orderReference = Dom.getOrderReference();
+        let databaseReference = FirebaseDb.setDatabaseOrderReference(orderReference);
+
+        databaseReference.push({
+            name: pizza.name,
+            price: pizza.price,
+            username: username,
+        });
     }
 }

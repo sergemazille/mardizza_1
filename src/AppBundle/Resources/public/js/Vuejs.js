@@ -1,4 +1,4 @@
-import {Dom} from './Dom';
+import {Helper} from './Helper';
 
 export class Vuejs {
 
@@ -17,8 +17,8 @@ export class Vuejs {
                 toggleIsFavorite(){
                     this.pizza.isFavorite = !this.pizza.isFavorite;
                 },
-                addToBasket(){
-                    console.log(this.pizza.name);
+                addToOrder(){
+                    Helper.addPizzaOnOrderDatabase(this.pizza, vm.username);
                 },
             },
         });
@@ -26,18 +26,30 @@ export class Vuejs {
         let vm = new Vue({
             el: '#app',
             data: {
-                pizzas: []
+                pizzas: [],
+                username: {},
+            },
+
+            methods:{
+                getPizzas(){
+                    $.get('/pizzas', function(pizzas){
+                        vm.pizzas = pizzas;
+                        // load functions that needs pizzas to be on DOM to work
+                        vm.$nextTick(function(){
+
+                        });
+                    });
+                },
+                getUsername(){
+                    $.getJSON('/username', function(username){
+                        vm.username = username;
+                    });
+                },
             },
 
             ready(){
-                $.get('/pizzas', function(pizzas){
-                    vm.pizzas = pizzas;
-
-                    // load functions that needs pizzas to be on DOM to work
-                    vm.$nextTick(function(){
-
-                    });
-                });
+                this.getPizzas();
+                this.getUsername();
             }
         });
     }

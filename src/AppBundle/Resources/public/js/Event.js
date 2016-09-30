@@ -89,20 +89,6 @@ export class Event {
                 })
         });
 
-        // add a pizza on database
-        $(".add-pizza").on('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            let pizzaInfo = Dom.getSelectedPizzaInfo($(this).closest('.pizza-card'));
-
-            databaseReference.push({
-                name: pizzaInfo.name,
-                price: pizzaInfo.price,
-                username: pizzaInfo.username,
-            });
-        });
-
         // watch database
         databaseReference.on('child_added', function (data) {
             // add pizza on DOM
