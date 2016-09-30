@@ -32,55 +32,26 @@
 
 // prevent account menu to change background color on leave
 .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
-  background-color: $main-light;
+  background-color: darken(red, 10%);
 }
 
-.navbar-lower {
-  margin-top: $main-navbar-height;
-  padding: 1em;
+.menu {
+  margin-top: $main-navbar-height +1em;
+  margin-left: 1em;
   z-index: 1;
-  height: $secondary-navbar-height;
-  background-color: transparent;
-  padding-left: $left-offset;
 
-  #filter-favorites {
+  button {
 
-    button {
-      background-color: white;
-      .button-text {
-        @media #{$phone}{
-          display: none;
-        }
-      }
-    }
-
-    @media #{$phone}{
-      padding-bottom: 0;
+    .fa-heart {
+      color: crimson;
+      line-height: 1.5em;
     }
 
     &.btn-default {
       &.active {
-        color: white;
-        background-color: lighten($main, 20%);
-        border: 2px solid white;
-
-        &:link {
-          border: 0;
-        }
-
-        .glyphicon-heart {
+        .fa-heart {
           color: white;
         }
-      }
-    }
-
-    .glyphicon-heart {
-      color: crimson;
-
-      @media #{$phone}{
-        font-size: 2em;
-        padding: 0;
-        margin: 0;
       }
     }
   }

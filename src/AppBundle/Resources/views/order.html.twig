@@ -3,10 +3,16 @@
 {% block content %}
 
     <div id="app">
-        <nav class="navbar navbar-lower navbar-fixed-top">
-            <button id="filter-favorites" class="btn btn-default" role="checkbox"><span
-                        class="button-text">Filtrer par </span><span class="glyphicon glyphicon-heart"></span></button>
-        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9 col-lg-8">
+                    <nav class="navbar menu navbar-fixed-top">
+                        <button id="filter-favorites" class="btn btn-default" role="checkbox">Filtrer par <span class="fa fa-heart pull-right"></span>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </div>
 
         <div class="container-fluid">
             <div class="row">
