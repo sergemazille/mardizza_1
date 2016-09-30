@@ -4,50 +4,12 @@ body {
   background-color: $main;
 
   .home {
-    height: 50em;
+    height: 60em;
 
     @media #{$tablet-desktop} {
       background-image: url("../../assets/images/bg.jpg");
       background-repeat: no-repeat;
       background-size: cover;
-    }
-  }
-}
-
-#slogan {
-  color: white;
-  margin-top: 8em;
-  text-align: center;
-
-  @media #{$phone}{
-    margin-top: 6em;
-  }
-
-  a {
-    margin-bottom: 2em;
-
-    @media #{$phone}{
-      font-size: 1.6em;
-    }
-  }
-
-  h1 {
-    font-family: 'Euphoria Script', cursive;
-    font-size: 5em;
-
-    @media #{$phone}{
-      display: none;
-    }
-  }
-
-  h2 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 4em;
-    margin: 0.5em 0 1.5em 0;
-
-    @media #{$phone}{
-      font-size: 2em;
-      margin-bottom: 1em;
     }
   }
 }

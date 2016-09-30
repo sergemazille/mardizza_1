@@ -2,7 +2,7 @@
 
 #slogan {
   color: white;
-  margin-top: 8em;
+  margin-top: 12em;
   text-align: center;
 
   @media #{$phone}{
@@ -11,6 +11,7 @@
 
   a {
     margin-bottom: 2em;
+    font-size: 1.7em;
 
     @media #{$phone}{
       font-size: 1.6em;
