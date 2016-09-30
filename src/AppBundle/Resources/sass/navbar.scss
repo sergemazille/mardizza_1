@@ -15,7 +15,7 @@
     &:hover {
       color: $main-dark;
     }
-    &:active{
+    &:active {
       color: $main-inverse;
     }
   }
@@ -23,8 +23,7 @@
   #navbar {
     .navbar-nav {
       padding: 0.55em;
-
-      .dropdown-toggle{
+      .dropdown-toggle {
         color: white;
       }
     }
@@ -33,7 +32,7 @@
 
 // prevent account menu to change background color on leave
 .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
-  background-color: $main;
+  background-color: $main-light;
 }
 
 .navbar-lower {
@@ -41,13 +40,17 @@
   padding: 1em;
   z-index: 1;
   height: $secondary-navbar-height;
-  background-color: $main-light;
+  background-color: transparent;
   padding-left: $left-offset;
 
   #filter-favorites {
-    .button-text {
-      @media #{$phone}{
-        display: none;
+
+    button {
+      background-color: white;
+      .button-text {
+        @media #{$phone}{
+          display: none;
+        }
       }
     }
 
@@ -78,8 +81,6 @@
         font-size: 2em;
         padding: 0;
         margin: 0;
-        //line-height: 0.2em;
-        //padding-top: 0.35em;
       }
     }
   }
