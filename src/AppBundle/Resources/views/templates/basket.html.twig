@@ -12,7 +12,9 @@
             </div>
 
             <div id="basket-body" class="collapse in">
-                <table class="table table-striped"></table>
+                <table class="table table-striped">
+                    <row v-for="row in rows" :pizza="row.pizza"></row>
+                </table>
             </div>
 
             <div id="basket-footer">

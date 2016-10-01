@@ -88,7 +88,7 @@ export class Event {
         // watch database
         databaseReference.on('child_added', function (data) {
             // add pizza on DOM
-            Dom.addPizza(data.key, data.val());
+            // Dom.addPizza(data.key, data.val());
 
             // show message if table is empty
             Dom.showOrHideEmptyBasketMessage();

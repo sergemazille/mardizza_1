@@ -9,7 +9,7 @@ export class Vuejs {
 
         Vue.config.delimiters = ['${', '}'];
 
-        Vue.filter('euro', function (price) {
+        Vue.filter('euro', function (price = 0) {
             return ((price.toFixed(2)).replace('.', ',') + '\xa0€');
         });
 
@@ -22,38 +22,57 @@ export class Vuejs {
                 },
                 addToOrder(){
                     Helper.addPizzaOnOrderDatabase(this.pizza, store.username);
+                    vm.$dispatch('pizzaAdded', this.pizza);
                 },
             },
         });
 
-        Vue.component('basket', {
+        let Row = {
+            template: '#row-template',
+            props: ['pizza'],
+            data(){
+                return {
+                    username: store.username,
+                    name: this.pizza.name,
+                    price: this.pizza.price,
+                }
+            },
+        };
+
+        let Basket = {
             template: '#basket-template',
             data(){
                 return {
                     messages: [],
                     message: '',
+                    rows: [],
                 }
             },
             methods: {
-                addPizzaToBasket(){
-
+                addPizzaToBasket(pizza){
+                    this.rows.push({'pizza': pizza}); // set a key to the object so user can add multiple times the same pizza
                 },
                 setRandomMessage(){
                     let ln = this.messages.length;
                     this.message = this.messages[Math.floor(Math.random() * ln)];
                 },
                 getMessages(){
-                    let that = this;
                     $.get('/basket/messages', function (messages) {
-                        that.messages = messages;
-                        that.setRandomMessage();
-                    });
+                        this.messages = messages;
+                        this.setRandomMessage();
+                    }.bind(this));
                 },
+            },
+            components:{
+                'row': Row,
             },
             created(){
                 this.getMessages();
+                this.$parent.$on('pizzaAdded', function(pizza){
+                    this.addPizzaToBasket(pizza);
+                }.bind(this));
             }
-        });
+        };
 
         let vm = new Vue({
             el: '#app',
@@ -65,7 +84,6 @@ export class Vuejs {
                 getPizzas(){
                     $.get('/pizzas', function (pizzas) {
                         vm.pizzas = pizzas;
-
                         // load functions that needs pizzas to be on DOM to work
                         vm.$nextTick(function () {
 
@@ -83,9 +101,10 @@ export class Vuejs {
                     });
                 },
             },
-
+            components: {
+                'basket': Basket,
+            },
             ready(){
-
                 // hydrate with ajax calls
                 this.getPizzas();
                 this.getUsername();
