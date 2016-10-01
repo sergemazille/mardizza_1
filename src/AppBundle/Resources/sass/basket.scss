@@ -56,25 +56,25 @@
   table {
     margin: 0;
     background-color: white;
+  }
 
-    tr {
-      td {
-        vertical-align: baseline;
+  tr {
+    td {
+      vertical-align: baseline;
 
-        .glyphicon-remove {
-          padding-left: 1em;
-          color: $main;
+      .glyphicon-remove {
+        padding-left: 1em;
+        color: $main;
 
-          &:hover {
-            cursor: pointer;
-          }
+        &:hover {
+          cursor: pointer;
         }
+      }
 
-        &.pizza-price {
-          text-align: right;
-          padding: 0;
-          padding-right: 1.5em;
-        }
+      &.pizza-price {
+        text-align: right;
+        padding: 0;
+        padding-right: 1.5em;
       }
     }
   }
