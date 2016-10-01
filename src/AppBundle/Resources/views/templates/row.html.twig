@@ -1,6 +1,6 @@
 <template id="row-template">
     <tr>
-        <td><span class="glyphicon glyphicon-remove pizza-remove"></span></td>
+        <td><span class="glyphicon glyphicon-remove" :class="{'hidden':isNotOwner}" @click.prevent="removePizzaFromDb"></span></td>
         <td class="user-name">${username}</td>
         <td class="pizza-name">${name}</td>
         <td class="pizza-price">${price|euro}</td>

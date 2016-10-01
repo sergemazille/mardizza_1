@@ -31,8 +31,12 @@ class PageController extends Controller
         // Welcome message
         $this->addFlash("success", "Bon appétit !!!");
 
+        // reference for database
+        $orderRef = $this->get('mardizza.order_service')->getOrderRef();
+
         return $this->render('@App/order.html.twig', [
             'user' => $user,
+            'orderRef' => $orderRef,
         ]);
     }
 }

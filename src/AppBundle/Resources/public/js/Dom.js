@@ -41,10 +41,6 @@ export class Dom {
         }
     }
 
-    static getOrderReference() {
-        return $("#order-reference").text();
-    }
-
     static getSelectedPizzaInfo($pizzaCard) {
 
         let pizzaId = $pizzaCard.attr("data-pizzaid");
@@ -151,10 +147,6 @@ export class Dom {
 
     static getCurrentUsername() {
         return $("#username").data("username");
-    }
-
-    static getPizzaOwnerUsername(pizzaId) {
-        return $(`#${pizzaId}`).find('.user-name').data("username");
     }
 
     static hideDeleteButtons(pizzaId) {

@@ -62,4 +62,10 @@ class OrderService
 
         return $todaysOrder;
     }
+
+    public function getOrderRef()
+    {
+        $order = $this->getOrder();
+        return $order->getCreatedAt()->format('Ymd');
+    }
 }

@@ -7,7 +7,6 @@ $(document).ready(function () {
     
     // initialization
     Vuejs.init();
-    FirebaseDb.init();
     Event.init();
     Dom.init();
 });

@@ -7,8 +7,8 @@ export class Event {
 
     static init() {
         // current order database reference
-        let orderReference = Dom.getOrderReference();
-        let databaseReference = FirebaseDb.setDatabaseOrderReference(orderReference);
+        // let orderReference = Dom.getOrderReference();
+        // let databaseReference = FirebaseDb.setDatabaseOrderReference(orderReference);
 
         // initialize snapshot behaviour
         Event.snapshot();
@@ -66,78 +66,78 @@ export class Event {
 
 
         // click on a pizza card
-        $(".pizza-card-content").on('click', function (e) {
-            e.preventDefault();
-
-            let pizza = Dom.getSelectedPizzaInfo($(this).parent('.pizza-card'));
-
-            $.post(`/pizza/${pizza.id}`)
-                .done(function (pizzaInfos) {
-
-                    $('body').append(pizzaInfos);
-                    $("#pizza-modal").modal("show");
-                    Event.snapshot();
-
-                    // Remove modal from the DOM in case user click an other pizza card
-                    $("#pizza-modal").on("hidden.bs.modal", function(){
-                        $(this).remove();
-                    });
-                })
-        });
+        // $(".pizza-card-content").on('click', function (e) {
+        //     e.preventDefault();
+        //
+        //     let pizza = Dom.getSelectedPizzaInfo($(this).parent('.pizza-card'));
+        //
+        //     $.post(`/pizza/${pizza.id}`)
+        //         .done(function (pizzaInfos) {
+        //
+        //             $('body').append(pizzaInfos);
+        //             $("#pizza-modal").modal("show");
+        //             Event.snapshot();
+        //
+        //             // Remove modal from the DOM in case user click an other pizza card
+        //             $("#pizza-modal").on("hidden.bs.modal", function(){
+        //                 $(this).remove();
+        //             });
+        //         })
+        // });
 
         // watch database
-        databaseReference.on('child_added', function (data) {
-            // add pizza on DOM
-            // Dom.addPizza(data.key, data.val());
+        // databaseReference.on('child_added', function (data) {
+        //     // add pizza on DOM
+        //     // Dom.addPizza(data.key, data.val());
+        //
+        //     // show message if table is empty
+        //     Dom.showOrHideEmptyBasketMessage();
+        //
+        //     // show or hide 'total' row if table is not empty
+        //     Dom.showOrHideBasketFooter();
+        //
+        //     // register 'remove from Dom' event
+        //     Event.removePizza(data.key);
+        // });
 
-            // show message if table is empty
-            Dom.showOrHideEmptyBasketMessage();
-
-            // show or hide 'total' row if table is not empty
-            Dom.showOrHideBasketFooter();
-
-            // register 'remove from Dom' event
-            Event.removePizza(data.key);
-        });
-
-        databaseReference.on('child_removed', function (data) {
-            // remove pizza from DOM
-            Dom.removePizza(data.key);
-
-            // show message if table is empty
-            Dom.showOrHideEmptyBasketMessage();
-
-            // show or hide 'total' row if table is not empty
-            Dom.showOrHideBasketFooter();
-        });
+        // databaseReference.on('child_removed', function (data) {
+        //     // remove pizza from DOM
+        //     Dom.removePizza(data.key);
+        //
+        //     // show message if table is empty
+        //     Dom.showOrHideEmptyBasketMessage();
+        //
+        //     // show or hide 'total' row if table is not empty
+        //     Dom.showOrHideBasketFooter();
+        // });
 
         // add pizza to user favorites
-        $(document).on('click', '.add-favorite', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
-            Helper.addPizzaToFavorites(pizzaId);
-
-            Helper.switchFavoritesClassesBehaviour(e.currentTarget);
-
-            Dom.favoriteFilterActivation();
-            Dom.filterFavorites();
-        });
+        // $(document).on('click', '.add-favorite', function (e) {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        //
+        //     let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
+        //     Helper.addPizzaToFavorites(pizzaId);
+        //
+        //     Helper.switchFavoritesClassesBehaviour(e.currentTarget);
+        //
+        //     Dom.favoriteFilterActivation();
+        //     Dom.filterFavorites();
+        // });
 
         // remove pizza to user favorites
-        $(document).on('click', '.remove-favorite', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
-            Helper.removePizzaFromFavorites(pizzaId);
-
-            Helper.switchFavoritesClassesBehaviour(e.currentTarget);
-
-            Dom.favoriteFilterActivation();
-            Dom.filterFavorites();
-        });
+        // $(document).on('click', '.remove-favorite', function (e) {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        //
+        //     let pizzaId = $(this).closest(".pizza-card").data("pizzaid");
+        //     Helper.removePizzaFromFavorites(pizzaId);
+        //
+        //     Helper.switchFavoritesClassesBehaviour(e.currentTarget);
+        //
+        //     Dom.favoriteFilterActivation();
+        //     Dom.filterFavorites();
+        // });
 
         // add camera effect for pizza card clipboard copy
         $(".pizza-clipboard").on('click', function (e) {
@@ -149,15 +149,15 @@ export class Event {
         });
 
         // filter by favorites
-        $("#filter-favorites").on("click", function (e) {
-            e.preventDefault();
-
-            let $checkbox = $(e.currentTarget);
-            $checkbox.toggleClass("active");
-
-            Dom.favoriteFilterActivation();
-            Dom.filterFavorites();
-        });
+        // $("#filter-favorites").on("click", function (e) {
+        //     e.preventDefault();
+        //
+        //     let $checkbox = $(e.currentTarget);
+        //     $checkbox.toggleClass("active");
+        //
+        //     Dom.favoriteFilterActivation();
+        //     Dom.filterFavorites();
+        // });
 
         // expand account dropdown on hover
         $(".dropdown.nav-right-content").hover(
