@@ -28,29 +28,11 @@ class PageController extends Controller
             return $this->redirectToRoute('login');
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $orderRepository = $em->getRepository('AppBundle:Order');
-        $today = new DateTime('TODAY');
-
-        // check if there's already an order today
-        $todaysOrder = $orderRepository->findOneBy(['createdAt' => $today]);
-
-        // else create a new one
-        if(! $todaysOrder){
-            $todaysOrder = $this->get('mardizza.order');
-            $todaysOrder->setCreatedAt($today);
-            $todaysOrder->setUpdatedAt($today);
-
-            $em->persist($todaysOrder);
-            $em->flush();
-        }
-
         // Welcome message
         $this->addFlash("success", "Bon appétit !!!");
 
         return $this->render('@App/order.html.twig', [
             'user' => $user,
-            'order' => $todaysOrder,
         ]);
     }
 }

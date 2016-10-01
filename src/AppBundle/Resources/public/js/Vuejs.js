@@ -4,6 +4,9 @@ export class Vuejs {
 
     static init() {
 
+        // global storage
+        let store = {};
+
         Vue.config.delimiters = ['${', '}'];
 
         Vue.filter('euro', function (price) {
@@ -18,38 +21,75 @@ export class Vuejs {
                     this.pizza.isFavorite = !this.pizza.isFavorite;
                 },
                 addToOrder(){
-                    Helper.addPizzaOnOrderDatabase(this.pizza, vm.username);
+                    Helper.addPizzaOnOrderDatabase(this.pizza, store.username);
                 },
             },
+        });
+
+        Vue.component('basket', {
+            template: '#basket-template',
+            data(){
+                return {
+                    messages: [],
+                    message: '',
+                }
+            },
+            methods: {
+                addPizzaToBasket(){
+
+                },
+                setRandomMessage(){
+                    let ln = this.messages.length;
+                    this.message = this.messages[Math.floor(Math.random() * ln)];
+                },
+                getMessages(){
+                    let that = this;
+                    $.get('/basket/messages', function (messages) {
+                        that.messages = messages;
+                        that.setRandomMessage();
+                    });
+                },
+            },
+            created(){
+                this.getMessages();
+            }
         });
 
         let vm = new Vue({
             el: '#app',
             data: {
                 pizzas: [],
-                username: {},
             },
 
-            methods:{
+            methods: {
                 getPizzas(){
-                    $.get('/pizzas', function(pizzas){
+                    $.get('/pizzas', function (pizzas) {
                         vm.pizzas = pizzas;
+
                         // load functions that needs pizzas to be on DOM to work
-                        vm.$nextTick(function(){
+                        vm.$nextTick(function () {
 
                         });
                     });
                 },
                 getUsername(){
-                    $.getJSON('/username', function(username){
-                        vm.username = username;
+                    $.get('/username', function (username) {
+                        store.username = username;
+                    });
+                },
+                getOrderRef(){
+                    $.get('/order/reference', function (orderRef) {
+                        store.order_reference = orderRef;
                     });
                 },
             },
 
             ready(){
+
+                // hydrate with ajax calls
                 this.getPizzas();
                 this.getUsername();
+                this.getOrderRef();
             }
         });
     }

@@ -16,3 +16,7 @@ services:
     mardizza.security.login_form_authenticator:
         class: AppBundle\Security\LoginFormAuthenticator
         autowire: true
+
+    mardizza.message_service:
+        class: AppBundle\Service\BasketMessageService
+        arguments: [ '@doctrine.orm.entity_manager' ]

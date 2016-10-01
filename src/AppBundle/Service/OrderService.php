@@ -41,4 +41,25 @@ class OrderService
         $this->em->persist($order);
         $this->em->flush();
     }
+
+    public function getOrder()
+    {
+        $orderRepository = $this->em->getRepository('AppBundle:Order');
+        $today = new DateTime('TODAY');
+
+        // check if there's already an order today
+        $todaysOrder = $orderRepository->findOneBy(['createdAt' => $today]);
+
+        // else create a new one
+        if(! $todaysOrder){
+            $todaysOrder = $this->order;
+            $todaysOrder->setCreatedAt($today);
+            $todaysOrder->setUpdatedAt($today);
+
+            $this->em->persist($todaysOrder);
+            $this->em->flush();
+        }
+
+        return $todaysOrder;
+    }
 }

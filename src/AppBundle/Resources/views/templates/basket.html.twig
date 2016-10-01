@@ -1,0 +1,26 @@
+<template id="basket-template">
+    <div class="basket-container">
+        <div id="basket">
+
+            <div id="basket-header">
+                <h1>Commande
+                    <a class="" role="button" data-toggle="collapse" href="#basket-body" aria-expanded="false"
+                                aria-controls="collapseOrderBasket"><span
+                                class="fa fa-bars pull-right hidden-sm hidden-md hidden-lg hidden-xl"></span>
+                    </a>
+                </h1>
+            </div>
+
+            <div id="basket-body" class="collapse in">
+                <table class="table table-striped"></table>
+            </div>
+
+            <div id="basket-footer">
+                <p id="basket-message">${ message }</p>
+                <p class="hidden" id="basket-total">TOTAL&nbsp;:&nbsp;<span id="price-total"></span></p>
+                <p class="hidden" id="phone-number">04 37 64 60 79</p>
+            </div>
+
+        </div>
+    </div>
+</template>

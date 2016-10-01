@@ -38,6 +38,10 @@ get_pizzas:
     defaults: { _controller: AppBundle:Pizza:getPizzas }
     methods: [GET]
 
+get_basket_messages:
+    path: /basket/messages
+    defaults: { _controller: AppBundle:BasketMessage:getBasketMessage }
+    methods: [GET]
 
 add_favorite_pizza:
     path: /user/add/pizza/{id}
@@ -49,11 +53,10 @@ remove_favorite_pizza:
     defaults: { _controller: AppBundle:Pizza:removeFavorite }
     methods: [GET, POST]
 
-get_pizzas:
-    path: /pizzas
-    defaults: { _controller: AppBundle:Pizza:getPizzas }
-    methods: [GET]
-
 get_username:
     path: /username
     defaults: { _controller: AppBundle:User:getUsername }
+
+get_order_reference:
+    path: /order/reference
+    defaults: { _controller: AppBundle:Order:getOrderReference }

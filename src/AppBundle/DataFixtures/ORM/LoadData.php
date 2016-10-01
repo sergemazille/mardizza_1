@@ -2,11 +2,12 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Message;
 use AppBundle\Entity\Pizza;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadPizzaData implements FixtureInterface
+class LoadData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -270,6 +271,16 @@ class LoadPizzaData implements FixtureInterface
                 "image" => "vegetarienne",
             ],
         ];
+        $messages = [
+            "C'est l'heure de commander une pizza !!!",
+            "Pour l'instant je suis un peu inutile...",
+            "Mieux vaut une pizza que... heu... qu'aucune !!!",
+            "Sélectionnez au moins une pizza... allez, pour me faire plaisir !",
+            "Vincent recommande la pizza tartiflette !!!",
+            "Eric recommande d'ajouter un supplément merguez !",
+            "Le mardi c'est permis !",
+            "Kowabunga, les Tortues Ninjas recommandent de ne pas choisir et de toutes les prendre !!!"
+        ];
 
         foreach($pizzas as $item){
             $pizza = new Pizza();
@@ -279,6 +290,14 @@ class LoadPizzaData implements FixtureInterface
             $pizza->setImage($item['image']);
 
             $manager->persist($pizza);
+            $manager->flush();
+        }
+
+        foreach($messages as $item){
+            $message = new Message();
+            $message->setBody($item);
+
+            $manager->persist($message);
             $manager->flush();
         }
     }
