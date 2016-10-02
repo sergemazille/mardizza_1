@@ -2,13 +2,13 @@
 
 {% block content %}
 
-    <div id="app" :order_reference="{{ orderRef }}">
+    <div id="app" :order_reference="{{ orderRef }}" xmlns="http://www.w3.org/1999/html">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-9 col-lg-8">
                     <nav class="navbar menu navbar-fixed-top">
-                        <button id="filter-favorites" class="btn btn-default" role="checkbox">Filtrer par <span class="fa fa-heart pull-right"></span>
-                        </button>
+                        <button class="btn btn-default" role="checkbox" @click="toggleFavoriteFilter">Filtrer par <span class="fa fa-heart pull-right"></span></button>
+                        <input type="text" v-model="priceFilter">
                     </nav>
                 </div>
             </div>
@@ -18,7 +18,7 @@
             <div class="row">
                 <div id="pizzas" class="col-md-9 col-lg-8">
                     <div class="row">
-                        <pizza v-for="pizza in pizzas" :pizza="pizza" class="col-sm-5 col-md-4 col-lg-3"></pizza>
+                        <pizza v-for="pizza in pizzas | filterByFavorite | filterBy priceFilter in 'price'" :pizza="pizza" class="col-sm-5 col-md-4 col-lg-3"></pizza>
                     </div>
                 </div>
                 <div class="col-md-3 col-lg-4 pull-right">

@@ -10,37 +10,42 @@ export class Vuejs {
         // global storage
         let store = {};
 
+        // initialized for filtering
+        let vm = {};
+
         Vue.config.delimiters = ['${', '}'];
 
         Vue.filter('euro', function (price = 0) {
             return ((price.toFixed(2)).replace('.', ',') + '\xa0€');
         });
 
+        Vue.filter('filterByFavorite', function (pizzas) {
+            if (vm.filterByFavorite) {
+                return pizzas.filter(function (pizza) {
+                    return pizza.isFavorite;
+                })
+            }
+
+            return pizzas;
+        });
+
         Vue.component('pizza', {
             template: '#pizza-template',
             props: ['pizza'],
-            data(){
-                return {
-                    name: this.pizza.name,
-                    price: this.pizza.price,
-                    isFavorite: this.pizza.isFavorite,
-                    username: store.username,
-                }
-            },
             methods: {
                 toggleIsFavorite(){
-                    this.isFavorite = !this.isFavorite;
-                    this.toggleUserFavorite();
+                    this.pizza.isFavorite = !this.pizza.isFavorite;
+                    this.saveUserFavorite();
                 },
                 addPizzaToDb(){
                     store.databaseReference.push({
-                        name: this.name,
-                        price: this.price,
+                        name: this.pizza.name,
+                        price: this.pizza.price,
                         username: store.username,
                     });
                 },
-                toggleUserFavorite(){
-                    let action = this.isFavorite ? 'add' : 'remove';
+                saveUserFavorite(){
+                    let action = this.pizza.isFavorite ? 'add' : 'remove';
                     $.post({
                         url: `/user/${action}/pizza/${this.pizza.id}`
                     });
@@ -80,8 +85,8 @@ export class Vuejs {
                     this.rows.push({'pizza': pizza}); // set a key to the object so user can add multiple times the same pizza
                 },
                 removePizzaFromBasket(key){
-                    $(this.rows).each(function(index, row){
-                        if(row.pizza.key == key){
+                    $(this.rows).each(function (index, row) {
+                        if (row.pizza.key == key) {
                             this.rows.$remove(row);
                         }
                     }.bind(this));
@@ -129,22 +134,24 @@ export class Vuejs {
             }
         };
 
-        let vm = new Vue({
+        vm = new Vue({
             el: '#app',
             props: ['order_reference'],
             data: {
                 pizzas: [],
                 username: '',
+                filterByFavorite: false,
+                priceFilter: '',
             },
             methods: {
                 getPizzas(){
                     $.get('/pizzas', function (pizzas) {
-                        vm.pizzas = pizzas;
+                        this.pizzas = pizzas;
+                        store.pizzas = pizzas; // keep a list of pizzas for future needs
                         // load functions that needs pizzas to be on DOM to work
-                        vm.$nextTick(function () {
-
+                        this.$nextTick(function () {
                         });
-                    });
+                    }.bind(this));
                 },
                 getUsername(){
                     $.get('/username', function (username) {
@@ -154,6 +161,9 @@ export class Vuejs {
                 setOrderRef(){
                     store.order_reference = this.order_reference;
                     store.databaseReference = firebase.database().ref(`orders/${this.order_reference}`);
+                },
+                toggleFavoriteFilter(){
+                    this.filterByFavorite = !this.filterByFavorite;
                 },
             },
             components: {
@@ -166,5 +176,6 @@ export class Vuejs {
                 this.setOrderRef();
             }
         });
+
     }
 }
