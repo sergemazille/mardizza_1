@@ -64,8 +64,12 @@ export class Vuejs {
                 addPizzaToBasket(pizza){
                     this.rows.push({'pizza': pizza}); // set a key to the object so user can add multiple times the same pizza
                 },
-                removePizzaFromBasket(pizza){
-                    this.rows.pop(pizza);
+                removePizzaFromBasket(key){
+                    $(this.rows).each(function(index, row){
+                        if(row.pizza.key == key){
+                            this.rows.$remove(row);
+                        }
+                    }.bind(this));
                 },
                 removePizzaFromDb(pizza){
                     if (pizza.username == store.username) {
