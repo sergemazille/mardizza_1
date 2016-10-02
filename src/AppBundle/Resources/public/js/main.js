@@ -1,5 +1,4 @@
 import { Vuejs } from './Vuejs';
-import { FirebaseDb } from './FirebaseDb';
 import { Event } from './Event';
 import { Dom } from './Dom';
 

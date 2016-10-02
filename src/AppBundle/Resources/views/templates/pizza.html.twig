@@ -1,7 +1,7 @@
 <template id="pizza-template">
     <div class="pizza-container">
         <div class="pizza">
-            <div class="pizza-header clearfix">
+            <div class="pizza-header">
                 <a href="#" role="button" class="btn btn-success" @click.prevent="addPizzaToDb"><span
                             class="fa fa-plus"></span></a>
                 <img class="img-responsive img-thumbnail" :src="pizza.imageUrl" alt="${pizza.name}">
@@ -19,7 +19,7 @@
                 </div>
                 <div>
                     <a href="#" @click.prevent="toggleIsFavorite">
-                        <span class="fa" :class="{'fa-heart':pizza.isFavorite, 'fa-heart-o':!pizza.isFavorite}"></span></a>
+                        <span class="fa" :class="{'fa-heart':isFavorite, 'fa-heart-o':!isFavorite}"></span></a>
                 </div>
             </div>
         </div>

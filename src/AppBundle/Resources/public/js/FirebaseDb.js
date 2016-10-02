@@ -52,12 +52,4 @@ export class FirebaseDb {
                 callback();
             });
     }
-
-    static setDatabaseOrderReference(orderReference) {
-        return firebase.database().ref(`orders/${orderReference}`);
-    }
-
-    static getPizzaReference(orderReference, key) {
-        return firebase.database().ref(`orders/${orderReference}/${key}`);
-    }
 }

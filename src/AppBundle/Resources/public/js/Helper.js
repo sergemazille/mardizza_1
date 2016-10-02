@@ -1,22 +1,7 @@
 import * as Const from "./constantes";
 import {Dom} from "./Dom";
-import {FirebaseDb} from "./FirebaseDb";
 
 export class Helper {
-
-    static formatPrice(price) {
-
-        // 2 decimals
-        price = parseFloat(Math.round(price * 100) / 100).toFixed(2);
-
-        // change '.' to ','
-        price = price.replace(/\./g, ',');
-
-        // add euro sign
-        price = price + String.fromCharCode(160) + "€";
-
-        return price;
-    }
 
     static calculateBasketTotal() {
         let $individualPrices = $("td.pizza-price").map(function (i, el) {
@@ -52,23 +37,8 @@ export class Helper {
 
         $.ajax({
             url: `/check/username?username=${username}`
-        })
-            .done(function (response) {
-                callback(response);
-            });
-    }
-
-    // ajax call to add favorite pizza
-    static addPizzaToFavorites(pizzaId) {
-        $.ajax({
-            url: "/user/add/pizza/" + pizzaId
-        });
-    }
-
-    // ajax call to remove favorite pizza
-    static removePizzaFromFavorites(pizzaId) {
-        $.ajax({
-            url: "/user/remove/pizza/" + pizzaId
+        }).done(function (response) {
+            callback(response);
         });
     }
 }

@@ -13,9 +13,6 @@ export class Dom {
 
         // manage notifications
         Dom.cleanNotifications();
-
-        // deactivate favorite pizzas filter if no favorite
-        Dom.favoriteFilterActivation();
     }
 
     static getCredentials(loginOrCreate) {
@@ -39,56 +36,6 @@ export class Dom {
             'username': $username,
             'password': $password,
         }
-    }
-
-    static getSelectedPizzaInfo($pizzaCard) {
-
-        let pizzaId = $pizzaCard.attr("data-pizzaid");
-        let pizzaName = $pizzaCard.find(".pizza-name").data('name');
-        let pizzaPrice = $pizzaCard.find(".pizza-price").data('price');
-        let userName = $("#username").data('username'); // can't get with twig because of ES6 compiler
-
-        return {
-            id: pizzaId,
-            name: pizzaName,
-            price: pizzaPrice,
-            username: userName,
-        }
-    }
-
-    static getSelectedPizzaRow(pizzaId) {
-        return $(`tr#${pizzaId}`);
-    }
-
-    // add pizza on DOM
-    static addPizza(pizzaId, pizza) {
-
-        // price format
-        let formattedPrice = Helper.formatPrice(pizza.price);
-
-        let pizzaRow = `<tr id="${pizzaId}">
-            <td class="pizza-item"><span class="glyphicon glyphicon-remove pizza-remove"></span></td>
-            <td class="user-name" data-username="${pizza.username}">${pizza.username}</td>
-             <td class="pizza-name" data-name="${pizza.name}">${pizza.name}</td>
-             <td class="pizza-price" data-price="${pizza.price}">${formattedPrice}</td>
-             </tr>`;
-
-        // append pizza on DOM
-        $(".table-striped").append(pizzaRow);
-
-        let owner = Dom.getPizzaOwnerUsername(pizzaId);
-
-        // hide delete button if current user is not the owner of the newly added pizza
-        if (!Helper.isOwner(owner)) {
-            Dom.hideDeleteButtons(pizzaId);
-        }
-    }
-
-    // remove pizza from DOM
-    static removePizza(pizzaId) {
-        let $pizzaRow = Dom.getSelectedPizzaRow(pizzaId);
-
-        $pizzaRow.remove();
     }
 
     static cropLongText(pizzaCard) {
@@ -145,14 +92,6 @@ export class Dom {
         }
     }
 
-    static getCurrentUsername() {
-        return $("#username").data("username");
-    }
-
-    static hideDeleteButtons(pizzaId) {
-        $(`#${pizzaId}`).find('.glyphicon-remove').addClass("hidden");
-    }
-
     static createNotification(msgBody, msgClass) {
         let domElement = `<div class="hidden alert ${msgClass}">${msgBody}</div>`;
         $(".messages").append(domElement);
@@ -187,31 +126,6 @@ export class Dom {
         });
     }
 
-    static filterFavorites() {
-
-        let $checkbox = $("#filter-favorites");
-        let $allPizzas = $(".pizza-card")
-        let $favoritePizzas = $(".pizza-favorite");
-
-        if ($checkbox.hasClass("active") && $favoritePizzas.length >= 1) {
-            $allPizzas.not($favoritePizzas).hide();
-        } else {
-            $allPizzas.show();
-        }
-    }
-
-    static favoriteFilterActivation() {
-        let $favoritePizzas = $(".pizza-favorite");
-        let $checkbox = $("#filter-favorites")
-
-        if ($favoritePizzas.length <= 0) {
-            $checkbox.attr("disabled", true);
-            $checkbox.removeClass("active");
-        } else {
-            $checkbox.attr("disabled", false);
-        }
-    }
-
     // load clipboard lib behaviour
     static loadClipboard(){
         let snapshotLinks = document.querySelectorAll('.pizza-clipboard');
@@ -222,10 +136,5 @@ export class Dom {
         clipboard.on('error', function () {
             Dom.createNotification("Erreur lors de la copie dans le presse papier.", "alert-danger");
         });
-    }
-
-    static rotateCards() {
-        var a = Math.random() * 10 - 5;
-        $(".pizza-container").css('transform', 'rotate(' + a + 'deg) scale(1.25)');
     }
 }

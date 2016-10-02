@@ -19,15 +19,30 @@ export class Vuejs {
         Vue.component('pizza', {
             template: '#pizza-template',
             props: ['pizza'],
+            data(){
+                return {
+                    name: this.pizza.name,
+                    price: this.pizza.price,
+                    isFavorite: this.pizza.isFavorite,
+                    username: store.username,
+                }
+            },
             methods: {
                 toggleIsFavorite(){
-                    this.pizza.isFavorite = !this.pizza.isFavorite;
+                    this.isFavorite = !this.isFavorite;
+                    this.toggleUserFavorite();
                 },
                 addPizzaToDb(){
                     store.databaseReference.push({
-                        name: this.pizza.name,
-                        price: this.pizza.price,
+                        name: this.name,
+                        price: this.price,
                         username: store.username,
+                    });
+                },
+                toggleUserFavorite(){
+                    let action = this.isFavorite ? 'add' : 'remove';
+                    $.post({
+                        url: `/user/${action}/pizza/${this.pizza.id}`
                     });
                 },
             },
