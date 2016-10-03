@@ -12,7 +12,7 @@
             </div>
             <div class="pizza-footer">
                 <div>
-                    <a href="#"><span class="fa fa-camera"></span></a>
+                    <a href="#" @click.prevent="takeSnapshot"><span class="fa fa-camera"></span></a>
                 </div>
                 <div>
                     <p>${pizza.price|euro}</p>

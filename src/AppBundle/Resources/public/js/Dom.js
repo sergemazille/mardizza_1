@@ -3,14 +3,6 @@ import {Helper} from "./Helper";
 export class Dom {
 
     static init() {
-        // shorten too long text for pizza ingredients
-        $(".pizza-card").each(function () {
-            Dom.cropLongText(this);
-        });
-
-        // show a message if the order basket is empty
-        Dom.showOrHideEmptyBasketMessage();
-
         // manage notifications
         Dom.cleanNotifications();
     }
@@ -38,17 +30,6 @@ export class Dom {
         }
     }
 
-    static cropLongText(pizzaCard) {
-        let $pizzaIngredients = $(pizzaCard).find(".pizza-card-ingredients");
-
-        var isTruncated = $pizzaIngredients.triggerHandler("isTruncated");
-        if (!isTruncated) {
-            $pizzaIngredients.dotdotdot({
-                ellipsis: '...'
-            });
-        }
-    }
-
     static showOrHideEmptyBasketMessage() {
         if ($("tr").length < 1 && $(window).width() > 768) {
 
@@ -62,33 +43,6 @@ export class Dom {
 
         } else {
             $("#basket-message").hide();
-        }
-    }
-
-    // show or hide 'total' row if table is not empty
-    static showOrHideBasketFooter() {
-
-        let $table = $("#pizza-list");
-
-        if ($table.find('tr').length >= 1) {
-            // calculate total
-            let total = Helper.calculateBasketTotal();
-
-            // format total price
-            total = Helper.formatPrice(total);
-
-            // insert total on DOM element
-            $("#price-total").text(total);
-
-            // show total element
-            $("#basket-total").removeClass('hidden');
-
-            // show phone number
-            $("#phone-number").removeClass('hidden');
-
-        } else {
-            $("#basket-total").addClass('hidden');
-            $("#phone-number").addClass('hidden');
         }
     }
 

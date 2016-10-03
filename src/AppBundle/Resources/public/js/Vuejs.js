@@ -1,4 +1,5 @@
 import {FirebaseDb} from './FirebaseDb';
+import {Dom} from './Dom';
 
 export class Vuejs {
 
@@ -50,6 +51,10 @@ export class Vuejs {
                         url: `/user/${action}/pizza/${this.pizza.id}`
                     });
                 },
+                takeSnapshot(e){
+                    let $pizzaCard = $(e.currentTarget).closest('.pizza-container');
+                    Dom.cameraEffect($pizzaCard);
+                }
             },
         });
 
