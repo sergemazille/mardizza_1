@@ -38,7 +38,7 @@ class PizzaService
 
         $pizzaItem['id'] = $pizza->getId();
         $pizzaItem['imageUrl'] = "/assets/images/pizzas/" . $pizza->getImage() . ".jpg";
-        $pizzaItem['imageSnapshotUrl'] = $host . "/assets/images/pizzas/snapshots/" . $pizza->getImage() . ".jpg";
+        $pizzaItem['imageSnapshotUrl'] = "https://" . $host . "/assets/images/pizzas/snapshots/" . $pizza->getImage() . ".jpg";
         $pizzaItem['ingredients'] = $pizza->getIngredients();
         $pizzaItem['name'] = $pizza->getName();
         $pizzaItem['price'] = $pizza->getPrice();
