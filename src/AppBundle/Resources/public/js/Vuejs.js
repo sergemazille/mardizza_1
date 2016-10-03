@@ -164,6 +164,7 @@ export class Vuejs {
                 username: '',
                 filterByFavorite: false,
                 nameFilter: '',
+                alphaSort: 1,
             },
             methods: {
                 getPizzas(){
@@ -186,6 +187,9 @@ export class Vuejs {
                 },
                 toggleFavoriteFilter(){
                     this.filterByFavorite = !this.filterByFavorite;
+                },
+                toggleAlphaSort(){
+                    this.alphaSort = this.alphaSort * -1;
                 },
             },
             components: {
