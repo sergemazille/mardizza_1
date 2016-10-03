@@ -1,4 +1,4 @@
-<template id="pizza-template">
+<template id="pizza-template" xmlns="http://www.w3.org/1999/html">
     <div class="pizza-container">
         <div class="pizza">
             <div class="pizza-header">
@@ -12,7 +12,9 @@
             </div>
             <div class="pizza-footer">
                 <div>
-                    <a href="#" @click.prevent="takeSnapshot"><span class="fa fa-camera"></span></a>
+                    <a href="#" @click="takeSnapshot" data-clipboard-text="${pizza.imageSnapshotUrl}" class="take-snapshot">
+                        <span class="fa fa-camera"></span>
+                    </a>
                 </div>
                 <div>
                     <p>${pizza.price|euro}</p>

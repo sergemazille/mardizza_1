@@ -1,7 +1,7 @@
 services:
     mardizza.pizza_service:
         class: AppBundle\Service\PizzaService
-        arguments: [ '@doctrine.orm.entity_manager', '@assets.context', '@security.token_storage' ]
+        arguments: [ '@doctrine.orm.entity_manager', '@request_stack', '@security.token_storage' ]
 
     mardizza.order_service:
         class: AppBundle\Service\OrderService

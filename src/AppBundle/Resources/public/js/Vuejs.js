@@ -52,6 +52,7 @@ export class Vuejs {
                     });
                 },
                 takeSnapshot(e){
+                    // visual effect
                     let $pizzaCard = $(e.currentTarget).closest('.pizza-container');
                     Dom.cameraEffect($pizzaCard);
                 }
@@ -169,9 +170,9 @@ export class Vuejs {
                 getPizzas(){
                     $.get('/pizzas', function (pizzas) {
                         this.pizzas = pizzas;
-                        store.pizzas = pizzas; // keep a list of pizzas for future needs
                         // load functions that needs pizzas to be on DOM to work
                         this.$nextTick(function () {
+                            Dom.loadClipboard();
                         });
                     }.bind(this));
                 },

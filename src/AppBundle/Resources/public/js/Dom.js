@@ -82,8 +82,9 @@ export class Dom {
 
     // load clipboard lib behaviour
     static loadClipboard(){
-        let snapshotLinks = document.querySelectorAll('.pizza-clipboard');
+        let snapshotLinks = document.querySelectorAll('.take-snapshot');
         let clipboard = new Clipboard(snapshotLinks);
+
         clipboard.on('success', function () {
             Dom.createNotification("Pizza copiée dans le presse-papier.", "alert-success");
         });

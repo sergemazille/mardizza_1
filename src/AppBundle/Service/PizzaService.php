@@ -4,19 +4,19 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Pizza;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Asset\Context\RequestStackContext;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class PizzaService
 {
 
-    private $assetContext;
     private $tokenStorage;
+    private $requestStack;
 
-    public function __construct(EntityManager $em, RequestStackContext $assetContext, TokenStorage $tokenStorage)
+    public function __construct(EntityManager $em, RequestStack $requestStack, TokenStorage $tokenStorage)
     {
         $this->em = $em;
-        $this->assetContext = $assetContext;
+        $this->requestStack = $requestStack;
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -31,14 +31,14 @@ class PizzaService
      */
     public function getPizzaWithFavorite(int $id)
     {
+        $host = $this->requestStack->getCurrentRequest()->getHttpHost();
         $user = $this->tokenStorage->getToken()->getUser();
         $userFavoritePizzas = $user->getFavoritePizzas();
-        $assetsBasePath = $this->assetContext->getBasePath();
         $pizza = $this->em->getRepository('AppBundle:Pizza')->find($id);
 
         $pizzaItem['id'] = $pizza->getId();
-        $pizzaItem['imageUrl'] = $assetsBasePath . "/assets/images/pizzas/" . $pizza->getImage() . ".jpg";
-        $pizzaItem['imageSnapshotUrl'] = $assetsBasePath . "/assets/images/pizzas/snapshots/" . $pizza->getImage() . ".jpg";
+        $pizzaItem['imageUrl'] = "/assets/images/pizzas/" . $pizza->getImage() . ".jpg";
+        $pizzaItem['imageSnapshotUrl'] = $host . "/assets/images/pizzas/snapshots/" . $pizza->getImage() . ".jpg";
         $pizzaItem['ingredients'] = $pizza->getIngredients();
         $pizzaItem['name'] = $pizza->getName();
         $pizzaItem['price'] = $pizza->getPrice();
