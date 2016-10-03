@@ -111,6 +111,22 @@ export class Vuejs {
             components: {
                 'row': Row,
             },
+            computed: {
+                order_total(){
+                    if (!this.rows) {
+                        return 0;
+                    }
+
+                    // prices array
+                    let selectedPizzasPrices = this.rows.map(function(row){
+                        return row.pizza.price;
+                    });
+
+                    return selectedPizzasPrices.reduce(function (total, value) {
+                        return total + value;
+                    }, 0);
+                }
+            },
             created(){
                 this.getMessages();
 

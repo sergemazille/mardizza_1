@@ -11,16 +11,18 @@
                 </h1>
             </div>
 
-            <div id="basket-body" class="collapse in">
+            <div id="basket-body" class="collapse in" v-show="rows.length">
                 <table class="table table-striped">
                     <tr v-for="row in rows" :pizza="row.pizza" is="row"></tr>
                 </table>
             </div>
 
             <div id="basket-footer">
-                <p id="basket-message">${ message }</p>
-                <p class="hidden" id="basket-total">TOTAL&nbsp;:&nbsp;<span id="price-total"></span></p>
-                <p class="hidden" id="phone-number">04 37 64 60 79</p>
+                <p id="basket-message" v-show="!rows.length">${ message }</p>
+                <section v-show="rows.length">
+                    <p class="order-total">TOTAL&nbsp;:&nbsp;${order_total | euro }</p>
+                    <p class="phone-number">04 37 64 60 79</p>
+                </section>
             </div>
 
         </div>

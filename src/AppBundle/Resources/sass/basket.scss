@@ -81,7 +81,7 @@
 }
 
 #basket-footer {
-  #basket-total {
+  .order-total {
     border-top: 2px solid $light-grey;
     background-color: lighten($light-grey, 4%);
     font-size: 1.2em;
@@ -96,7 +96,7 @@
     }
   }
 
-  #phone-number {
+  .phone-number {
     background-color: $main;
     border-radius: 0 0 5px 5px;
     font-size: 1.2em;
