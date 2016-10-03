@@ -12,7 +12,7 @@
             </div>
             <div class="pizza-footer">
                 <div>
-                    <a href="#" @click="takeSnapshot" data-clipboard-text="${pizza.imageSnapshotUrl}" class="take-snapshot">
+                    <a href="#" @click.prevent="takeSnapshot" data-clipboard-text="${pizza.imageSnapshotUrl}" class="take-snapshot">
                         <span class="fa fa-camera"></span>
                     </a>
                 </div>
