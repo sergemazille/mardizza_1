@@ -142,6 +142,7 @@ export class Vuejs {
                 username: '',
                 filterByFavorite: false,
                 priceFilter: '',
+                nameFilter: '',
             },
             methods: {
                 getPizzas(){
