@@ -163,7 +163,6 @@ export class Vuejs {
                 pizzas: [],
                 username: '',
                 filterByFavorite: false,
-                priceFilter: '',
                 nameFilter: '',
             },
             methods: {
