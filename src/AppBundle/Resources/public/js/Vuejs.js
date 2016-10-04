@@ -26,7 +26,6 @@ export class Vuejs {
                     return pizza.isFavorite;
                 })
             }
-
             return pizzas;
         });
 
@@ -42,7 +41,7 @@ export class Vuejs {
                     store.databaseReference.push({
                         name: this.pizza.name,
                         price: this.pizza.price,
-                        username: store.username,
+                        username: vm.current_username,
                     });
                 },
                 saveUserFavorite(){
@@ -74,7 +73,15 @@ export class Vuejs {
                 removePizzaFromDb(){
                     vm.$emit('pizzaRemoved', this.pizza);
                 },
-            }
+            },
+            computed: {
+                isOwner(){
+                    return this.pizza.username == vm.current_username;
+                },
+                isNotOwner(){
+                    return !this.isOwner;
+                },
+            },
         };
 
         let Basket = {
@@ -98,7 +105,7 @@ export class Vuejs {
                     }.bind(this));
                 },
                 removePizzaFromDb(pizza){
-                    if (pizza.username == store.username) {
+                    if (pizza.username == vm.current_username) {
                         let dbPizza = firebase.database().ref(`orders/${store.order_reference}/${pizza.key}`);
                         dbPizza.remove();
                     }
@@ -122,12 +129,10 @@ export class Vuejs {
                     if (!this.rows) {
                         return 0;
                     }
-
                     // prices array
                     let selectedPizzasPrices = this.rows.map(function(row){
                         return row.pizza.price;
                     });
-
                     return selectedPizzasPrices.reduce(function (total, value) {
                         return total + value;
                     }, 0);
@@ -158,10 +163,9 @@ export class Vuejs {
 
         vm = new Vue({
             el: '#app',
-            props: ['order_reference'],
+            props: ['order_reference', 'current_username'],
             data: {
                 pizzas: [],
-                username: '',
                 filterByFavorite: false,
                 nameFilter: '',
                 alphaSort: 1,
@@ -175,11 +179,6 @@ export class Vuejs {
                             Dom.loadClipboard();
                         });
                     }.bind(this));
-                },
-                getUsername(){
-                    $.get('/username', function (username) {
-                        store.username = username;
-                    });
                 },
                 setOrderRef(){
                     store.order_reference = this.order_reference;
@@ -198,10 +197,8 @@ export class Vuejs {
             ready(){
                 // hydrate with ajax calls
                 this.getPizzas();
-                this.getUsername();
                 this.setOrderRef();
             }
         });
-
     }
 }

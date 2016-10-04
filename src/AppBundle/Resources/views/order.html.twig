@@ -2,12 +2,12 @@
 
 {% block content %}
 
-    <div id="app" :order_reference="{{ orderRef }}" xmlns="http://www.w3.org/1999/html">
+    <div id="app" :order_reference="{{ orderRef }}" :current_username="{{ user.username|json_encode }}">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-9 col-lg-8">
                     <nav class="navbar menu navbar-fixed-top">
-                        <form action="" class="form-inline">
+                        <form class="form-inline">
                             <div class="form-group">
                                 <button class="btn btn-default form-control" role="checkbox"
                                         @click.prevent="toggleFavoriteFilter">
