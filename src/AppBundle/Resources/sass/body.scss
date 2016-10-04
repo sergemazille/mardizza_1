@@ -59,4 +59,15 @@ body {
   .fa-heart{
     color: crimson;
   }
+
+  #favorite-filter-button{
+    &.active{
+      color: white;
+      background-color: $main-dark;
+
+      .fa-heart{
+        color: white;
+      }
+    }
+  }
 }
