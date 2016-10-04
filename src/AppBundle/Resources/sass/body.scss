@@ -42,6 +42,7 @@ body {
   background-color: $dark-grey;
   background-image: url("../../assets/images/textures/bg_pattern.jpg");
   padding-top: $complete-navbar-height;
+  min-height: 80em;
 
   @media #{$phone-tablet}{
     padding-top: 8em;
