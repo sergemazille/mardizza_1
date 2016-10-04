@@ -10,8 +10,7 @@
                         <form class="form-inline">
                             <div class="form-group">
                                 <button class="btn btn-default form-control" role="checkbox"
-                                        @click.prevent="toggleFavoriteFilter">
-                                    Filtrer par <span class="fa fa-heart pull-right"></span></button>
+                                        @click.prevent="toggleFavoriteFilter">Filtrer par <span class="fa fa-heart"></span></button>
                                 <input type="text" placeholder="recherche par nom" v-model="nameFilter" class="form-control">
                                 <button class="btn btn-default form-control" @click.prevent="toggleAlphaSort"  role="checkbox">
                                     <span class="fa" :class="{'fa-sort-alpha-asc': alphaSort == -1, 'fa-sort-alpha-desc': alphaSort == 1}"></span></button>
