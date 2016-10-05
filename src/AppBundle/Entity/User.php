@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -38,6 +39,20 @@ class User implements UserInterface
      * @ORM\JoinTable(name="users_favorite_pizzas")
      */
     private $favoritePizzas;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Group", inversedBy="users")
+     * @ORM\JoinTable(name="groups_users")
+     */
+    private $groups;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->groups = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -100,6 +115,14 @@ class User implements UserInterface
     public function getFavoritePizzas()
     {
         return $this->favoritePizzas;
+    }
+
+    /**
+     * @return Group ArrayCollection
+     */
+    public function getGroups()
+    {
+        return $this->groups;
     }
 
     public function getSalt()

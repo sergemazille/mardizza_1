@@ -13,6 +13,9 @@ services:
     mardizza.user:
         class: AppBundle\Entity\User
 
+    mardizza.group:
+        class: AppBundle\Entity\Group
+
     mardizza.security.login_form_authenticator:
         class: AppBundle\Security\LoginFormAuthenticator
         autowire: true

@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -114,12 +113,4 @@ class Pizza
     {
         $this->image = $image;
     }
-
-//    /**
-//     * @return ArrayCollection
-//     */
-//    public function getUserFavorites()
-//    {
-//        return $this->userFavorites;
-//    }
 }
