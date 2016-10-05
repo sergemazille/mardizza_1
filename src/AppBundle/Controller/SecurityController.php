@@ -50,12 +50,21 @@ class SecurityController extends Controller
             return $this->redirectToRoute('login');
         }
 
+        // user creation
         $user->setUsername($username);
         $user->setEmail($request->get('_email'));
         $user->setPassword($request->get('_password'));
 
+        // group creation
+        $group = $this->get('mardizza.group');
+        $group->setName('Défaut');
+
+        $groups = $user->getGroups();
+        $groups->add($group);
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
+        $em->persist($group);
         $em->flush();
 
         // Welcome message

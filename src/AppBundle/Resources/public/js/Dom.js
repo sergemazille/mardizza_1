@@ -1,5 +1,3 @@
-import {Helper} from "./Helper";
-
 export class Dom {
 
     static init() {

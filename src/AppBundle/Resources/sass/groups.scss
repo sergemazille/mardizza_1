@@ -1,0 +1,10 @@
+@import 'variables';
+
+#groups{
+  background-color: $light-grey;
+  padding-top: $complete-navbar-height;
+
+  .group-container{
+    background-color: #1abc9c;
+  }
+}

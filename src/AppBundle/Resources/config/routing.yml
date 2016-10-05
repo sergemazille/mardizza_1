@@ -28,6 +28,11 @@ check_unique_username:
     defaults: { _controller: AppBundle:Security:checkAjaxUniqueUsername }
     methods: [GET]
 
+get_basket_messages:
+    path: /basket/messages
+    defaults: { _controller: AppBundle:BasketMessage:getBasketMessage }
+    methods: [GET]
+
 get_pizza:
     path: /pizza/{id}
     defaults: { _controller: AppBundle:Pizza:getPizza }
@@ -36,11 +41,6 @@ get_pizza:
 get_pizzas:
     path: /pizzas
     defaults: { _controller: AppBundle:Pizza:getPizzas }
-    methods: [GET]
-
-get_basket_messages:
-    path: /basket/messages
-    defaults: { _controller: AppBundle:BasketMessage:getBasketMessage }
     methods: [GET]
 
 add_favorite_pizza:
@@ -60,3 +60,23 @@ get_username:
 get_order_reference:
     path: /order/reference
     defaults: { _controller: AppBundle:Order:getOrderReference }
+
+group_list:
+    path: /groups
+    defaults: { _controller: AppBundle:Page:groups }
+    methods: [GET]
+
+get_groups:
+    path: /get/groups
+    defaults: { _controller: AppBundle:Group:getGroups }
+    methods: [GET]
+
+user_add_group:
+    path: /user/add/group/{id}
+    defaults: { _controller: AppBundle:Group:addGroup }
+    methods: [GET, POST]
+
+user_remove_group:
+    path: /user/remove/group/{id}
+    defaults: { _controller: AppBundle:Group:removeGroup }
+    methods: [GET, POST]

@@ -4,7 +4,7 @@ body {
   background-color: $main;
 
   .home {
-    height: 60em;
+    min-height: 80em;
 
     @media #{$tablet-desktop} {
       background-image: url("../../assets/images/bg.jpg");

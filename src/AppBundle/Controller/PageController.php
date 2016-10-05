@@ -9,10 +9,10 @@ class PageController extends Controller
 {
     public function homeAction()
     {
-        // already logged in users are sent directly to order page
+        // already logged in users are sent directly to groups page or even more quickly to order page if they have only one group
         $user = $this->getUser();
         if ($user) {
-            return $this->redirectToRoute('order');
+            return $this->redirectToRoute('group_list');
         }
 
         return $this->render('@App/home.html.twig', [
@@ -37,6 +37,19 @@ class PageController extends Controller
         return $this->render('@App/order.html.twig', [
             'user' => $user,
             'orderRef' => $orderRef,
+        ]);
+    }
+
+    public function groupsAction()
+    {
+        // anonymous users are sent back to login form
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        return $this->render('@App/groups.html.twig', [
+            'user' => $user
         ]);
     }
 }

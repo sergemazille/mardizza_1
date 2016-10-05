@@ -1,11 +1,26 @@
-import { Vuejs } from './Vuejs';
+import { orderVue } from './orderVue';
+import { groupsVue } from './groupsVue';
 import { Event } from './Event';
 import { Dom } from './Dom';
+import { FirebaseDb } from './FirebaseDb';
 
 $(document).ready(function () {
     
-    // initialization
-    Vuejs.init();
+    // initializations //
+
+    // current order database reference
+    FirebaseDb.init();
+
+    // test if we're on the groups page to initialize the right vue js file
+    if($("#groups").length >= 1){
+        groupsVue.init();
+    }
+
+    // test if we're on the app page to initialize the right vue js file
+    if($("#app").length >= 1){
+        orderVue.init();
+    }
+
     Event.init();
     Dom.init();
 });

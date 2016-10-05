@@ -14,7 +14,7 @@ class LoadData implements FixtureInterface
         $pizzas = [
             [
                 "name" => "Quatre fromages",
-                "ingredients" => "tomate, mozzarelle, parmesan, fromage, roquefort",
+                "ingredients" => "tomate, mozzarella, parmesan, fromage, roquefort",
                 "price" => 11.00,
                 "image" => "4-fromage",
             ],
@@ -119,7 +119,7 @@ class LoadData implements FixtureInterface
 
             [
                 "name" => "Mont d'or",
-                "ingredients" => "tomate, mozzarelle, jambon de parme, basilic, copeaux de parmesan, tomate fraîche",
+                "ingredients" => "tomate, mozzarella, jambon de parme, basilic, copeaux de parmesan, tomate fraîche",
                 "price" => 11.50,
                 "image" => "mont-dor",
             ],
@@ -140,7 +140,7 @@ class LoadData implements FixtureInterface
 
             [
                 "name" => "Napolitaine",
-                "ingredients" => "tomate, mozzarelle, câpre, anchois",
+                "ingredients" => "tomate, mozzarella, câpre, anchois",
                 "price" => 10.00,
                 "image" => "napolitaine",
             ],
@@ -189,7 +189,7 @@ class LoadData implements FixtureInterface
 
             [
                 "name" => "Quattro Stagione",
-                "ingredients" => "tomate, fromage, persillade, 1/4 champignons, 1/4 coeur d'artichaut, 1/4 jambon de parme, 1/4 mozzarelle",
+                "ingredients" => "tomate, fromage, persillade, 1/4 champignons, 1/4 coeur d'artichaut, 1/4 jambon de parme, 1/4 mozzarella",
                 "price" => 11.50,
                 "image" => "quattro-stagione",
             ],

@@ -7,16 +7,23 @@ services:
         class: AppBundle\Service\OrderService
         arguments: [ '@doctrine.orm.entity_manager', '@router', '@mardizza.order' ]
 
+    mardizza.message_service:
+        class: AppBundle\Service\BasketMessageService
+        arguments: [ '@doctrine.orm.entity_manager' ]
+
+    mardizza.group_service:
+        class: AppBundle\Service\GroupService
+        arguments: [ '@doctrine.orm.entity_manager', '@security.token_storage' ]
+
     mardizza.order:
         class: AppBundle\Entity\Order
 
     mardizza.user:
         class: AppBundle\Entity\User
 
+    mardizza.group:
+        class: AppBundle\Entity\Group
+
     mardizza.security.login_form_authenticator:
         class: AppBundle\Security\LoginFormAuthenticator
         autowire: true
-
-    mardizza.message_service:
-        class: AppBundle\Service\BasketMessageService
-        arguments: [ '@doctrine.orm.entity_manager' ]
