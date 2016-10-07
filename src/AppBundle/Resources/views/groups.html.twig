@@ -1,0 +1,16 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+    <div id="groups">
+        <div class="container">
+            <h1>Choisissez votre groupe</h1>
+            <ul class="list-unstyled list-inline">
+                <group v-for="group in groups" :group="group"></group>
+            </ul>
+            <a href="">Créez un nouveau groupe</a>
+        </div>
+    </div>
+
+    {# includes templates #}
+    {% include 'AppBundle:templates:group.html.twig' %}
+{% endblock %}

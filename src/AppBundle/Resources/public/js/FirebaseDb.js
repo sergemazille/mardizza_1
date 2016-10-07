@@ -11,7 +11,7 @@ export class FirebaseDb {
         firebase.initializeApp(dbConfig);
     }
 
-    static signIn(email, password) {
+    static signUp(email, password) {
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;

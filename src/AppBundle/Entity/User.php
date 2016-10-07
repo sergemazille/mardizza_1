@@ -2,8 +2,8 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -41,8 +41,7 @@ class User implements UserInterface
     private $favoritePizzas;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Group", inversedBy="users")
-     * @ORM\JoinTable(name="groups_users")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Group")
      */
     private $groups;
 
@@ -51,7 +50,7 @@ class User implements UserInterface
      */
     public function __construct()
     {
-        $this->groups = new ArrayCollection();
+        $this->groups = new PersistentCollection();
     }
 
     /**
@@ -117,9 +116,6 @@ class User implements UserInterface
         return $this->favoritePizzas;
     }
 
-    /**
-     * @return Group ArrayCollection
-     */
     public function getGroups()
     {
         return $this->groups;

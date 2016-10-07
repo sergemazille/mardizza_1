@@ -23,11 +23,6 @@ class Group
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="groups")
-     */
-    private $users;
-
-    /**
      * @return int
      */
     public function getId()
