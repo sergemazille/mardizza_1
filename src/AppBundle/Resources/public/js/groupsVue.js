@@ -14,7 +14,6 @@ export class groupsVue {
             methods: {
                 getGroups(){
                     $.get('/get/groups', function (groups) {
-                        console.log(groups);
                         this.groups = groups;
                     }.bind(this));
                 },
