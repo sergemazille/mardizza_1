@@ -5,6 +5,15 @@
   padding-top: $complete-navbar-height;
 
   .group-container{
-    background-color: #1abc9c;
+    padding: 15px;
+
+    .group-left{
+      text-align: center;
+      border-right: 1px solid $main;
+
+      &:hover{
+        cursor: pointer;
+      }
+    }
   }
 }

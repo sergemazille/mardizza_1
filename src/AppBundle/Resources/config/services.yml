@@ -20,10 +20,19 @@ services:
 
     mardizza.user:
         class: AppBundle\Entity\User
+        arguments: [ '@doctrine.orm.entity_manager' ]
 
     mardizza.group:
         class: AppBundle\Entity\Group
+        arguments: [ '@mardizza.group_service' ]
 
     mardizza.security.login_form_authenticator:
         class: AppBundle\Security\LoginFormAuthenticator
         autowire: true
+
+    app_extension.twig_extension:
+        class: AppBundle\Twig\Extension\AppExtension
+        public: false
+        arguments: [ '@security.token_storage' ]
+        tags:
+            - { name: twig.extension }

@@ -1,12 +1,20 @@
 <template id="group-template">
-    <div class="group-container">
+    <div class="group-container" :style="{backgroundColor: group.color}">
         <div class="group">
-            <div class="group-header">
-                <h2>${ group.name }</h2>
-            </div>
-            <div class="group-body">
-            </div>
-            <div class="group-footer">
+            <div class="row">
+                <div class="col-xs-6 group-left">
+                    <div class="group-header">
+                        <h2>${ group.name }</h2>
+                    </div>
+                    <div class="group-body">
+                        <img :src="group.imageUrl" alt="">
+                    </div>
+                </div>
+                <aside class="col-xs-6 group-right">
+                    {#{% if userIsGroupAdmin(group.id) %}#}
+                        <input type="text" v-model="group.name">
+                    {#{% endif %}#}
+                </aside>
             </div>
         </div>
     </div>

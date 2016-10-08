@@ -57,7 +57,6 @@ class SecurityController extends Controller
 
         // group creation
         $group = $this->get('mardizza.group');
-        $group->setName('Défaut');
 
         $groups = $user->getGroups();
         $groups->add($group);

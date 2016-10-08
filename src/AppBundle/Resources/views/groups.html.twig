@@ -5,7 +5,11 @@
         <div class="container">
             <h1>Choisissez votre groupe</h1>
             <ul class="list-unstyled list-inline">
-                <group v-for="group in groups" :group="group"></group>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <group v-for="group in groups" :group="group"></group>
+                    </div>
+                </div>
             </ul>
             <a href="">Créez un nouveau groupe</a>
         </div>

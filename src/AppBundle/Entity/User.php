@@ -2,8 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -47,10 +48,11 @@ class User implements UserInterface
 
     /**
      * User constructor.
+     * @param EntityManager $em
      */
-    public function __construct()
+    public function __construct(EntityManager $em)
     {
-        $this->groups = new PersistentCollection();
+        $this->groups = new ArrayCollection();
     }
 
     /**
