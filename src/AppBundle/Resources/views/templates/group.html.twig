@@ -2,7 +2,7 @@
     <div class="group-container" :style="{backgroundColor: group.color}">
         <div class="group">
             <div class="row">
-                <div class="col-xs-6 group-left">
+                <div class="group-left col-xs-6">
                     <div class="group-header">
                         <h2>${ group.name }</h2>
                     </div>
@@ -10,10 +10,8 @@
                         <img :src="group.imageUrl" alt="">
                     </div>
                 </div>
-                <aside class="col-xs-6 group-right">
-                    {#{% if userIsGroupAdmin(group.id) %}#}
-                        <input type="text" v-model="group.name">
-                    {#{% endif %}#}
+                <aside class="col-xs-6 group-right" v-if="!group.userIsAdmin">
+                    <input type="text" v-model="group.name">
                 </aside>
             </div>
         </div>

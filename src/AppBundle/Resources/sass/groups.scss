@@ -7,6 +7,10 @@
   .group-container{
     padding: 15px;
 
+    .group-header{
+      color: white;
+    }
+
     .group-left{
       text-align: center;
       border-right: 1px solid $main;

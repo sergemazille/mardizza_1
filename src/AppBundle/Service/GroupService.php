@@ -2,9 +2,8 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Entity\Pizza;
+use AppBundle\Entity\Group;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class GroupService
@@ -27,6 +26,7 @@ class GroupService
             $groupItem['id'] = $group->getId();
             $groupItem['name'] = $group->getName();
             $groupItem['color'] = $group->getColor();
+            $groupItem['userIsAdmin'] = $group->getAdmins()->contains($user);
             $groupItem['imageUrl'] = "/assets/images/group/" . $group->getImage();
 
             $groupItems[] = $groupItem;
@@ -38,13 +38,23 @@ class GroupService
     public function getRandomColor() : string
     {
         $colors = [
-            "#58FF00",
-            "#E8A30C",
-            "#FF0000",
-            "#330CE8",
-            "#0DFFDA",
+            "#00145E",
+            "#034A61",
+            "#00AB74",
+            "#007D0C",
+            "#508500",
         ];
 
         return $colors[rand(0, 4)];
+    }
+
+    /**
+     * @param Group $group
+     * @return bool
+     */
+    public function userIsAdmin(Group $group) : bool
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        return $group->getAdmins()->contains($user);
     }
 }

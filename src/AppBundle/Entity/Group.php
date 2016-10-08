@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Service\GroupService;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,14 +35,20 @@ class Group
     private $color;
 
     /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
+     */
+    private $admins;
+
+    /**
      * Group constructor.
      * @param GroupService $groupService
      */
     public function __construct(GroupService $groupService)
     {
-        $this->setColor($groupService->getRandomColor());
-        $this->setImage("group_default_image.png");
-        $this->setName("Groupe");
+        $this->color = $groupService->getRandomColor();
+        $this->image = "group_default_image.png";
+        $this->name = "Groupe";
+        $this->admins = new ArrayCollection();
     }
 
     /**
@@ -60,10 +67,7 @@ class Group
         $this->image = $image;
     }
 
-    /**
-     * @return string
-     */
-    public function getColor()
+    public function getColor() : string
     {
         return $this->color;
     }
@@ -76,15 +80,12 @@ class Group
         $this->color = $color;
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
 
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
@@ -92,5 +93,10 @@ class Group
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    public function getAdmins()
+    {
+        return $this->admins;
     }
 }

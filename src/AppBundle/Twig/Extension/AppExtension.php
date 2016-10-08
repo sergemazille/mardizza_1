@@ -2,7 +2,6 @@
 
 namespace AppBundle\Twig\Extension;
 
-use AppBundle\Entity\Group;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class AppExtension extends \Twig_Extension
@@ -17,17 +16,12 @@ class AppExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('userIsGroupAdmin', array($this, 'userIsGroupAdmin')),
+            new \Twig_SimpleFilter('exampleFilter', array($this, 'exampleFilter')),
         );
     }
 
-    /**
-     * @param Group $group
-     * @return boolean
-     */
-    public function userIsGroupAdmin(Group $group)
+    public function exampleFilter()
     {
-        $user = $this->tokenStorage->getToken()->getUser();
         return true;
     }
 
