@@ -1,21 +1,32 @@
 @import 'variables';
 
-#groups{
+#groups {
   background-color: $light-grey;
   padding-top: $complete-navbar-height;
 
-  .group-container{
-    padding: 15px;
+  .group-container {
+    border: 2px solid $main;
+    margin: 15px;
 
-    .group-header{
-      color: white;
-    }
-
-    .group-left{
+    .group-selector {
+      padding: 15px;
       text-align: center;
-      border-right: 1px solid $main;
+      color: white;
 
-      &:hover{
+      .group-header {
+        text-align: left;
+
+        a {
+          color: white;
+          text-decoration: underline;
+        }
+      }
+
+      h2 {
+        margin-top: 0;
+      }
+
+      &:hover {
         cursor: pointer;
       }
     }

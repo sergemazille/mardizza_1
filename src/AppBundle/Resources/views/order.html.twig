@@ -3,23 +3,9 @@
 {% block content %}
 
     <div id="app" :order_reference="{{ orderRef }}" :current_username="{{ user.username|json_encode }}">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-9 col-lg-8">
-                    <nav class="navbar menu navbar-fixed-top">
-                        <form class="form-inline">
-                            <div class="form-group">
-                                <button id="favorite-filter-button" class="btn btn-default form-control" :class="{'active': filterByFavorite}" role="checkbox"
-                                        @click.prevent="toggleFavoriteFilter">Filtrer par <span class="fa fa-heart"></span></button>
-                                <input type="text" placeholder="recherche par nom" v-model="nameFilter" class="form-control">
-                                <button class="btn btn-default form-control" @click.prevent="toggleAlphaSort"  role="checkbox">
-                                    <span class="fa" :class="{'fa-sort-alpha-asc': alphaSort == -1, 'fa-sort-alpha-desc': alphaSort == 1}"></span></button>
-                            </div>
-                        </form>
-                    </nav>
-                </div>
-            </div>
-        </div>
+
+        {# action navbar #}
+        {% include 'AppBundle:partials:_navbar_order.html.twig' %}
 
         <div class="container-fluid">
             <div class="row">

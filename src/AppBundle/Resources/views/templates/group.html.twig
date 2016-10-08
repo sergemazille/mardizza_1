@@ -1,18 +1,67 @@
 <template id="group-template">
-    <div class="group-container" :style="{backgroundColor: group.color}">
+    <div class="col-xs-3 group-container">
         <div class="group">
             <div class="row">
-                <div class="group-left col-xs-6">
+                <div class="group-selector"
+                     :style="{backgroundColor: group.color}"
+                >
                     <div class="group-header">
-                        <h2>${ group.name }</h2>
+                        {# modal trigger #}
+                        <a href="#" data-toggle="modal" data-target="#${group.id}"><small>Admin</small></a>
                     </div>
+
                     <div class="group-body">
+                        <h2>${ group.name }</h2>
                         <img :src="group.imageUrl" alt="">
                     </div>
                 </div>
-                <aside class="col-xs-6 group-right" v-if="!group.userIsAdmin">
-                    <input type="text" v-model="group.name">
-                </aside>
+
+                {# modal config #}
+                <div :id="group.id" class="modal fade" role="dialog" tabindex="-1" v-if="group.userIsAdmin">
+                    <div class="modal-dialog" role="document">
+
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">${ group.name }</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <div class="row">
+
+                                    {# config #}
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <label>Nom du groupe :</label>
+                                            <input type="text" v-model="group.name" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Couleur du groupe :</label>
+                                            <input type="color" v-model="group.color" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Changer l'image du groupe :</label>
+                                            <button type="file" class="btn btn-success btn-block">Parcourir</button>
+                                        </div>
+                                    </div>
+
+                                    {# group users #}
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <label>Membres du groupe :</label>
+                                            {# TODO: add group members and their roles #}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
