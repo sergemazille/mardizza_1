@@ -24,10 +24,52 @@
 
       h2 {
         margin-top: 0;
+        font-family: 'Euphoria Script', cursive;
+        font-size: 3em;
       }
 
       &:hover {
         cursor: pointer;
+      }
+    }
+  }
+
+  .modal-header {
+    padding-bottom: 0.25em;
+
+    .modal-title {
+      h3 {
+        margin: 0;
+      }
+    }
+  }
+  .config {
+    span.fa {
+      margin-top: 0.19em;
+    }
+  }
+
+  .members {
+    padding-right: 30px;
+    text-align: left;
+
+    .table-header {
+      text-align: left;
+      margin-bottom: 0.7em;
+      border-bottom: 1px solid $dark-grey;
+    }
+
+    .member {
+      line-height: 1.1em;
+
+      label {
+        padding: 0;
+      }
+
+      input {
+        margin-top: 0;
+        margin-left: 1em;
+        text-align: right;
       }
     }
   }

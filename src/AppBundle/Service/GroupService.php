@@ -27,6 +27,7 @@ class GroupService
             $groupItem['name'] = $group->getName();
             $groupItem['color'] = $group->getColor();
             $groupItem['userIsAdmin'] = $group->getAdmins()->contains($user);
+            $groupItem['members'] = $this->getMembers($group);
             $groupItem['imageUrl'] = "/assets/images/group/" . $group->getImage();
 
             $groupItems[] = $groupItem;
@@ -56,5 +57,21 @@ class GroupService
     {
         $user = $this->tokenStorage->getToken()->getUser();
         return $group->getAdmins()->contains($user);
+    }
+
+    private function getMembers($group)
+    {
+        $members = $group->getMembers();
+
+        $memberItems = [];
+        foreach ($members as $member){
+            $memberItem['id'] = $member->getId();
+            $memberItem['username'] = $member->getUsername();
+            $memberItem['isAdmin'] = $group->getAdmins()->contains($member);
+
+            $memberItems[] = $memberItem;
+        }
+
+        return $memberItems;
     }
 }

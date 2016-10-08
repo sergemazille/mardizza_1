@@ -80,3 +80,10 @@ user_remove_group:
     path: /user/remove/group/{id}
     defaults: { _controller: AppBundle:Group:removeGroup }
     methods: [GET, POST]
+
+update_group:
+    path: /group/update/{id}
+    defaults: { _controller: AppBundle:Group:updateGroup }
+    requirements:
+        id: \d+
+    methods: [POST]

@@ -2,8 +2,7 @@
 
 {% block content %}
 
-    <div id="groups">
-
+    <div id="groups" :token="`{{ csrf_token('group_token') }}`">
         <div class="container">
             {# action navbar #}
             {% include 'AppBundle:partials:_navbar_groups.html.twig' %}
@@ -11,12 +10,9 @@
             <h1>Choisissez votre groupe</h1>
             <ul class="list-unstyled list-inline">
                 <div class="row">
-                    {% for i in 1..4 %}
-                        <group v-for="group in groups" :group="group"></group>
-                    {% endfor %}
+                    <group v-for="group in groups" :group="group"></group>
                 </div>
             </ul>
-            <a href="">Créez un nouveau groupe</a>
         </div>
     </div>
 

@@ -49,7 +49,7 @@ class PageController extends Controller
         }
 
         return $this->render('@App/groups.html.twig', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 }

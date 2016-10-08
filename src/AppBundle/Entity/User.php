@@ -42,7 +42,7 @@ class User implements UserInterface
     private $favoritePizzas;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Group")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Group", inversedBy="members")
      */
     private $groups;
 

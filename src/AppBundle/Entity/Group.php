@@ -40,6 +40,11 @@ class Group
     private $admins;
 
     /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", mappedBy="groups")
+     */
+    private $members;
+
+    /**
      * Group constructor.
      * @param GroupService $groupService
      */
@@ -49,6 +54,7 @@ class Group
         $this->image = "group_default_image.png";
         $this->name = "Groupe";
         $this->admins = new ArrayCollection();
+        $this->members = new ArrayCollection();
     }
 
     /**
@@ -98,5 +104,10 @@ class Group
     public function getAdmins()
     {
         return $this->admins;
+    }
+
+    public function getMembers()
+    {
+        return $this->members;
     }
 }

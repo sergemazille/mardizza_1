@@ -90,4 +90,9 @@ export class Dom {
             Dom.createNotification("Erreur lors de la copie dans le presse papier.", "alert-danger");
         });
     }
+
+    // hide modals
+    static hideModal(){
+        $(".modal").modal('hide');
+    }
 }
