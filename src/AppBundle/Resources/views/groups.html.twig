@@ -7,7 +7,6 @@
             {# action navbar #}
             {% include 'AppBundle:partials:_navbar_groups.html.twig' %}
 
-            <h1>Choisissez votre groupe</h1>
             <ul class="list-unstyled list-inline">
                 <div class="row">
                     <group v-for="group in groups" :group="group"></group>

@@ -12,7 +12,8 @@ class PageController extends Controller
         // already logged in users are sent directly to groups page or even more quickly to order page if they have only one group
         $user = $this->getUser();
         if ($user) {
-            return $this->redirectToRoute('group_list');
+            $route = (count($user->getGroups()) <= 1) ? 'order' : 'group_list';
+            return $this->redirectToRoute($route);
         }
 
         return $this->render('@App/home.html.twig', [
