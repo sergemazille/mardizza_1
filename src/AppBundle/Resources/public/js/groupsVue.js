@@ -21,12 +21,14 @@ export class groupsVue {
                 revertChanges() {
                     this.group.name = this.tempName;
                     this.group.color = this.tempColor;
+                    this.group.stamps = this.tempStamps;
                     this.group.imageUrl = this.tempImageUrl;
                     this.adminIds = this.tempAdminIds;
                 },
                 saveState() {
                     this.tempName = this.group.name;
                     this.tempColor = this.group.color;
+                    this.tempStamps = this.group.stamps;
                     this.tempImageUrl = this.group.imageUrl;
                     this.tempAdminIds = this.adminIds;
                     // this.tempMemberIds = this.memberIds;
@@ -38,6 +40,7 @@ export class groupsVue {
                 stateHasChanged(){
                     return (this.group.name != this.tempName ||
                     this.group.color != this.tempColor ||
+                    this.group.stamps != this.tempStamps ||
                     this.group.imageUrl != this.tempImageUrl ||
                     this.adminIds != this.tempAdminIds ||
                     this.newImageFlag != '');
@@ -58,6 +61,7 @@ export class groupsVue {
                     formData.append('image', this.$els.fileinput.files[0]);
                     formData.append('name', this.group.name);
                     formData.append('color', this.group.color);
+                    formData.append('stamps', this.group.stamps);
                     formData.append('adminIds', this.adminIds);
 
                     this.$http.post(`/group/update/${this.group.id}`, formData)

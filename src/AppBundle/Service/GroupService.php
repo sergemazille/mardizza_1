@@ -26,6 +26,7 @@ class GroupService
             $groupItem['id'] = $group->getId();
             $groupItem['name'] = $group->getName();
             $groupItem['color'] = $group->getColor();
+            $groupItem['stamps'] = $group->getStamps();
             $groupItem['userIsAdmin'] = $group->getAdmins()->contains($user);
             $groupItem['members'] = $this->getMembers($group);
             $groupItem['imageUrl'] = "/assets/images/group/" . $group->getImage();

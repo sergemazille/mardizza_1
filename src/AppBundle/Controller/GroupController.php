@@ -118,8 +118,13 @@ class GroupController extends Controller
             // update remaining data
             $name = $request->get('name');
             $color = $request->get('color');
+
             $group->setName($name);
             $group->setColor($color);
+
+            $stamps = $request->get('stamps');
+            $stamps = ($stamps == '') ? 0 : $stamps;
+            $group->setStamps($stamps);
 
             // save updates
             $em->flush();

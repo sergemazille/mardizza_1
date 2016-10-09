@@ -40,8 +40,9 @@
                                 </div>
                             </div>
 
-                            {# group members #}
                             <div class="col-xs-12 col-sm-6 members">
+
+                                {# group members #}
                                 <div class="row table-header">
                                     <div class="col-xs-2 text-left">Admin</div>
                                     <div class="col-xs-9">Membre</div>
@@ -59,8 +60,14 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
 
+                                {# fidelity card stamps management #}
+                                <div class="form-group">
+                                    <label>Nombre de tampons :</label>
+                                    <input type="number" v-model="group.stamps" class="form-control" name="stamps">
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 
