@@ -45,6 +45,11 @@ class Group
     private $members;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $stamps;
+
+    /**
      * Group constructor.
      * @param GroupService $groupService
      */
@@ -109,5 +114,15 @@ class Group
     public function getMembers()
     {
         return $this->members;
+    }
+
+    public function getStamps() : int
+    {
+        return $this->stamps;
+    }
+
+    public function setStamps($stamps)
+    {
+        $this->stamps = $stamps;
     }
 }
