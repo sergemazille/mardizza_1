@@ -51,10 +51,8 @@
 
   .members {
     padding-right: 30px;
-    text-align: left;
 
     .table-header {
-      text-align: left;
       margin-bottom: 0.7em;
       border-bottom: 1px solid $dark-grey;
     }
@@ -67,8 +65,7 @@
       }
 
       input {
-        margin-top: 0;
-        margin-left: 1em;
+        margin: 0 1.5em;
         text-align: right;
       }
     }

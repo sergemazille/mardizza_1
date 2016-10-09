@@ -63,42 +63,51 @@ class GroupController extends Controller
 
             // TODO: sanitize data
 
-            // get data from request
-            $adminIds = $request->get('adminIds');
-            $memberIds = $request->get('memberIds');
-            $name = $request->get('name');
-            $color = $request->get('color');
-            $image = $request->get('image');
-
             $em = $this->getDoctrine()->getManager();
             $userRepo = $em->getRepository('AppBundle:User');
 
             // update group admins
+            $adminIds = explode(",", $request->get('adminIds'));
+
             $groupAdmins = $group->getAdmins();
             $groupAdmins->clear(); // start clean
 
             foreach ($adminIds as $adminId) {
                 $user = $userRepo->find($adminId);
-                if(! $groupAdmins->contains($user)){
+                if (!$groupAdmins->contains($user)) {
                     $groupAdmins->add($user);
                 }
             }
 
             // update group members
+            $memberIds = explode(",", $request->get('memberIds'));
+
             $groupMembers = $group->getMembers();
             $groupMembers->clear(); // start clean
 
             foreach ($memberIds as $memberId) {
                 $user = $userRepo->find($memberId);
-                if(! $groupMembers->contains($user)){
+                if (!$groupMembers->contains($user)) {
                     $groupMembers->add($user);
                 }
             }
 
+            // image management
+            $imageFile = $request->files->get('image');
+            if ($imageFile) {
+                $imageName = $imageFile->getClientOriginalName();
+                $group->setImage($imageName);
+
+                // move image file to group images folder
+                $groupImagesDir = $this->container->getParameter('kernel.root_dir') . '/../web/assets/images/group';
+                $imageFile->move($groupImagesDir, $imageName);
+            }
+
             // update remaining data
+            $name = $request->get('name');
+            $color = $request->get('color');
             $group->setName($name);
             $group->setColor($color);
-            $group->setImage($image);
 
             // save updates
             $em->flush();
