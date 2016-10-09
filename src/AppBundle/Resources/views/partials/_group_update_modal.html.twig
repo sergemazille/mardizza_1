@@ -18,26 +18,26 @@
 
                     <input type="hidden" name="csrf" :value="`{{ csrf_token('group_token') }}`" v-model="csrf">
 
-                    <div class="modal-body">
-                        <div class="row">
-                            {# config #}
-                            <div class="col-xs-12 col-sm-6 config">
-                                <div class="form-group">
-                                    <label>Nom du groupe :</label>
-                                    <input type="text" v-model="group.name" class="form-control" name="name" v-validate:groupname="{required: true, maxlength: 14}">
-                                </div>
-                                <div class="form-group">
-                                    <label>Couleur du groupe :</label>
-                                    <input type="color" v-model="group.color" class="form-control" name="color">
-                                </div>
-                                <div class="form-group">
-                                    <p>Image du groupe :</p>
-                                    <label class="btn btn-success btn-block btn-file">
-                                        Parcourir<span class="fa fa-picture-o pull-right"></span>
-                                        <input type="file" class="hidden" name="image" v-el:fileInput v-model="newImageFlag">
-                                    </label>
-                                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        {# config #}
+                        <div class="col-xs-12 col-sm-6 config">
+                            <div class="form-group">
+                                <label>Nom du groupe :</label>
+                                <input type="text" v-model="group.name" class="form-control" name="name">
                             </div>
+                            <div class="form-group">
+                                <label>Couleur du groupe :</label>
+                                <input type="color" v-model="group.color" class="form-control" name="color">
+                            </div>
+                            <div class="form-group">
+                                <p>Image du groupe :</p>
+                                <label class="btn btn-success btn-block btn-file">
+                                    Parcourir<span class="fa fa-picture-o pull-right"></span>
+                                    <input type="file" class="hidden" name="image" v-el:fileInput v-model="newImageFlag" accept="image/jpeg, image/gif, image/png">
+                                </label>
+                            </div>
+                        </div>
 
                             {# group members #}
                             <div class="col-xs-12 col-sm-6 members">

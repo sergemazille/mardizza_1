@@ -1,5 +1,4 @@
 import {Dom} from './Dom';
-import * as mime from 'mime-types';
 
 export class groupsVue {
 
@@ -63,19 +62,23 @@ export class groupsVue {
                     this.$http.post(`/group/update/${this.group.id}`, formData)
                         .then(
                             // success
-                            function () {
-                                // update image if it has been changed
-                                if (this.$els.fileinput.files[0]) {
-                                    this.group.imageUrl = 'assets/images/group/' + this.$els.fileinput.files[0].name;
+                            function (response) {
+                                if(response.body == "ok"){
+                                    // update image if it has been changed
+                                    if (this.$els.fileinput.files[0]) {
+                                        this.group.imageUrl = 'assets/images/group/' + this.$els.fileinput.files[0].name;
+                                    }
+                                    this.newImageFlag = ""; // set variable back to empty for next changes
+                                    Dom.hideModal();
+                                    Dom.createNotification('Le groupe a bien été mis à jour', 'alert-success');
+                                }else{
+                                    Dom.createNotification(response.body, 'alert-danger');
                                 }
-                                this.newImageFlag = ""; // set variable back to empty for next changes
-                                Dom.hideModal();
-                                Dom.createNotification('Le groupe a bien été mis à jour', 'alert-success');
                             },
                             // error
-                            function (data) {
-                                console.log(data);
-                                Dom.createNotification('Une erreur est survenue', 'alert-danger');
+                            function (response) {
+                                console.log(response);
+                                Dom.createNotification(response.body, 'alert-danger');
                             }
                         ).bind(this);
                 },
@@ -84,16 +87,24 @@ export class groupsVue {
                         .done(function () {
                             Dom.createNotification('Le groupe a bien été créé', 'alert-success');
                         })
-                        .error(function () {
-                            Dom.createNotification('Une erreur est survenue', 'alert-danger');
+                        .error(function (data) {
+                            Dom.createNotification(data, 'alert-danger');
                         });
                 },
                 formDataIsValid(){
-                    // test image size isn't greater than 1Mo
+
+                    // test image size isn't greater than 1Mo and is an actual image
                     if (this.$els.fileinput.files[0]) {
+
                         let imageSize = this.$els.fileinput.files[0].size;
                         if (imageSize > 100000) {
                             Dom.createNotification("L'image ne doit pas faire plus de 1 Mo", 'alert-danger');
+                            return false;
+                        }
+
+                        let imageMimeType = this.$els.fileinput.files[0].type;
+                        if(imageMimeType != 'image/png' && imageMimeType != 'image/jpg' && imageMimeType != 'image/gif'){
+                            Dom.createNotification("L'image doit être au format jpg, png ou gif", 'alert-danger');
                             return false;
                         }
                     }
@@ -107,7 +118,7 @@ export class groupsVue {
                     // if every test is valid then send ok to keep going on with form submission
                     return true;
                 },
-                //revert changes on modal dismissal if nothing has been saved
+                // revert changes on modal dismissal if nothing has been saved
                 revertStateOnModalDismissal(){
                     let self = this;
                     vm.$nextTick(function () {

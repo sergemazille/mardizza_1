@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Group;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class GroupController extends Controller
 {
@@ -61,20 +63,20 @@ class GroupController extends Controller
 
         if ($this->isCsrfTokenValid('group_token', $submittedToken)) {
 
+            // TODO: sanitize data
+
             $em = $this->getDoctrine()->getManager();
             $userRepo = $em->getRepository('AppBundle:User');
-
 
             // update group admins
             $adminIds = explode(",", $request->get('adminIds'));
 
             if ($adminIds) {
-
-                // check if future admins are part of the group
-                $userIsMemberValidator = $this->get('mardizza.validation_service');
-                foreach ($adminIds as $user) {
-                    if (! $userIsMemberValidator->useIsMemberOfGroup($group, $user)) {
-                        return $this->createAccessDeniedException('Au moins un utilisateur ne fait pas partie du groupe');
+                // check if users are members of the group
+                foreach ($adminIds as $userId) {
+                    $user = $userRepo->find($userId);
+                    if (! $user || ! $group->getMembers()->contains($user)) {
+                        return $this->json("Au moins un utilisateur n'est pas membre du groupe");
                     }
                 }
 
@@ -82,16 +84,23 @@ class GroupController extends Controller
                 $groupAdmins->clear(); // start clean
 
                 foreach ($adminIds as $adminId) {
-                    $adminUser = $userRepo->find($adminId);
-                    if ($adminUser && !$groupAdmins->contains($adminUser)) {
-                        $groupAdmins->add($adminUser);
+                    $user = $userRepo->find($adminId);
+                    if (!$groupAdmins->contains($user)) {
+                        $groupAdmins->add($user);
                     }
                 }
             }
 
             // image management
             $imageFile = $request->files->get('image');
+
             if ($imageFile) {
+                $mimeType = $imageFile->getMimeType();
+
+                if($mimeType != 'image/png' && $mimeType != 'image/jpg' && $mimeType != 'image/gif'){
+                    return $this->json("L'image doit être au format jpg, png ou gif");
+                }
+
                 $imageName = $imageFile->getClientOriginalName();
                 $group->setImage($imageName);
 
@@ -113,7 +122,7 @@ class GroupController extends Controller
             return $this->json("ok");
 
         } else {
-            throw new \Exception("L'action a expirée");
+            return $this->json("L'action a expirée");
         }
     }
 }
