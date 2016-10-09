@@ -5,7 +5,6 @@ namespace AppBundle\Entity;
 use AppBundle\Service\GroupService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -22,7 +21,6 @@ class Group
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\Length(max=14)
      */
     private $name;
 

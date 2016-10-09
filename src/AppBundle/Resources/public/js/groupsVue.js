@@ -29,6 +29,7 @@ export class groupsVue {
                     this.tempColor = this.group.color;
                     this.tempImageUrl = this.group.imageUrl;
                     this.tempAdminIds = this.adminIds;
+                    // this.tempMemberIds = this.memberIds;
                 },
                 getImageFromImageUrl(imageUrl){
                     let tmp = imageUrl.split('/');
