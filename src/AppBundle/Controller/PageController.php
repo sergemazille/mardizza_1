@@ -29,9 +29,6 @@ class PageController extends Controller
             return $this->redirectToRoute('login');
         }
 
-        // Welcome message
-        $this->addFlash("success", "Bon appétit !!!");
-
         // reference for database
         $orderRef = $this->get('mardizza.order_service')->getOrderRef();
 

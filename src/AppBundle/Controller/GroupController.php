@@ -59,11 +59,13 @@ class GroupController extends Controller
 
     public function updateGroupAction(Group $group, Request $request)
     {
+        if(! $this->getUser()){
+            return $this->redirectToRoute('login');
+        }
+
         $submittedToken = $request->get('csrf');
 
         if ($this->isCsrfTokenValid('group_token', $submittedToken)) {
-
-            // TODO: sanitize data
 
             $em = $this->getDoctrine()->getManager();
             $userRepo = $em->getRepository('AppBundle:User');
@@ -97,8 +99,12 @@ class GroupController extends Controller
             if ($imageFile) {
                 $mimeType = $imageFile->getMimeType();
 
-                if($mimeType != 'image/png' && $mimeType != 'image/jpg' && $mimeType != 'image/gif'){
+                if($mimeType != 'image/png' && $mimeType != 'image/jpeg' && $mimeType != 'image/gif'){
                     return $this->json("L'image doit être au format jpg, png ou gif");
+                }
+
+                if($imageFile->getSize() > 100000){
+                    return $this->json("L'image ne doit pas faire plus de 1 Mo");
                 }
 
                 $imageName = $imageFile->getClientOriginalName();

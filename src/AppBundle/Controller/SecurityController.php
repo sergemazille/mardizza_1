@@ -10,9 +10,11 @@ class SecurityController extends Controller
 {
     public function loginAction()
     {
-        // redirect to order page if already logged in
-        if ($this->getUser()) {
-            return $this->redirectToRoute('order');
+        // redirect to order page if already logged in or groups page if user has more than one group
+        $user = $this->getUser();
+        if ($user) {
+            $route = count($user->getGroups()) <= 1 ? 'order' : 'group_list' ;
+            return $this->redirectToRoute($route);
         }
 
         $authenticationUtils = $this->get('security.authentication_utils');

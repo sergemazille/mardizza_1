@@ -104,7 +104,7 @@ export class groupsVue {
                         }
 
                         let imageMimeType = this.$els.fileinput.files[0].type;
-                        if(imageMimeType != 'image/png' && imageMimeType != 'image/jpg' && imageMimeType != 'image/gif'){
+                        if(imageMimeType != 'image/png' && imageMimeType != 'image/jpeg' && imageMimeType != 'image/gif'){
                             Dom.createNotification("L'image doit être au format jpg, png ou gif", 'alert-danger');
                             return false;
                         }
