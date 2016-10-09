@@ -77,4 +77,12 @@
       margin-left: 0.6em;
     }
   }
+
+  .modal-content{
+    .validation-error{
+      color: red;
+      font-size: 1.4em;
+      padding: 1em;
+    }
+  }
 }

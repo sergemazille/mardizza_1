@@ -1,10 +1,9 @@
 import {Dom} from './Dom';
+import * as mime from 'mime-types';
 
 export class groupsVue {
 
     static init() {
-        Vue.use(require('vue-resource'));
-        Vue.http.options.emulateJSON = true;
 
         Vue.component('group', {
             template: '#group-template',
@@ -16,7 +15,6 @@ export class groupsVue {
                     tempImageUrl: '',
                     newImageFlag: "", // used to check if image input has been changed or not
                     adminIds: [],
-                    memberIds: [],
                     csrf: '',
                 }
             },
@@ -26,30 +24,22 @@ export class groupsVue {
                     this.group.color = this.tempColor;
                     this.group.imageUrl = this.tempImageUrl;
                     this.adminIds = this.tempAdminIds;
-                    this.memberIds = this.tempMemberIds;
                 },
                 saveState() {
                     this.tempName = this.group.name;
                     this.tempColor = this.group.color;
                     this.tempImageUrl = this.group.imageUrl;
                     this.tempAdminIds = this.adminIds;
-                    this.tempMemberIds = this.memberIds;
                 },
                 getImageFromImageUrl(imageUrl){
                     let tmp = imageUrl.split('/');
                     return tmp.slice(-1).pop();
-                },
-                getIdsFromMembers(){
-                    return $(this.group.members).map(function (index, member) {
-                        return member.id;
-                    }).toArray();
                 },
                 stateHasChanged(){
                     return (this.group.name != this.tempName ||
                     this.group.color != this.tempColor ||
                     this.group.imageUrl != this.tempImageUrl ||
                     this.adminIds != this.tempAdminIds ||
-                    this.memberIds != this.tempMemberIds ||
                     this.newImageFlag != '');
                 },
                 updateGroup() {
@@ -69,7 +59,6 @@ export class groupsVue {
                     formData.append('name', this.group.name);
                     formData.append('color', this.group.color);
                     formData.append('adminIds', this.adminIds);
-                    formData.append('memberIds', this.memberIds);
 
                     this.$http.post(`/group/update/${this.group.id}`, formData)
                         .then(
@@ -140,7 +129,6 @@ export class groupsVue {
                 }
             },
             created(){
-                this.memberIds = this.getIdsFromMembers();
                 this.revertStateOnModalDismissal();
             }
         });

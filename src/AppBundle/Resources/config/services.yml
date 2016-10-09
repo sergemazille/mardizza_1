@@ -36,3 +36,6 @@ services:
         arguments: [ '@security.token_storage' ]
         tags:
             - { name: twig.extension }
+
+    mardizza.validation_service:
+        class: AppBundle\Service\ValidationService

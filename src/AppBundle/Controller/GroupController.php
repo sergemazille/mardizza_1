@@ -61,34 +61,31 @@ class GroupController extends Controller
 
         if ($this->isCsrfTokenValid('group_token', $submittedToken)) {
 
-            // TODO: sanitize data
-
             $em = $this->getDoctrine()->getManager();
             $userRepo = $em->getRepository('AppBundle:User');
+
 
             // update group admins
             $adminIds = explode(",", $request->get('adminIds'));
 
-            $groupAdmins = $group->getAdmins();
-            $groupAdmins->clear(); // start clean
+            if ($adminIds) {
 
-            foreach ($adminIds as $adminId) {
-                $user = $userRepo->find($adminId);
-                if (!$groupAdmins->contains($user)) {
-                    $groupAdmins->add($user);
+                // check if future admins are part of the group
+                $userIsMemberValidator = $this->get('mardizza.validation_service');
+                foreach ($adminIds as $user) {
+                    if (! $userIsMemberValidator->useIsMemberOfGroup($group, $user)) {
+                        return $this->createAccessDeniedException('Au moins un utilisateur ne fait pas partie du groupe');
+                    }
                 }
-            }
 
-            // update group members
-            $memberIds = explode(",", $request->get('memberIds'));
+                $groupAdmins = $group->getAdmins();
+                $groupAdmins->clear(); // start clean
 
-            $groupMembers = $group->getMembers();
-            $groupMembers->clear(); // start clean
-
-            foreach ($memberIds as $memberId) {
-                $user = $userRepo->find($memberId);
-                if (!$groupMembers->contains($user)) {
-                    $groupMembers->add($user);
+                foreach ($adminIds as $adminId) {
+                    $adminUser = $userRepo->find($adminId);
+                    if ($adminUser && !$groupAdmins->contains($adminUser)) {
+                        $groupAdmins->add($adminUser);
+                    }
                 }
             }
 
