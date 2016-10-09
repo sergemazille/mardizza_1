@@ -1,4 +1,3 @@
-import {FirebaseDb} from './FirebaseDb';
 import {Dom} from './Dom';
 
 export class orderVue {

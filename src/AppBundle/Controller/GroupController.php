@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Group;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class GroupController extends Controller
 {
@@ -69,32 +71,36 @@ class GroupController extends Controller
             // update group admins
             $adminIds = explode(",", $request->get('adminIds'));
 
-            $groupAdmins = $group->getAdmins();
-            $groupAdmins->clear(); // start clean
-
-            foreach ($adminIds as $adminId) {
-                $user = $userRepo->find($adminId);
-                if (!$groupAdmins->contains($user)) {
-                    $groupAdmins->add($user);
+            if ($adminIds) {
+                // check if users are members of the group
+                foreach ($adminIds as $userId) {
+                    $user = $userRepo->find($userId);
+                    if (! $user || ! $group->getMembers()->contains($user)) {
+                        return $this->json("Au moins un utilisateur n'est pas membre du groupe");
+                    }
                 }
-            }
 
-            // update group members
-            $memberIds = explode(",", $request->get('memberIds'));
+                $groupAdmins = $group->getAdmins();
+                $groupAdmins->clear(); // start clean
 
-            $groupMembers = $group->getMembers();
-            $groupMembers->clear(); // start clean
-
-            foreach ($memberIds as $memberId) {
-                $user = $userRepo->find($memberId);
-                if (!$groupMembers->contains($user)) {
-                    $groupMembers->add($user);
+                foreach ($adminIds as $adminId) {
+                    $user = $userRepo->find($adminId);
+                    if (!$groupAdmins->contains($user)) {
+                        $groupAdmins->add($user);
+                    }
                 }
             }
 
             // image management
             $imageFile = $request->files->get('image');
+
             if ($imageFile) {
+                $mimeType = $imageFile->getMimeType();
+
+                if($mimeType != 'image/png' && $mimeType != 'image/jpg' && $mimeType != 'image/gif'){
+                    return $this->json("L'image doit être au format jpg, png ou gif");
+                }
+
                 $imageName = $imageFile->getClientOriginalName();
                 $group->setImage($imageName);
 
@@ -116,7 +122,7 @@ class GroupController extends Controller
             return $this->json("ok");
 
         } else {
-            throw new \Exception("L'action a expirée");
+            return $this->json("L'action a expirée");
         }
     }
 }
