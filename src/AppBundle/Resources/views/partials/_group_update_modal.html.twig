@@ -23,20 +23,32 @@
                         <div class="row">
                             {# config #}
                             <div class="col-xs-12 col-sm-6 config">
+
+                                {# name #}
                                 <div class="form-group">
                                     <label>Nom du groupe :</label>
                                     <input type="text" v-model="group.name" class="form-control" name="name" v-validate:groupname="{ required: true, maxlength: 14 }">
                                 </div>
+
+                                {# color #}
                                 <div class="form-group">
                                     <label>Couleur du groupe :</label>
                                     <input type="color" v-model="group.color" class="form-control" name="color">
                                 </div>
+
+                                {# image #}
                                 <div class="form-group">
                                     <p>Image du groupe :</p>
                                     <label class="btn btn-success btn-block btn-file">
                                         Parcourir<span class="fa fa-picture-o pull-right"></span>
                                         <input type="file" class="hidden" name="image" v-el:fileInput v-model="newImageFlag" accept="image/jpeg, image/gif, image/png">
                                     </label>
+                                </div>
+
+                                {# fidelity card stamps management #}
+                                <div class="form-group">
+                                    <label>Nombre de tampons :</label>
+                                    <input type="number" v-model="group.stamps" class="form-control" name="stamps">
                                 </div>
                             </div>
 
@@ -48,24 +60,25 @@
                                     <div class="col-xs-9">Membre</div>
                                 </div>
 
-                                <div class="row member" v-for="member in group.members">
-                                    <div class="form-group">
-                                        <label>
-                                            <input id="${member.id}" type="checkbox"
-                                                   :checked="member.isAdmin" value="${member.id}" v-model="adminIds"
-                                                   name="memberIds"
-                                                   class="member-username"
-                                            >
-                                            ${member.username}
-                                        </label>
+                                <div class="row">
+                                    <div class="member" v-for="member in group.members">
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <label>
+                                                    <input id="${member.id}" type="checkbox"
+                                                           :checked="member.isAdmin" value="${member.id}" v-model="adminIds"
+                                                           name="memberIds"
+                                                           class="member-username"
+                                                    >
+                                                    ${member.username}
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {# fidelity card stamps management #}
-                                <div class="form-group">
-                                    <label>Nombre de tampons :</label>
-                                    <input type="number" v-model="group.stamps" class="form-control" name="stamps">
-                                </div>
+                                {# invite button #}
+                                <button class="btn btn-success btn-block">Inviter un nouveau membre <span class="fa fa-user pull-right"></span></button>
 
                             </div>
                         </div>

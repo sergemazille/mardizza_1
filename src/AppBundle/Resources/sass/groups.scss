@@ -43,9 +43,20 @@
       }
     }
   }
-  .config {
-    span.fa {
-      margin-top: 0.19em;
+
+  span.fa {
+    margin-top: 0.19em;
+  }
+
+  .btn-block{
+    margin: 1.2em 0;
+  }
+
+  .config{
+    .form-group{
+      p{
+        font-weight: bold;
+      }
     }
   }
 
@@ -58,7 +69,13 @@
     }
 
     .member {
-      line-height: 1.1em;
+      .form-group{
+        margin: 0;
+        label{
+          font-weight: 200;
+          line-height: 0.8em;
+        }
+      }
 
       label {
         padding: 0;
@@ -71,21 +88,14 @@
     }
   }
 
-  #create-group-button{
-    .fa{
-      line-height: 1.5em;
-      margin-left: 0.6em;
-    }
-  }
-
-  .modal-content{
-    .validation-error{
+  .modal-content {
+    .validation-error {
       color: red;
       font-size: 1.4em;
       padding: 1em;
     }
 
-    .errors p{
+    .errors p {
       color: red;
       font-size: 1.2em;
     }
