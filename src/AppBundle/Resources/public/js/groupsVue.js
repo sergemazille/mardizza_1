@@ -9,9 +9,11 @@ export class groupsVue {
             props: ['group'],
             data(){
                 return {
-                    tempName: '',
-                    tempColor: '',
-                    tempImageUrl: '',
+                    tempName: this.group.name,
+                    tempColor: this.group.color,
+                    tempStamps: this.group.stamps,
+                    tempImageUrl: this.group.imageUrl,
+                    tempAdminIds: this.adminIds,
                     newImageFlag: "", // used to check if image input has been changed or not
                     adminIds: [],
                     csrf: '',
@@ -23,7 +25,7 @@ export class groupsVue {
                     this.group.color = this.tempColor;
                     this.group.stamps = this.tempStamps;
                     this.group.imageUrl = this.tempImageUrl;
-                    this.adminIds = this.tempAdminIds;
+                    // this.adminIds = this.tempAdminIds;
                 },
                 saveState() {
                     this.tempName = this.group.name;
@@ -31,7 +33,6 @@ export class groupsVue {
                     this.tempStamps = this.group.stamps;
                     this.tempImageUrl = this.group.imageUrl;
                     this.tempAdminIds = this.adminIds;
-                    // this.tempMemberIds = this.memberIds;
                 },
                 getImageFromImageUrl(imageUrl){
                     let tmp = imageUrl.split('/');
