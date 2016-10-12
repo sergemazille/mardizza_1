@@ -17,6 +17,7 @@ export class groupsVue {
                     newImageFlag: "", // used to check if image input has been changed or not
                     adminIds: [],
                     csrf: '',
+                    user: '',
                 }
             },
             methods: {
@@ -143,6 +144,9 @@ export class groupsVue {
                             }
                         });
                     });
+                },
+                quitGroup(){
+                    console.log(this.user);
                 }
             },
             created(){

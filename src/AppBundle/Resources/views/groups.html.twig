@@ -1,8 +1,7 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block content %}
-
-    <div id="groups" :token="`{{ csrf_token('group_token') }}`">
+    <div id="groups">
         <div class="container">
             {# action navbar #}
             {% include 'AppBundle:partials:_navbar_groups.html.twig' %}

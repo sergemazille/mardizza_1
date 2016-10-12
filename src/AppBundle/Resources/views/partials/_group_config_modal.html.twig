@@ -85,6 +85,7 @@
                     </div>
 
                     <div class="modal-footer">
+                        <button @click.prevent="quitGroup" type="button" class="btn btn-danger pull-left">Quitter ce groupe</button>
                         <button @click.prevent="revertChanges" type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                         <button type="submit" class="btn btn-primary" v-if="$validation.valid">Enregistrer</button>
                     </div>
