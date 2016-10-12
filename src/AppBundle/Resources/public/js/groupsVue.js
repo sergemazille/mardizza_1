@@ -5,6 +5,13 @@ export class groupsVue {
 
     static init() {
 
+        const messages = {
+            ONE_ADMIN: 'Il doit rester au moins un administrateur',
+            IMAGE_FORMAT: 'L\'image doit être au format jpg, png ou gif',
+            IMAGE_SIZE: 'L\'image ne doit pas faire plus de 1 Mo',
+            GROUP_UPDATED: 'Le groupe a bien été mis à jour',
+        };
+
         Vue.component('group', {
             template: '#group-template',
             props: ['group'],
@@ -56,6 +63,14 @@ export class groupsVue {
                         Dom.hideModal();
                     }
                 },
+                quitGroup(){
+
+                    // TODO: create backend route and controller to detach a user from a group
+                    // TODO: check csrf
+
+                    console.log("group.id : " + this.group.id);
+                    console.log("vm.user_id : " + vm.user_id);
+                },
                 submitForm(){
                     // form submission
                     let formData = new FormData();
@@ -78,7 +93,7 @@ export class groupsVue {
                                     }
                                     this.newImageFlag = ""; // set variable back to empty for next changes
                                     Dom.hideModal();
-                                    Dom.createNotification('Le groupe a bien été mis à jour', 'alert-success');
+                                    Dom.createNotification(messages.GROUP_UPDATED, 'alert-success');
                                 } else {
                                     Dom.createNotification(response.body, 'alert-danger');
                                 }
@@ -106,20 +121,20 @@ export class groupsVue {
 
                         let imageSize = this.$els.fileinput.files[0].size;
                         if (imageSize > 100000) {
-                            Dom.createNotification("L'image ne doit pas faire plus de 1 Mo", 'alert-danger');
+                            Dom.createNotification(messages.IMAGE_SIZE, 'alert-danger');
                             return false;
                         }
 
                         let imageMimeType = this.$els.fileinput.files[0].type;
                         if (imageMimeType != 'image/png' && imageMimeType != 'image/jpeg' && imageMimeType != 'image/gif') {
-                            Dom.createNotification("L'image doit être au format jpg, png ou gif", 'alert-danger');
+                            Dom.createNotification(messages.IMAGE_FORMAT, 'alert-danger');
                             return false;
                         }
                     }
 
                     // test there's at least one admin
                     if (this.adminIds.length <= 0) {
-                        Dom.createNotification('Il doit rester au moins un administrateur', 'alert-danger');
+                        Dom.createNotification(messages.ONE_ADMIN, 'alert-danger');
                         return false;
                     }
 
@@ -146,8 +161,11 @@ export class groupsVue {
                         });
                     });
                 },
-                quitGroup(){
-                    console.log(this.user);
+                userIsLastMember(){
+                    return this.group.members.length <= 1;
+                },
+                userIsLastAdmin(){
+                    return this.adminIds.length <= 1;
                 }
             },
             created(){
@@ -157,6 +175,7 @@ export class groupsVue {
 
         let vm = new Vue({
             el: '#groups',
+            props: ['user_id'],
             data: {
                 groups: [],
             },
