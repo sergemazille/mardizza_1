@@ -3,6 +3,9 @@ export class Dom {
     static init() {
         // manage notifications
         Dom.cleanNotifications();
+
+        // prepare animations
+        Dom.animations();
     }
 
     static getCredentials(loginOrCreate) {
@@ -25,22 +28,6 @@ export class Dom {
             'email': $email,
             'username': $username,
             'password': $password,
-        }
-    }
-
-    static showOrHideEmptyBasketMessage() {
-        if ($("tr").length < 1 && $(window).width() > 768) {
-
-            let messages = [
-            ];
-
-            // doesn't display funny messages on small devices
-            let randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            $("#basket-message").show();
-            $("#basket-message").text(randomMessage);
-
-        } else {
-            $("#basket-message").hide();
         }
     }
 
@@ -94,5 +81,18 @@ export class Dom {
     // hide modals
     static hideModal(){
         $(".modal").modal('hide');
+    }
+
+
+    // animation
+    static animations() {
+        $.fn.extend({
+            animateCss: function (animationName) {
+                var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+                this.addClass(animationName).one(animationEnd, function () {
+                    $(this).removeClass(animationName);
+                });
+            }
+        });
     }
 }
