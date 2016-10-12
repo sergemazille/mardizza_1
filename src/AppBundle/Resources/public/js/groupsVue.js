@@ -1,4 +1,5 @@
 import {Dom} from './Dom';
+import {Event} from './Event';
 
 export class groupsVue {
 
@@ -69,7 +70,7 @@ export class groupsVue {
                         .then(
                             // success
                             function (response) {
-                                if(response.body == "ok"){
+                                if (response.body == "ok") {
                                     // update image if it has been changed
                                     if (this.$els.fileinput.files[0]) {
                                         this.group.imageUrl = 'assets/images/group/' + this.$els.fileinput.files[0].name;
@@ -77,7 +78,7 @@ export class groupsVue {
                                     this.newImageFlag = ""; // set variable back to empty for next changes
                                     Dom.hideModal();
                                     Dom.createNotification('Le groupe a bien été mis à jour', 'alert-success');
-                                }else{
+                                } else {
                                     Dom.createNotification(response.body, 'alert-danger');
                                 }
                             },
@@ -109,7 +110,7 @@ export class groupsVue {
                         }
 
                         let imageMimeType = this.$els.fileinput.files[0].type;
-                        if(imageMimeType != 'image/png' && imageMimeType != 'image/jpeg' && imageMimeType != 'image/gif'){
+                        if (imageMimeType != 'image/png' && imageMimeType != 'image/jpeg' && imageMimeType != 'image/gif') {
                             Dom.createNotification("L'image doit être au format jpg, png ou gif", 'alert-danger');
                             return false;
                         }
@@ -130,14 +131,14 @@ export class groupsVue {
                     vm.$nextTick(function () {
 
                         // revert when click outside modal content
-                        $(".modal.fade").on('click', function(e){
-                            if(e.target == this){
+                        $(".modal.fade").on('click', function (e) {
+                            if (e.target == this) {
                                 self.revertChanges();
                             }
                         });
 
                         // revert when ESC key pressed
-                        $(document).keyup(function(e) {
+                        $(document).keyup(function (e) {
                             if (e.keyCode == 27) { // escape key maps to keycode `27`
                                 self.revertChanges();
                             }
@@ -159,7 +160,15 @@ export class groupsVue {
                 getGroups(){
                     $.get('/get/groups', function (groups) {
                         this.groups = groups;
+
+                        // wait for groups to be loaded
+                        this.$nextTick(function () {
+                            this.launchScripts();
+                        });
                     }.bind(this));
+                },
+                launchScripts(){
+                    Event.animations();
                 },
             },
             ready(){

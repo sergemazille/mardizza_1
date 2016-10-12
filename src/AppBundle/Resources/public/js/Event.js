@@ -60,27 +60,6 @@ export class Event {
             });
         });
 
-
-        // click on a pizza card
-        // $(".pizza-card-content").on('click', function (e) {
-        //     e.preventDefault();
-        //
-        //     let pizza = Dom.getSelectedPizzaInfo($(this).parent('.pizza-card'));
-        //
-        //     $.post(`/pizza/${pizza.id}`)
-        //         .done(function (pizzaInfos) {
-        //
-        //             $('body').append(pizzaInfos);
-        //             $("#pizza-modal").modal("show");
-        //             Event.snapshot();
-        //
-        //             // Remove modal from the DOM in case user click an other pizza card
-        //             $("#pizza-modal").on("hidden.bs.modal", function(){
-        //                 $(this).remove();
-        //             });
-        //         })
-        // });
-
         // add camera effect for pizza card clipboard copy
         $(".pizza-clipboard").on('click', function (e) {
             e.preventDefault();
@@ -130,5 +109,19 @@ export class Event {
         clipboard.on('error', function () {
             Dom.createNotification("Erreur lors de la copie dans le presse papier.", "alert-danger");
         });
+    }
+
+    // animations
+    static animations() {
+        $('.fa-cog').hover(
+            // hover
+            function () {
+                $(this).animateCss('rotateIn');
+            },
+            // leave
+            function () {
+                return; // does not animate on leave event
+            }
+        );
     }
 }
