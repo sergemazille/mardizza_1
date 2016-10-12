@@ -8,8 +8,8 @@
                 >
                     <div class="group-header">
                         {# modal trigger #}
-                        <a data-toggle="modal" data-target="#${group.id}" v-if="group.userIsAdmin" @click.prevent="saveState"><small>Admin</small></a>
-                        <span v-else><small>&nbsp;</small></span>
+                        <a data-toggle="modal" data-target="#${group.id}" v-if="group.userIsAdmin" @click.prevent="saveState"><span class="fa fa-cog fa-2x"></span></a>
+                        <p v-else><span>&nbsp;</span></p>
                     </div>
 
                     <div class="group-body">

@@ -18,7 +18,9 @@
 
         a {
           color: white;
-          text-decoration: underline;
+          .fa{
+            margin-top: 0;
+          }
         }
       }
 
