@@ -4,10 +4,9 @@ declare(strict_types = 1);
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Group;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class GroupController extends Controller
 {
@@ -15,6 +14,29 @@ class GroupController extends Controller
     {
         $userGroups = $this->get('mardizza.group_service')->getUserGroups();
         return $this->json($userGroups);
+    }
+
+    public function quitGroupAction(Request $request, Group $group)
+    {
+        $submittedToken = $request->get('csrf');
+        if(! $this->isCsrfTokenValid('group_token', $submittedToken)){
+            return $this->json("L'action a expirée");
+        }
+
+        $user = $this->getUser();
+        if(!$user){
+            return $this->redirectToRoute('login');
+        }
+
+        // remove user from group
+        $group->getMembers()->removeElement($user);
+        $group->getAdmins()->removeElement($user);
+        $user->getGroups()->removeElement($group);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return $this->json("ok");
     }
 
     public function addGroupAction(Group $group)

@@ -1,6 +1,6 @@
 {# modal config #}
 <div :id="group.id" class="modal fade" role="dialog" tabindex="-1" v-if="group.userIsAdmin">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
 
         <div class="modal-content">
 
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button v-if="userIsLastMember()" @click.prevent="quitGroup" type="button" class="btn btn-danger pull-left">Quitter ce groupe</button>
+                        <button v-if="!userIsLastMember()" @click.prevent="quitGroup" type="button" class="btn btn-warning pull-left">Quitter ce groupe</button>
                         <button @click.prevent="revertChanges" type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                         <button type="submit" class="btn btn-primary" v-if="$validation.valid">Enregistrer</button>
                     </div>

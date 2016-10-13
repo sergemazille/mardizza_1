@@ -10,6 +10,7 @@ export class groupsVue {
             IMAGE_FORMAT: 'L\'image doit être au format jpg, png ou gif',
             IMAGE_SIZE: 'L\'image ne doit pas faire plus de 1 Mo',
             GROUP_UPDATED: 'Le groupe a bien été mis à jour',
+            GROUP_QUITTED: 'Vous avez bien quitté le groupe',
         };
 
         Vue.component('group', {
@@ -64,12 +65,28 @@ export class groupsVue {
                     }
                 },
                 quitGroup(){
+                    let formData = new FormData();
 
-                    // TODO: create backend route and controller to detach a user from a group
-                    // TODO: check csrf
+                    formData.append('csrf', this.csrf);
 
-                    console.log("group.id : " + this.group.id);
-                    console.log("vm.user_id : " + vm.user_id);
+                    this.$http.post(`/group/quit/${this.group.id}`, formData)
+                        .then(
+                            // success
+                            function (response) {
+                                if (response.body == "ok") {
+                                    this.group.userIsAdmin = false;
+                                    Dom.hideModal();
+                                    Dom.createNotification(messages.GROUP_QUITTED, 'alert-success');
+                                } else {
+                                    Dom.createNotification(response.body, 'alert-danger');
+                                }
+                            },
+                            // error
+                            function (response) {
+                                console.log(response);
+                                Dom.createNotification(response.body, 'alert-danger');
+                            }
+                        ).bind(this);
                 },
                 submitForm(){
                     // form submission
