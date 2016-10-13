@@ -101,3 +101,8 @@ delete_group:
     methods: [POST]
     requirements:
         id: \d+
+
+create_group:
+    path: /group/create
+    defaults: { _controller: AppBundle:Group:createGroup }
+    methods: [POST]

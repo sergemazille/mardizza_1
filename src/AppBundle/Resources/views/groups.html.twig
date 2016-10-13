@@ -1,7 +1,8 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block content %}
-    <div id="groups" :user_id="{{ user.id }}">
+    <div id="groups">
+        <input type="hidden" name="csrf" :value="`{{ csrf_token('group_token') }}`" v-model="csrf">
         <div class="container">
             {# action navbar #}
             {% include 'AppBundle:partials:_navbar_groups.html.twig' %}
@@ -13,7 +14,7 @@
             </ul>
 
             <div v-if="groups.length <= 0">
-                <p class="h3">Vous n'avez pas de groupe, voulez-vous <a href="#">en créer un</a> ?</p>
+                <p class="h3">Vous n'avez pas de groupe, voulez-vous <a href="#" @click.prevent="createGroup()">en créer un</a> ?</p>
             </div>
         </div>
     </div>

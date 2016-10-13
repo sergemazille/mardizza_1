@@ -12,6 +12,7 @@ export class groupsVue {
             GROUP_UPDATED: 'Le groupe a bien été mis à jour',
             GROUP_QUITTED: 'Vous avez bien quitté le groupe',
             GROUP_DELETED: 'Le groupe a bien été supprimé',
+            GROUP_CREATED: 'Votre nouveau groupe a bien été créé',
         };
 
         Vue.component('group', {
@@ -215,9 +216,9 @@ export class groupsVue {
 
         let vm = new Vue({
             el: '#groups',
-            props: ['user_id'],
             data: {
                 groups: [],
+                csrf: '',
             },
             methods: {
                 getGroups(){
@@ -232,6 +233,28 @@ export class groupsVue {
                 },
                 launchScripts(){
                     Event.animations();
+                },
+                createGroup(){
+                    let formData = new FormData();
+                    formData.append('csrf', this.csrf);
+
+                    this.$http.post('/group/create', formData)
+                        .then(
+                            // success
+                            function (response) {
+                                if (response.body == "ok") {
+                                    Dom.createNotification(messages.GROUP_CREATED, 'alert-success');
+                                    this.getGroups();
+                                } else {
+                                    Dom.createNotification(response.body, 'alert-danger');
+                                }
+                            },
+                            // error
+                            function (response) {
+                                console.log(response);
+                                Dom.createNotification(response.body, 'alert-danger');
+                            }
+                        ).bind(this);
                 },
             },
             ready(){
