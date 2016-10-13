@@ -29,6 +29,8 @@ export class groupsVue {
                     adminIds: [],
                     csrf: '',
                     user: '',
+                    invitationOn: false,
+                    invitationEmail: '',
                 }
             },
             methods: {
@@ -207,7 +209,14 @@ export class groupsVue {
                 },
                 userIsLastAdmin(){
                     return this.adminIds.length <= 1;
-                }
+                },
+                openInvitation(){
+                    this.invitationOn = true;
+                },
+                sendInvitation(){
+                    // todo
+                    console.log(this.invitationEmail);
+                },
             },
             created(){
                 this.revertStateOnModalDismissal();
