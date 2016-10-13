@@ -73,12 +73,12 @@ get_groups:
 
 user_add_group:
     path: /user/add/group/{group}
-    defaults: { _controller: AppBundle:Group:addGroup }
+    defaults: { _controller: AppBundle:Group:addToGroup }
     methods: [GET, POST]
 
 user_remove_group:
     path: /user/remove/group/{group}
-    defaults: { _controller: AppBundle:Group:removeGroup }
+    defaults: { _controller: AppBundle:Group:removeFromGroup }
     methods: [GET, POST]
 
 update_group:
@@ -91,6 +91,13 @@ update_group:
 quit_group:
     path: /group/quit/{group}
     defaults: { _controller: AppBundle:Group:quitGroup }
+    methods: [POST]
+    requirements:
+        id: \d+
+
+delete_group:
+    path: /group/delete/{group}
+    defaults: { _controller: AppBundle:Group:deleteGroup }
     methods: [POST]
     requirements:
         id: \d+

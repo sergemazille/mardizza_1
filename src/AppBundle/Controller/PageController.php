@@ -9,10 +9,10 @@ class PageController extends Controller
 {
     public function homeAction()
     {
-        // already logged in users are sent directly to groups page or even more quickly to order page if they have only one group
+        // already logged in users are sent directly to order page if they have only 1 group and to groups page if they have 0 or more than 1 group
         $user = $this->getUser();
         if ($user) {
-            $route = (count($user->getGroups()) <= 1) ? 'order' : 'group_list';
+            $route = ($user->getGroups()->count() == 1) ? 'order' : 'group_list';
             return $this->redirectToRoute($route);
         }
 
@@ -27,6 +27,11 @@ class PageController extends Controller
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('login');
+        }
+
+        // users who don't have a group can't access this page
+        if($user->getGroups()->count() <= 0){
+            return $this->redirectToRoute('group_list');
         }
 
         // reference for database

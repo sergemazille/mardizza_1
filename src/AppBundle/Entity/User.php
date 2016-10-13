@@ -118,6 +118,9 @@ class User implements UserInterface
         return $this->favoritePizzas;
     }
 
+    /**
+     * @return ArrayCollection
+     */
     public function getGroups()
     {
         return $this->groups;

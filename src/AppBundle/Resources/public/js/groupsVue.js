@@ -11,6 +11,7 @@ export class groupsVue {
             IMAGE_SIZE: 'L\'image ne doit pas faire plus de 1 Mo',
             GROUP_UPDATED: 'Le groupe a bien été mis à jour',
             GROUP_QUITTED: 'Vous avez bien quitté le groupe',
+            GROUP_DELETED: 'Le groupe a bien été supprimé',
         };
 
         Vue.component('group', {
@@ -66,7 +67,6 @@ export class groupsVue {
                 },
                 quitGroup(){
                     let formData = new FormData();
-
                     formData.append('csrf', this.csrf);
 
                     this.$http.post(`/group/quit/${this.group.id}`, formData)
@@ -77,6 +77,29 @@ export class groupsVue {
                                     this.group.userIsAdmin = false;
                                     Dom.hideModal();
                                     Dom.createNotification(messages.GROUP_QUITTED, 'alert-success');
+                                } else {
+                                    Dom.createNotification(response.body, 'alert-danger');
+                                }
+                            },
+                            // error
+                            function (response) {
+                                console.log(response);
+                                Dom.createNotification(response.body, 'alert-danger');
+                            }
+                        ).bind(this);
+                },
+                deleteGroup(){
+                    let formData = new FormData();
+                    formData.append('csrf', this.csrf);
+
+                    this.$http.post(`/group/delete/${this.group.id}`, formData)
+                        .then(
+                            // success
+                            function (response) {
+                                if (response.body == "ok") {
+                                    Dom.hideModal();
+                                    Dom.createNotification(messages.GROUP_DELETED, 'alert-success');
+                                    vm.groups.$remove(this.group);
                                 } else {
                                     Dom.createNotification(response.body, 'alert-danger');
                                 }

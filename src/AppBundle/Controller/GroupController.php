@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Group;
-use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -39,7 +38,32 @@ class GroupController extends Controller
         return $this->json("ok");
     }
 
-    public function addGroupAction(Group $group)
+    public function deleteGroupAction(Request $request, Group $group)
+    {
+        $submittedToken = $request->get('csrf');
+        if(! $this->isCsrfTokenValid('group_token', $submittedToken)){
+            return $this->json("L'action a expirée");
+        }
+
+        $user = $this->getUser();
+        if(!$user){
+            return $this->redirectToRoute('login');
+        }
+
+        // cleanup
+        $group->getMembers()->clear();
+        $group->getAdmins()->clear();
+        $user->getGroups()->removeElement($group);
+
+        // delete group
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($group);
+        $em->flush();
+
+        return $this->json("ok");
+    }
+
+    public function addToGroupAction(Group $group)
     {
         if (!$group) {
             throw $this->createNotFoundException('Aucun groupe trouvé.');
@@ -58,7 +82,7 @@ class GroupController extends Controller
         return $this->json(true);
     }
 
-    public function removeGroupAction(Group $group)
+    public function removeFromGroupAction(Group $group)
     {
         if (!$group) {
             throw $this->createNotFoundException('Aucun groupe trouvé.');

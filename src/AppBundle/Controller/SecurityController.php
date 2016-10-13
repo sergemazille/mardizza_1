@@ -10,10 +10,10 @@ class SecurityController extends Controller
 {
     public function loginAction()
     {
-        // redirect to order page if already logged in or groups page if user has more than one group
+        // already logged in users are sent directly to order page if they have only 1 group and to groups page if they have 0 or more than 1 group
         $user = $this->getUser();
         if ($user) {
-            $route = count($user->getGroups()) <= 1 ? 'order' : 'group_list' ;
+            $route = ($user->getGroups()->count() == 1) ? 'order' : 'group_list';
             return $this->redirectToRoute($route);
         }
 

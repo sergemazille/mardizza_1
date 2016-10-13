@@ -11,6 +11,10 @@
                     <group v-for="group in groups" :group="group"></group>
                 </div>
             </ul>
+
+            <div v-if="groups.length <= 0">
+                <p class="h3">Vous n'avez pas de groupe, voulez-vous <a href="#">en créer un</a> ?</p>
+            </div>
         </div>
     </div>
 
