@@ -20,7 +20,6 @@
           color: white;
           .fa{
             margin-top: 0;
-
           }
         }
       }
@@ -47,60 +46,64 @@
     }
   }
 
-  span.fa {
-    margin-top: 0.19em;
+  // fix Firefox icons bug
+  button, label{
+    white-space: inherit ! important;
+    span.fa {
+      margin-top: 0.22em;
+    }
   }
 
-  .btn-block{
-    margin: 1.2em 0;
+.btn-block{
+  margin: 1.2em 0;
+}
+
+.config{
+  .form-group{
+    p{
+      font-weight: bold;
+    }
+  }
+}
+
+.members {
+  padding-right: 30px;
+
+  .table-header {
+    margin-bottom: 0.7em;
+    border-bottom: 1px solid $dark-grey;
   }
 
-  .config{
+  .member {
     .form-group{
-      p{
-        font-weight: bold;
+      margin: 0;
+      label{
+        font-weight: 200;
+        line-height: 0.8em;
       }
+    }
+
+    label {
+      padding: 0;
+    }
+
+    input {
+      margin: 0 1.5em;
+      text-align: right;
     }
   }
+}
 
-  .members {
-    padding-right: 30px;
-
-    .table-header {
-      margin-bottom: 0.7em;
-      border-bottom: 1px solid $dark-grey;
-    }
-
-    .member {
-      .form-group{
-        margin: 0;
-        label{
-          font-weight: 200;
-          line-height: 0.8em;
-        }
-      }
-
-      label {
-        padding: 0;
-      }
-
-      input {
-        margin: 0 1.5em;
-        text-align: right;
-      }
-    }
+.modal-content {
+  .validation-error {
+    color: red;
+    font-size: 1.4em;
+    padding: 1em;
   }
 
-  .modal-content {
-    .validation-error {
-      color: red;
-      font-size: 1.4em;
-      padding: 1em;
-    }
-
-    .errors p {
-      color: red;
-      font-size: 1.2em;
-    }
+  .errors p {
+    color: red;
+    font-size: 1.2em;
   }
+}
 }
