@@ -1,0 +1,26 @@
+{# modal confirmation #}
+<div id="confirmation_modal_${group.id}" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="confirm-message row">
+                    <div class="col-xs-1">
+                        <span class="fa fa-exclamation-circle fa-2x text-danger"></span>
+                    </div>
+
+                    <div class="col-xs-11">
+                        <p class="h4" id="confirm-text">Attention, vous vous apprêter à supprimer le groupe.<br>Cette action est irréversible.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button data-dismiss="modal" type="button" class="btn btn-default">Annuler</button>
+                <button @click.prevent="deleteGroup()" type="button" class="btn btn-danger confirm-button">Confirmer</button>
+            </div>
+
+        </div>
+    </div>
+</div>

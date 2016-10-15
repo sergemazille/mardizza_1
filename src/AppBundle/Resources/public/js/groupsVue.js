@@ -1,19 +1,10 @@
 import {Dom} from './Dom';
 import {Event} from './Event';
+import * as constantes from './constantes';
 
 export class groupsVue {
 
     static init() {
-
-        const messages = {
-            ONE_ADMIN: 'Il doit rester au moins un administrateur',
-            IMAGE_FORMAT: 'L\'image doit être au format jpg, png ou gif',
-            IMAGE_SIZE: 'L\'image ne doit pas faire plus de 1 Mo',
-            GROUP_UPDATED: 'Le groupe a bien été mis à jour',
-            GROUP_QUITTED: 'Vous avez bien quitté le groupe',
-            GROUP_DELETED: 'Le groupe a bien été supprimé',
-            GROUP_CREATED: 'Votre nouveau groupe a bien été créé',
-        };
 
         Vue.component('group', {
             template: '#group-template',
@@ -79,17 +70,24 @@ export class groupsVue {
                                 if (response.body == "ok") {
                                     this.group.userIsAdmin = false;
                                     Dom.hideModal();
-                                    Dom.createNotification(messages.GROUP_QUITTED, 'alert-success');
+                                    Dom.createNotification(constantes.messages.GROUP_QUITTED, constantes.ALERT_SUCCESS);
                                 } else {
-                                    Dom.createNotification(response.body, 'alert-danger');
+                                    Dom.createNotification(response.body, constantes.ALERT_ERROR);
                                 }
                             },
                             // error
                             function (response) {
-                                console.log(response);
-                                Dom.createNotification(response.body, 'alert-danger');
+                                console.log(response.body);
+                                Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
                             }
                         ).bind(this);
+                },
+                confirmDeleteGroup(){
+                    // hide displayed modal
+                    Dom.hideModal();
+
+                    // show confirmation modal
+                    this.showConfirmation();
                 },
                 deleteGroup(){
                     let formData = new FormData();
@@ -101,18 +99,22 @@ export class groupsVue {
                             function (response) {
                                 if (response.body == "ok") {
                                     Dom.hideModal();
-                                    Dom.createNotification(messages.GROUP_DELETED, 'alert-success');
+                                    Dom.createNotification(constantes.messages.GROUP_DELETED, constantes.ALERT_SUCCESS);
                                     vm.groups.$remove(this.group);
                                 } else {
-                                    Dom.createNotification(response.body, 'alert-danger');
+                                    Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
                                 }
                             },
                             // error
                             function (response) {
                                 console.log(response);
-                                Dom.createNotification(response.body, 'alert-danger');
+                                Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
                             }
                         ).bind(this);
+                },
+                showConfirmation(){
+                    // show confirmation modal
+                    $("#confirmation_modal_"+this.group.id).modal("show");
                 },
                 submitForm(){
                     // form submission
@@ -136,25 +138,26 @@ export class groupsVue {
                                     }
                                     this.newImageFlag = ""; // set variable back to empty for next changes
                                     Dom.hideModal();
-                                    Dom.createNotification(messages.GROUP_UPDATED, 'alert-success');
+                                    Dom.createNotification(constantes.messages.GROUP_UPDATED, constantes.ALERT_SUCCESS);
                                 } else {
-                                    Dom.createNotification(response.body, 'alert-danger');
+                                    Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
                                 }
                             },
                             // error
                             function (response) {
-                                console.log(response);
-                                Dom.createNotification(response.body, 'alert-danger');
+                                console.log(response.body);
+                                Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
                             }
                         ).bind(this);
                 },
                 createGroup() {
                     $.post("/group/create")
                         .done(function () {
-                            Dom.createNotification('Le groupe a bien été créé', 'alert-success');
+                            Dom.createNotification('Le groupe a bien été créé', constantes.ALERT_SUCCESS);
                         })
                         .error(function (data) {
-                            Dom.createNotification(data, 'alert-danger');
+                            console.log(data);
+                            Dom.createNotification(data, constantes.ALERT_ERROR);
                         });
                 },
                 formDataIsValid(){
@@ -164,20 +167,20 @@ export class groupsVue {
 
                         let imageSize = this.$els.fileinput.files[0].size;
                         if (imageSize > 100000) {
-                            Dom.createNotification(messages.IMAGE_SIZE, 'alert-danger');
+                            Dom.createNotification(constantes.messages.IMAGE_SIZE, constantes.ALERT_ERROR);
                             return false;
                         }
 
                         let imageMimeType = this.$els.fileinput.files[0].type;
                         if (imageMimeType != 'image/png' && imageMimeType != 'image/jpeg' && imageMimeType != 'image/gif') {
-                            Dom.createNotification(messages.IMAGE_FORMAT, 'alert-danger');
+                            Dom.createNotification(constantes.messages.IMAGE_FORMAT, constantes.ALERT_ERROR);
                             return false;
                         }
                     }
 
                     // test there's at least one admin
                     if (this.adminIds.length <= 0) {
-                        Dom.createNotification(messages.ONE_ADMIN, 'alert-danger');
+                        Dom.createNotification(constantes.messages.ONE_ADMIN, constantes.ALERT_ERROR);
                         return false;
                     }
 
@@ -252,16 +255,16 @@ export class groupsVue {
                             // success
                             function (response) {
                                 if (response.body == "ok") {
-                                    Dom.createNotification(messages.GROUP_CREATED, 'alert-success');
+                                    Dom.createNotification(constantes.messages.GROUP_CREATED, constantes.ALERT_SUCCESS);
                                     this.getGroups();
                                 } else {
-                                    Dom.createNotification(response.body, 'alert-danger');
+                                    Dom.createNotification(response.body, constantes.ALERT_ERROR);
                                 }
                             },
                             // error
                             function (response) {
                                 console.log(response);
-                                Dom.createNotification(response.body, 'alert-danger');
+                                Dom.createNotification(response.body, constantes.ALERT_ERROR);
                             }
                         ).bind(this);
                 },

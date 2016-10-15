@@ -100,7 +100,7 @@
 
                     <div class="modal-footer">
                         <button v-if="!userIsLastMember() && !userIsLastAdmin()" @click.prevent="quitGroup" type="button" class="btn btn-warning pull-left">Quitter ce groupe</button>
-                        <button @click.prevent="deleteGroup" type="button" class="btn btn-danger pull-left">Supprimer ce groupe</button>
+                        <button @click.prevent="confirmDeleteGroup" type="button" class="btn btn-danger pull-left">Supprimer ce groupe</button>
                         <button @click.prevent="revertChanges" type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                         <button type="submit" class="btn btn-primary" v-if="$validation.valid">Enregistrer</button>
                     </div>

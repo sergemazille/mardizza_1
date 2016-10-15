@@ -83,7 +83,6 @@ export class Dom {
         $(".modal").modal('hide');
     }
 
-
     // animation
     static animations() {
         $.fn.extend({
