@@ -88,9 +88,9 @@
                                 {# invite button #}
                                 <button class="btn btn-success btn-block" @click.prevent="openInvitation()">Inviter un nouveau membre <span class="fa fa-user pull-right"></span></button>
                                 <div class="input-group" v-if="invitationOn">
-                                    <input type="email" placeholder="email de la personne" :value="" v-model="invitationEmail" class="form-control">
+                                    <input type="email" placeholder="email de la personne" :value="" v-model="mailTo" class="form-control">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-primary" type="button" @click.prevent="sendInvitation()">Envoyer</button>
+                                        <button class="btn btn-primary" type="button" @click.prevent="sendInvitation()">Envoyer &nbsp;<span class="fa fa-envelope-o"></span></button>
                                     </span>
                                 </div>
 

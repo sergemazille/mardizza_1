@@ -21,7 +21,7 @@ export class groupsVue {
                     csrf: '',
                     user: '',
                     invitationOn: false,
-                    invitationEmail: '',
+                    mailTo: [],
                 }
             },
             methods: {
@@ -161,7 +161,6 @@ export class groupsVue {
                         });
                 },
                 formDataIsValid(){
-
                     // test image size isn't greater than 1Mo and is an actual image
                     if (this.$els.fileinput.files[0]) {
 
@@ -217,8 +216,30 @@ export class groupsVue {
                     this.invitationOn = true;
                 },
                 sendInvitation(){
-                    // todo
-                    console.log(this.invitationEmail);
+                    let formData = new FormData();
+
+                    formData.append('csrf', this.csrf);
+                    formData.append('mailTo', this.mailTo);
+
+                    this.$http.post('/group/invitation', formData)
+                        .then(
+                            // success
+                            function (response) {
+                                if (response.body == "ok") {
+                                    Dom.hideModal();
+                                    Dom.createNotification(constantes.messages.INVITATION_SENT, constantes.ALERT_SUCCESS);
+                                    this.mailTo = [];
+                                } else {
+                                    Dom.createNotification('marche pas...', constantes.ALERT_ERROR);
+                                    // Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
+                                }
+                            },
+                            // error
+                            function (response) {
+                                console.log(response);
+                                Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
+                            }
+                        ).bind(this);
                 },
             },
             created(){

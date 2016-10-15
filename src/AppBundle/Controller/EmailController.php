@@ -3,36 +3,35 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class EmailController extends Controller
 {
-    public function indexAction($name)
+    public function groupInvitationAction(Request $request)
     {
+        $submittedToken = $request->get('csrf');
+        if(! $this->isCsrfTokenValid('group_token', $submittedToken)){
+            return $this->json("L'action a expirée");
+        }
+
+        $mailTo = $request->get('mailTo');
+
         $message = \Swift_Message::newInstance()
-            ->setSubject('Hello Email')
-            ->setFrom('send@example.com')
-            ->setTo('recipient@example.com')
+            ->setSubject('Invitation Mardizza')
+            ->setFrom('contact.mardizza@gmail.com')
+            ->setTo($mailTo)
             ->setBody(
                 $this->renderView(
-                // app/Resources/views/Emails/registration.html.twig
-                    'Emails/registration.html.twig',
-                    array('name' => $name)
+                    '@App/emails/group-invitation.html.twig'
                 ),
                 'text/html'
-            )
-            /*
-             * If you also want to include a plaintext version of the message
-            ->addPart(
-                $this->renderView(
-                    'Emails/registration.txt.twig',
-                    array('name' => $name)
-                ),
-                'text/plain'
-            )
-            */
-        ;
-        $this->get('mailer')->send($message);
+            );
 
-        return $this->render(...);
+        $emailSent = $this->get('mailer')->send($message);
+        if($emailSent){
+            return $this->json("ok");
+        }
+
+        return false;
     }
 }
