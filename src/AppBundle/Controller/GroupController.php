@@ -188,7 +188,7 @@ class GroupController extends Controller
             $group->setImage($imageName);
 
             // move image file to group images folder
-            $groupImagesDir = $this->container->getParameter('kernel.root_dir') . '\..\web\assets\images\group';
+            $groupImagesDir = $this->container->getParameter('kernel.root_dir') . '\..\web\assets\images\group/';
             $imageFile->move($groupImagesDir, $imageName);
         }
 
