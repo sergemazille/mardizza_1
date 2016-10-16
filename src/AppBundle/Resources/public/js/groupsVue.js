@@ -131,10 +131,10 @@ export class groupsVue {
                         .then(
                             // success
                             function (response) {
-                                if (response.body == "ok") {
+                                if (response.body.response == "ok") {
                                     // update image if it has been changed
                                     if (this.$els.fileinput.files[0]) {
-                                        this.group.imageUrl = 'assets/images/group/' + this.$els.fileinput.files[0].name;
+                                        this.group.imageUrl = 'assets/images/group/' + response.body.imageName;
                                     }
                                     this.newImageFlag = ""; // set variable back to empty for next changes
                                     Dom.hideModal();

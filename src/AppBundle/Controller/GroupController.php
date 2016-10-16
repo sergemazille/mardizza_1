@@ -18,12 +18,12 @@ class GroupController extends Controller
     public function quitGroupAction(Request $request, Group $group)
     {
         $submittedToken = $request->get('csrf');
-        if(! $this->isCsrfTokenValid('group_token', $submittedToken)){
+        if (!$this->isCsrfTokenValid('group_token', $submittedToken)) {
             return $this->json("L'action a expirée");
         }
 
         $user = $this->getUser();
-        if(!$user){
+        if (!$user) {
             return $this->redirectToRoute('login');
         }
 
@@ -41,12 +41,12 @@ class GroupController extends Controller
     public function deleteGroupAction(Request $request, Group $group)
     {
         $submittedToken = $request->get('csrf');
-        if(! $this->isCsrfTokenValid('group_token', $submittedToken)){
+        if (!$this->isCsrfTokenValid('group_token', $submittedToken)) {
             return $this->json("L'action a expirée");
         }
 
         $user = $this->getUser();
-        if(!$user){
+        if (!$user) {
             return $this->redirectToRoute('login');
         }
 
@@ -85,12 +85,12 @@ class GroupController extends Controller
     public function createGroupAction(Request $request)
     {
         $user = $this->getUser();
-        if(! $user){
+        if (!$user) {
             return $this->redirectToRoute('login');
         }
 
         $submittedToken = $request->get('csrf');
-        if (! $this->isCsrfTokenValid('group_token', $submittedToken)) {
+        if (!$this->isCsrfTokenValid('group_token', $submittedToken)) {
             return $this->json("L'action a expirée");
         }
 
@@ -134,13 +134,13 @@ class GroupController extends Controller
 
     public function updateGroupAction(Group $group, Request $request)
     {
-        if(! $this->getUser()){
+        if (!$this->getUser()) {
             return $this->redirectToRoute('login');
         }
 
         $submittedToken = $request->get('csrf');
 
-        if (! $this->isCsrfTokenValid('group_token', $submittedToken)) {
+        if (!$this->isCsrfTokenValid('group_token', $submittedToken)) {
             return $this->json("L'action a expirée");
         }
 
@@ -154,7 +154,7 @@ class GroupController extends Controller
             // check if users are members of the group
             foreach ($adminIds as $userId) {
                 $user = $userRepo->find($userId);
-                if (! $user || ! $group->getMembers()->contains($user)) {
+                if (!$user || !$group->getMembers()->contains($user)) {
                     return $this->json("Au moins un utilisateur n'est pas membre du groupe");
                 }
             }
@@ -172,23 +172,27 @@ class GroupController extends Controller
 
         // image management
         $imageFile = $request->files->get('image');
+        $imageName = "";
 
         if ($imageFile) {
             $mimeType = $imageFile->getMimeType();
 
-            if($mimeType != 'image/png' && $mimeType != 'image/jpeg' && $mimeType != 'image/gif'){
+            if ($mimeType != 'image/png' && $mimeType != 'image/jpeg' && $mimeType != 'image/gif') {
                 return $this->json("L'image doit être au format jpg, png ou gif");
             }
 
-            if($imageFile->getSize() > 100000){
+            if ($imageFile->getSize() > 100000) {
                 return $this->json("L'image ne doit pas faire plus de 1 Mo");
             }
 
-            $imageName = $imageFile->getClientOriginalName();
+            $imageOriginalName = $imageFile->getClientOriginalName();
+            $imageExtension = $imageFile->guessExtension();
+
+            $imageName = hash('md5', $imageOriginalName) . '.' . $imageExtension;
             $group->setImage($imageName);
 
             // move image file to group images folder
-            $groupImagesDir = $this->container->getParameter('kernel.root_dir') . '\..\web\assets\images\group/';
+            $groupImagesDir = $_SERVER['DOCUMENT_ROOT'] . '/assets/images/group/';
             $imageFile->move($groupImagesDir, $imageName);
         }
 
@@ -207,6 +211,9 @@ class GroupController extends Controller
         $em->flush();
 
         // return confirmation
-        return $this->json("ok");
+        return $this->json([
+            'response' => 'ok',
+            'imageName' => $imageName
+        ]);
     }
 }
