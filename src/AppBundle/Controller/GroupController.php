@@ -185,10 +185,10 @@ class GroupController extends Controller
                 return $this->json("L'image ne doit pas faire plus de 1 Mo");
             }
 
-            $imageOriginalName = $imageFile->getClientOriginalName();
+            $imageNameToHash = $imageFile->getClientOriginalName() . random_int(1,5);
             $imageExtension = $imageFile->guessExtension();
 
-            $imageName = hash('md5', $imageOriginalName) . '.' . $imageExtension;
+            $imageName = hash('md5', $imageNameToHash) . '.' . $imageExtension;
             $group->setImage($imageName);
 
             // move image file to group images folder
