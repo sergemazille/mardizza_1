@@ -14,8 +14,12 @@ class EmailController extends Controller
             return $this->json("L'action a expirée");
         }
 
-        $mailTo = $request->get('mailTo');
+        // create a validation token
+        $tokenManager = $this->get("security.csrf.token_manager");
+        $token = $tokenManager->refreshToken('group_invitation');
 
+        // send the actual invitation
+        $mailTo = $request->get('mailTo');
         $message = \Swift_Message::newInstance()
             ->setSubject('Invitation Mardizza')
             ->setFrom('contact.mardizza@gmail.com')
