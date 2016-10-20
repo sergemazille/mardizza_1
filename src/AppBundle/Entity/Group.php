@@ -50,7 +50,7 @@ class Group
     private $stamps;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Group", mappedBy="orders")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Order", mappedBy="group", cascade={"remove"})
      */
     private $orders;
 
