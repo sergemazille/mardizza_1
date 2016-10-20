@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OrderRepository")
  * @ORM\Table(name="`order`") // as a reserved word, 'order' is escaped
  */
 class Order
@@ -36,6 +36,11 @@ class Order
      * @ORM\Column(type="boolean")
      */
     private $isActive = true;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Group", inversedBy="orders")
+     */
+    private $group;
 
     /**
      * @return mixed
@@ -115,5 +120,21 @@ class Order
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
+    }
+
+    /**
+     * @return Group
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param Group $group
+     */
+    public function setGroup($group)
+    {
+        $this->group = $group;
     }
 }

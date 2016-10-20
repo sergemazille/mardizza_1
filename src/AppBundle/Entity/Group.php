@@ -50,6 +50,11 @@ class Group
     private $stamps;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Group", mappedBy="orders")
+     */
+    private $orders;
+
+    /**
      * Group constructor.
      * @param GroupService $groupService
      */
@@ -124,5 +129,21 @@ class Group
     public function setStamps($stamps)
     {
         $this->stamps = $stamps;
+    }
+
+    /**
+     * @return Order
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    /**
+     * @param Order $orders
+     */
+    public function setOrders($orders)
+    {
+        $this->orders = $orders;
     }
 }

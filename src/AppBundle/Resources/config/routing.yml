@@ -3,10 +3,12 @@ home:
     defaults: { _controller: AppBundle:Page:home }
     methods: [GET]
 
-order:
-    path: /order
+order_group:
+    path: /order/group/{id}
     defaults: { _controller: AppBundle:Page:order }
     methods: [GET]
+    requirements:
+        id: \d+
 
 account_create:
     path: /account/create

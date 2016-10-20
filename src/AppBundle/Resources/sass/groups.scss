@@ -13,6 +13,13 @@
       text-align: center;
       color: white;
 
+      .group-body{
+        &:hover {
+          cursor: pointer;
+          opacity: 0.85;
+        }
+      }
+
       .group-header {
         text-align: left;
 
@@ -21,6 +28,9 @@
           .fa{
             margin-top: 0;
           }
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
 
@@ -28,10 +38,6 @@
         margin-top: 0;
         font-family: 'Euphoria Script', cursive;
         font-size: 3em;
-      }
-
-      &:hover {
-        cursor: pointer;
       }
     }
   }

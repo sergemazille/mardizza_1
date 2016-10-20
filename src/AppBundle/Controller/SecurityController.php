@@ -13,8 +13,14 @@ class SecurityController extends Controller
         // already logged in users are sent directly to order page if they have only 1 group and to groups page if they have 0 or more than 1 group
         $user = $this->getUser();
         if ($user) {
-            $route = ($user->getGroups()->count() == 1) ? 'order' : 'group_list';
-            return $this->redirectToRoute($route);
+            if($user->getGroups()->count() == 1){
+                $userGroupId = $user->getGroups()->first()->getId();
+                return $this->redirectToRoute('order_group', [
+                    'id' => $userGroupId
+                ]);
+            }else{
+                return $this->redirectToRoute('group_list');
+            }
         }
 
         $authenticationUtils = $this->get('security.authentication_utils');

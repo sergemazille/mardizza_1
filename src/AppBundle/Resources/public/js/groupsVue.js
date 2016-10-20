@@ -241,6 +241,9 @@ export class groupsVue {
                             }
                         ).bind(this);
                 },
+                orderLink() {
+                    window.location = `/order/group/${this.group.id}`;
+                },
             },
             created(){
                 this.revertStateOnModalDismissal();

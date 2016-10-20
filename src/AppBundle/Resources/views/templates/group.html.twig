@@ -12,7 +12,7 @@
                         <p v-else><span>&nbsp;</span></p>
                     </div>
 
-                    <div class="group-body">
+                    <div class="group-body" @click="orderLink">
                         <h2>${ group.name }</h2>
                         <img :src="group.imageUrl" alt="image ${ group.name }" style="width: 150px; height: 150px">
                     </div>

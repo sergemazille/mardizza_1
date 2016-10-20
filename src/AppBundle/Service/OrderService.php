@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Group;
 use AppBundle\Entity\Order;
 use DateTime;
 use Doctrine\ORM\EntityManager;
@@ -20,7 +21,7 @@ class OrderService
 
     public function create()
     {
-        return $this->router->generate('order', [
+        return $this->router->generate('group_order', [
             'order' => $this->order,
         ]);
     }
@@ -42,17 +43,22 @@ class OrderService
         $this->em->flush();
     }
 
-    public function getOrder()
+    /**
+     * @param Group $group
+     * @return Order
+     */
+    public function getOrder(Group $group) : Order
     {
         $orderRepository = $this->em->getRepository('AppBundle:Order');
         $today = new DateTime('TODAY');
 
         // check if there's already an order today
-        $todaysOrder = $orderRepository->findOneBy(['createdAt' => $today]);
+        $todaysOrder = $orderRepository->findOneByDateAndGroupId($today, $group->getId());
 
         // else create a new one
         if(! $todaysOrder){
             $todaysOrder = $this->order;
+            $todaysOrder->setGroup($group);
             $todaysOrder->setCreatedAt($today);
             $todaysOrder->setUpdatedAt($today);
 
@@ -63,9 +69,15 @@ class OrderService
         return $todaysOrder;
     }
 
-    public function getOrderRef()
+    /**
+     * @param Group $group
+     * @return string
+     */
+    public function getOrderRef(Group $group) : string
     {
-        $order = $this->getOrder();
-        return $order->getCreatedAt()->format('Ymd');
+        $order = $this->getOrder($group);
+
+        // groupId is added to order ref in order to differentiate orders by groups
+        return $order->getCreatedAt()->format('Ymd') . $group->getId();
     }
 }
