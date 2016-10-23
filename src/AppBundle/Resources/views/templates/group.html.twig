@@ -3,12 +3,10 @@
         <div class="group">
             <div class="row">
 
-                <div class="group-selector"
-                     :style="{backgroundColor: group.color}"
-                >
+                <div class="group-selector" :style="{backgroundColor: group.color}">
                     <div class="group-header">
-                        {# modal trigger #}
-                        <a data-toggle="modal" data-target="#${group.id}" v-if="group.userIsAdmin" @click.prevent="saveState"><span class="fa fa-cog fa-2x animated"></span></a>
+
+                        <a v-if="group.userIsAdmin" href="/group/${group.id}"><span class="fa fa-cog fa-2x animated"></span></a>
                         <p v-else><span>&nbsp;</span></p>
                     </div>
 
@@ -17,10 +15,6 @@
                         <img :src="group.imageUrl" alt="image ${ group.name }" style="width: 150px; height: 150px">
                     </div>
                 </div>
-
-                {# update group modals #}
-                {% include 'AppBundle:partials:_group_config_modal.html.twig' %}
-                {% include 'AppBundle:partials:_group_delete_confirmation_modal.html.twig' %}
             </div>
         </div>
     </div>

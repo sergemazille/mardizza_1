@@ -68,6 +68,13 @@ group_list:
     defaults: { _controller: AppBundle:Page:groups }
     methods: [GET]
 
+group_config:
+    path: /group/{id}
+    defaults: { _controller: AppBundle:Page:groupConfig }
+    methods: [GET]
+    requirements:
+        id: \d+
+
 get_groups:
     path: /get/groups
     defaults: { _controller: AppBundle:Group:getGroups }

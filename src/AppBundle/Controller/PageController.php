@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Group;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class PageController extends Controller
 {
@@ -57,6 +58,27 @@ class PageController extends Controller
 
         return $this->render('@App/groups.html.twig', [
             'user' => $user,
+        ]);
+    }
+
+    public function groupConfigAction(Group $group)
+    {
+        // anonymous users are sent back to login form
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        // users that are not group admin can't access this page
+        if(! $group->getAdmins()->contains($user)){
+            return $this->createAccessDeniedException();
+        }
+
+        $groupReadModel = $this->get('mardizza.group_service')->getGroup($group);
+
+        return $this->render('@App/group-config.html.twig', [
+            'user' => $user,
+            'group' => $groupReadModel,
         ]);
     }
 }

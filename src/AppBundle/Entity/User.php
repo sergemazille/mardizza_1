@@ -47,6 +47,11 @@ class User implements UserInterface
     private $groups;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $stampNumber = 0;
+
+    /**
      * User constructor.
      * @param EntityManager $em
      */
@@ -124,6 +129,22 @@ class User implements UserInterface
     public function getGroups()
     {
         return $this->groups;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStampNumber()
+    {
+        return $this->stampNumber;
+    }
+
+    /**
+     * @param int $stampNumber
+     */
+    public function setStampNumber($stampNumber)
+    {
+        $this->stampNumber = $stampNumber;
     }
 
     public function getSalt()

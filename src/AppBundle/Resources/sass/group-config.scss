@@ -1,0 +1,77 @@
+@import 'variables';
+
+#group-config {
+  background-color: $light-grey;
+  padding-top: $complete-navbar-height;
+
+  .group-container {
+    background-color: $grey;
+    border-radius: 5px;
+    padding: 24px;
+
+    .image-group {
+      .group-thumbnail {
+        border: 1px solid $dark-grey;
+        border-radius: 5px;
+        padding: 5px;
+        margin-bottom: 5px;
+        width: 120px;
+      }
+      label {
+        display: block;
+        width: 120px;
+      }
+    }
+
+    .color-block {
+      display: block;
+      width: 120px;
+      height: 120px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .group-label {
+      font-weight: bold;
+      font-size: 1em;
+      margin: 12px 0;
+    }
+
+    table {
+      tr {
+        th {
+          padding: 0 0 5px 0;
+        }
+        td {
+          input {
+            padding-left: 5px;
+          }
+        }
+      }
+    }
+
+    .invitation-group, .config-footer {
+      margin-top: 2em;
+    }
+
+    .config-footer {
+      button {
+        &.btn-submit{
+          margin-left: 1em;
+        }
+        &.group-delete{
+          margin-right: 1em;
+        }
+      }
+    }
+  }
+
+  // fix Firefox icons bug
+  button, label{
+    white-space: inherit ! important;
+    span.fa {
+      margin-top: 0.22em;
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <div id="group-config" :group="{{ group|json_encode }}" xmlns="http://www.w3.org/1999/html">
+
+        <div class="container">
+            <div class="group-container">
+                <h1>${ group.name }</h1>
+
+                <validator name="validation">
+                    <form novalidate :id="group.id" action="/group/update/${group.id}" method="POST"
+                          @submit.prevent="updateGroup()"
+                          enctype="multipart/form-data">
+                        <input type="hidden" name="csrf" :value="`{{ csrf_token('group_token') }}`" v-model="csrf">
+
+                        <div class="errors">
+                            <p v-if="$validation.groupname.required">Le nom du groupe ne peut pas être vide</p>
+                            <p v-if="$validation.groupname.maxlength">Le nom du groupe doit contenir maximum 14
+                                caractères</p>
+                        </div>
+
+                        <div class="row">
+
+                            {# Group specific block #}
+                            <div class="col-xs-12 col-sm-6">
+                                {# name #}
+                                <div class="form-group">
+                                    <label>Nom du groupe&nbsp;:</label>
+                                    <input type="text" v-model="group.name" class="form-control" name="name"
+                                           v-validate:groupname="{ required: true, maxlength: 14 }">
+                                </div>
+                                <div class="row">
+                                    {# image #}
+                                    <div class="image-group col-sm-4">
+                                        <p class="group-label">Image du groupe&nbsp;:</p>
+
+                                        <img :src="group.imageUrl" alt="image ${ group.name }"
+                                             class="group-thumbnail">
+                                        <label class="btn btn-success btn-file form-control">
+                                            Modifier<span class="fa fa-picture-o pull-right"></span>
+                                            <input type="file" class="hidden" name="image" v-el:fileInput
+                                                   v-model="newImageFlag"
+                                                   accept="image/jpeg, image/gif, image/png">
+                                        </label>
+                                    </div>
+                                    {# color #}
+                                    <div class="form-group col-sm-4">
+                                        <label class="group-label">Couleur du groupe&nbsp;:</label>
+                                        <input type="color" class="color-block" v-model="group.color" name="color"
+                                               :style="{backgroundColor: group.color}">
+                                    </div>
+                                    {# fidelity card stamps management #}
+                                    <div class="form-group col-sm-4">
+                                        <label class="group-label">Nombre de tampons&nbsp;:</label>
+                                        <input type="number" v-model="group.stamps" class="form-control" name="stamps">
+                                    </div>
+                                </div>
+                            </div>
+
+                            {# members #}
+                            <div class="col-xs-12 col-sm-6">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr class="row">
+                                        <th class="col-xs-2 text-center">Admin</th>
+                                        <th class="col-xs-8">Membre</th>
+                                        <th class="col-xs-2">Tampons</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="row" v-for="member in group.members">
+                                        <td class="col-xs-2 text-center">
+                                            <input type="checkbox" :checked="member.isAdmin" value="${member.id}"
+                                                   v-model="adminIds"
+                                                   name="memberIds"
+                                            >
+                                        </td>
+                                        <td class="col-xs-8">${member.username}</td>
+                                        <td class="col-xs-2">
+                                            <input type="number" value="${member.stampNumber}"
+                                                   name="memberStampNumber"
+                                            >
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        {# invite button #}
+                        <section class="invitation-group">
+                            <button class="btn btn-success btn-block" @click.prevent="openInvitation()" disabled>
+                                Inviter un nouveau membre
+                                <span class="fa fa-user pull-right"></span>
+                            </button>
+
+                            <div class="input-group" v-if="invitationOn">
+                                <input type="email" placeholder="email de la personne" :value="" v-model="mailTo"
+                                       class="form-control">
+                                <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" @click.prevent="sendInvitation()" disabled>
+                                Envoyer
+                                <span class="fa fa-envelope-o"></span>
+                            </button>
+                        </span>
+                            </div>
+                        </section>
+
+                        {# validation buttons #}
+                        <section class="config-footer clearfix">
+                            <button type="button" class="btn btn-danger pull-left group-delete" data-toggle="modal" data-target="#confirmation_delete">
+                                Supprimer ce groupe
+                            </button>
+                            <button v-if="!userIsLastMember() && !userIsLastAdmin()"
+                                    type="button" class="btn btn-warning pull-left" data-toggle="modal" data-target="#confirmation_leave">
+                                Quitter ce groupe
+                            </button>
+                            <button @click.prevent="updateGroup()" class="btn btn-primary pull-right btn-submit" v-if="$validation.valid">
+                                Enregistrer
+                            </button>
+                            <a href="{{ path('group_list') }}" class="btn btn-default pull-right">
+                                Annuler
+                            </a>
+                        </section>
+                    </form>
+                </validator>
+            </div>
+        </div>
+
+        {% include 'AppBundle:partials:_group_delete_confirmation_modal.html.twig' %}
+        {% include 'AppBundle:partials:_group_leave_confirmation_modal.html.twig' %}
+
+    </div>
+
+{% endblock %}

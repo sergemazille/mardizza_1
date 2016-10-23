@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Group;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class GroupController extends Controller
@@ -35,6 +36,7 @@ class GroupController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
+        // return confirmation
         return $this->json("ok");
     }
 
@@ -60,6 +62,9 @@ class GroupController extends Controller
         $em->remove($group);
         $em->flush();
 
+        // add confirmation message
+        $this->addFlash('success', "Le groupe a bien été supprimé.");
+        // return confirmation
         return $this->json("ok");
     }
 
@@ -79,7 +84,8 @@ class GroupController extends Controller
 
         $groups->add($group);
         $this->getDoctrine()->getManager()->flush();
-        return $this->json(true);
+        // return confirmation
+        return $this->json("ok");
     }
 
     public function createGroupAction(Request $request)
@@ -108,6 +114,7 @@ class GroupController extends Controller
         $em->persist($group);
         $em->flush();
 
+        // return confirmation
         return $this->json("ok");
     }
 
@@ -118,18 +125,22 @@ class GroupController extends Controller
         }
 
         $user = $this->getUser();
-        $groups = $user->getGroups();
+        $userGroups = $user->getGroups();
 
         // return false if group isn't in user's groups
-        if (!$groups->contains($group)) {
+        if (!$userGroups->contains($group)) {
             return $this->json(false);
         }
 
-        $groups->removeElement($group);
+        $userGroups->removeElement($group);
 
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->json(true);
+        // add confirmation message
+        $this->addFlash('success', "Vous avez bien quitté le groupe.");
+
+        // return confirmation
+        return $this->json("ok");
     }
 
     public function updateGroupAction(Group $group, Request $request)
@@ -207,13 +218,16 @@ class GroupController extends Controller
         $stamps = ($stamps == '') ? 0 : $stamps;
         $group->setStamps($stamps);
 
+        // update users stamps number
+        // TODO
+
         // save updates
         $em->flush();
 
+        // add confirmation message
+        $this->addFlash('success', "Le groupe a bien été mis à jour.");
+
         // return confirmation
-        return $this->json([
-            'response' => 'ok',
-            'imageName' => $imageName
-        ]);
+        return $this->json("ok");
     }
 }

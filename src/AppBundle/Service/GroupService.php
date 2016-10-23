@@ -37,6 +37,18 @@ class GroupService
         return $groupItems;
     }
 
+    public function getGroup(Group $group) : array
+    {
+        $groupItem['id'] = $group->getId();
+        $groupItem['name'] = $group->getName();
+        $groupItem['color'] = $group->getColor();
+        $groupItem['stamps'] = $group->getStamps();
+        $groupItem['members'] = $this->getMembers($group);
+        $groupItem['imageUrl'] = "/assets/images/group/" . $group->getImage();
+
+        return $groupItem;
+    }
+
     public function getRandomColor() : string
     {
         $colors = [
@@ -68,6 +80,7 @@ class GroupService
         foreach ($members as $member){
             $memberItem['id'] = $member->getId();
             $memberItem['username'] = $member->getUsername();
+            $memberItem['stampNumber'] = $member->getStampNumber();
             $memberItem['isAdmin'] = $group->getAdmins()->contains($member);
 
             $memberItems[] = $memberItem;

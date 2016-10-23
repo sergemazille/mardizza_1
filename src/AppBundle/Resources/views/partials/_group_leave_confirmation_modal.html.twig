@@ -1,5 +1,5 @@
 {# modal confirmation #}
-<div id="confirmation_delete" class="modal fade" role="dialog" tabindex="-1">
+<div id="confirmation_leave" class="modal fade" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
 
         <div class="modal-content">
@@ -11,14 +11,14 @@
                     </div>
 
                     <div class="col-xs-11">
-                        <p class="h4" id="confirm-text">Attention, vous vous apprêter à supprimer le groupe.<br>Cette action est irréversible.</p>
+                        <p class="h4" id="confirm-text">Attention, vous vous apprêter à quitter le groupe.<br>Cette action est irréversible.</p>
                     </div>
                 </div>
             </div>
 
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default">Annuler</button>
-                <button type="button" @click="deleteGroup()" class="btn btn-danger">Confirmer</button>
+                <button type="button" @click="quitGroup()" class="btn btn-danger">Confirmer</button>
             </div>
 
         </div>
