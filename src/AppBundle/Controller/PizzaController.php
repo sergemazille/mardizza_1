@@ -9,19 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PizzaController extends Controller
 {
-    /**
-     * @param Pizza $pizza
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function getPizzaAction(Pizza $pizza) : Response
-    {
-        $pizza = $this->get('mardizza.pizza_service')->getPizzaWithFavorite($pizza->getId());
-
-        return $this->render('@App/partials/_pizza_detail_modal.html.twig', [
-            'pizza' => $pizza,
-        ]);
-    }
-
     public function getPizzasAction()
     {
         $pizzas = $this->get('mardizza.pizza_service')->getPizzasWithFavorites();
