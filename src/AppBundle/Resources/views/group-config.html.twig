@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <div id="group-config" :group="{{ group|json_encode }}" xmlns="http://www.w3.org/1999/html">
+    <div id="group-config" :group="{{ group|json_encode }}">
 
         <div class="container">
             <div class="group-container">
@@ -15,7 +15,7 @@
                         <input type="hidden" name="csrf" :value="`{{ csrf_token('group_token') }}`" v-model="csrf">
 
                         <div class="errors">
-                            <p v-if="$validation.groupname.required">Le nom du groupe ne peut pas être vide</p>
+                            <p v-if="$validation.groupname.required">Le groupe doit avoir un nom</p>
                             <p v-if="$validation.groupname.maxlength">Le nom du groupe doit contenir maximum 14
                                 caractères</p>
                         </div>
@@ -71,15 +71,16 @@
                                     <tbody>
                                     <tr class="row" v-for="member in group.members">
                                         <td class="col-xs-2 text-center">
-                                            <input type="checkbox" :checked="member.isAdmin" value="${member.id}"
+                                            <input type="checkbox" :checked="member.isAdmin" :value="member.id"
                                                    v-model="adminIds"
                                                    name="memberIds"
                                             >
                                         </td>
                                         <td class="col-xs-8">${member.username}</td>
                                         <td class="col-xs-2">
-                                            <input type="number" value="${member.stampNumber}"
+                                            <input type="number" :value="member.stampNumber"
                                                    name="memberStampNumber"
+                                                   v-model="member.stampNumber"
                                             >
                                         </td>
                                     </tr>
@@ -87,7 +88,6 @@
                                 </table>
                             </div>
                         </div>
-
 
                         {# invite button #}
                         <section class="invitation-group">

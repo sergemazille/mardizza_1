@@ -74,4 +74,16 @@
       margin-top: 0.22em;
     }
   }
+
+  .validation-error {
+    color: red;
+    font-size: 1.4em;
+    padding: 1em;
+  }
+
+  .errors p {
+    color: red;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
 }

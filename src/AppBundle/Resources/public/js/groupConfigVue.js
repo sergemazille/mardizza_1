@@ -12,7 +12,6 @@ export class groupConfigVue {
             data: {
                 csrf: '',
                 adminIds: [],
-                user: '',
             },
             methods: {
                 userIsLastMember(){
@@ -30,11 +29,14 @@ export class groupConfigVue {
                     // form submission
                     let formData = new FormData();
 
+                    console.dir(this.group.members);
+
                     formData.append('csrf', this.csrf);
                     formData.append('image', this.$els.fileinput.files[0]);
                     formData.append('name', this.group.name);
                     formData.append('color', this.group.color);
                     formData.append('stamps', this.group.stamps);
+                    formData.append('members', JSON.stringify(this.group.members));
                     formData.append('adminIds', this.adminIds);
 
                     this.$http.post(`/group/update/${this.group.id}`, formData)

@@ -13,7 +13,7 @@
       text-align: center;
       color: white;
 
-      .group-body{
+      .group-body {
         &:hover {
           cursor: pointer;
           opacity: 0.85;
@@ -25,7 +25,7 @@
 
         a {
           color: white;
-          .fa{
+          .fa {
             margin-top: 0;
           }
           &:hover {
@@ -43,63 +43,50 @@
   }
 
   // fix Firefox icons bug
-  button, label{
+  button, label {
     white-space: inherit ! important;
     span.fa {
       margin-top: 0.22em;
     }
   }
 
-.btn-block{
-  margin: 1.2em 0;
-}
-
-.config{
-  .form-group{
-    p{
-      font-weight: bold;
-    }
-  }
-}
-
-.members {
-  padding-right: 30px;
-
-  .table-header {
-    margin-bottom: 0.7em;
-    border-bottom: 1px solid $dark-grey;
+  .btn-block {
+    margin: 1.2em 0;
   }
 
-  .member {
-    .form-group{
-      margin: 0;
-      label{
-        font-weight: 200;
-        line-height: 0.8em;
+  .config {
+    .form-group {
+      p {
+        font-weight: bold;
       }
     }
+  }
 
-    label {
-      padding: 0;
+  .members {
+    padding-right: 30px;
+
+    .table-header {
+      margin-bottom: 0.7em;
+      border-bottom: 1px solid $dark-grey;
     }
 
-    input {
-      margin: 0 1.5em;
-      text-align: right;
+    .member {
+      .form-group {
+        margin: 0;
+        label {
+          font-weight: 200;
+          line-height: 0.8em;
+        }
+      }
+
+      label {
+        padding: 0;
+      }
+
+      input {
+        margin: 0 1.5em;
+        text-align: right;
+      }
     }
   }
-}
-
-.modal-content {
-  .validation-error {
-    color: red;
-    font-size: 1.4em;
-    padding: 1em;
-  }
-
-  .errors p {
-    color: red;
-    font-size: 1.2em;
-  }
-}
 }

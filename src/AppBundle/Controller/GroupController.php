@@ -219,7 +219,11 @@ class GroupController extends Controller
         $group->setStamps($stamps);
 
         // update users stamps number
-        // TODO
+        $members = json_decode($request->get('members'));
+        foreach($members as $member){
+            $user = $userRepo->find($member->id);
+            $user->setStampNumber($member->stampNumber);
+        }
 
         // save updates
         $em->flush();
