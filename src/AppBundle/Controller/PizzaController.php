@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Pizza;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 
 class PizzaController extends Controller
 {
