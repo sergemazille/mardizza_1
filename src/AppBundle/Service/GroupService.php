@@ -29,7 +29,7 @@ class GroupService
             $groupItem['stamps'] = $group->getStamps();
             $groupItem['userIsAdmin'] = $group->getAdmins()->contains($user);
             $groupItem['members'] = $this->getMembers($group);
-            $groupItem['imageUrl'] = "/assets/images/group/" . $group->getImage();
+            $groupItem['imageUrl'] = "/assets/files/images/" . $group->getImage();
 
             $groupItems[] = $groupItem;
         }
@@ -44,7 +44,7 @@ class GroupService
         $groupItem['color'] = $group->getColor();
         $groupItem['stamps'] = $group->getStamps();
         $groupItem['members'] = $this->getMembers($group);
-        $groupItem['imageUrl'] = "/assets/images/group/" . $group->getImage();
+        $groupItem['imageUrl'] = "/assets/files/images/" . $group->getImage();
 
         return $groupItem;
     }

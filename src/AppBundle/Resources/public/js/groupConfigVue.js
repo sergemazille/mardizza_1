@@ -12,6 +12,7 @@ export class groupConfigVue {
             data: {
                 csrf: '',
                 adminIds: [],
+                tmpImage: '',
             },
             methods: {
                 userIsLastMember(){
@@ -20,16 +21,27 @@ export class groupConfigVue {
                 userIsLastAdmin(){
                     return this.adminIds.length <= 1;
                 },
+                updateImageThumbnail() {
+                    let that = this;
+                    if (this.$els.fileinput.files[0]) {
+                        if(this.imageIsValid()) {
+                            let image = this.$els.fileinput.files[0];
+                            let reader  = new FileReader();
+                            reader.readAsDataURL(image);
+                            reader.onloadend = function () {
+                                that.group.imageUrl = reader.result;
+                            };
+                        }
+                    }
+                },
                 updateGroup() {
-                    this.submitForm();
-                    // TODO
-                    // if nothing has changed the form isn't submitted
+                    if(this.formDataIsValid()){
+                        this.submitForm();
+                    }
                 },
                 submitForm(){
                     // form submission
                     let formData = new FormData();
-
-                    console.dir(this.group.members);
 
                     formData.append('csrf', this.csrf);
                     formData.append('image', this.$els.fileinput.files[0]);
@@ -43,11 +55,9 @@ export class groupConfigVue {
                         .then(
                             // success
                             function (response) {
-                                if (response.data == "ok") {
+                                if (response) {
                                     // redirect back to user groups
                                     window.location = '/groups';
-                                } else {
-                                    Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
                                 }
                             },
                             // error
@@ -55,6 +65,39 @@ export class groupConfigVue {
                                 Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
                             }
                         ).bind(this);
+                },
+                formDataIsValid(){
+                    // test image size and mime type
+                    if (this.$els.fileinput.files[0]) {
+                        if(! this.imageIsValid()) {
+                            return false;
+                        }
+                    }
+
+                    // test there's at least one admin
+                    if (this.adminIds.length <= 0) {
+                        Dom.createNotification(constantes.messages.ONE_ADMIN, constantes.ALERT_ERROR);
+                        return false;
+                    }
+
+                    // if every test is valid then send ok to keep going on with form submission
+                    return true;
+                },
+                imageIsValid() {
+                    let imageSize = this.$els.fileinput.files[0].size;
+                    if (imageSize > 100000) {
+                        Dom.createNotification(constantes.messages.IMAGE_SIZE, constantes.ALERT_ERROR);
+                        return false;
+                    }
+
+                    let imageMimeType = this.$els.fileinput.files[0].type;
+                    if (imageMimeType != 'image/png' && imageMimeType != 'image/jpeg' && imageMimeType != 'image/gif') {
+                        Dom.createNotification(constantes.messages.IMAGE_FORMAT, constantes.ALERT_ERROR);
+                        return false;
+                    }
+
+                    // if image is valid then return true
+                    return true;
                 },
                 quitGroup(){
                     let formData = new FormData();
@@ -100,156 +143,12 @@ export class groupConfigVue {
                             }
                         ).bind(this);
                 },
-                revertChanges(){
-                    console.log('hello');
-
+            },
+            watch : {
+                'tmpImage' : function(){
+                    this.updateImageThumbnail();
                 }
             }
         });
-
-        // Vue.component('group', {
-        //     template: '#group-template',
-        //     props: ['group'],
-        //     data(){
-        //         return {
-        //             tempName: this.group.name,
-        //             tempColor: this.group.color,
-        //             tempStamps: this.group.stamps,
-        //             tempImageUrl: this.group.imageUrl,
-        //             tempAdminIds: this.adminIds,
-        //             newImageFlag: "", // used to check if image input has been changed or not
-        //             adminIds: [],
-        //             csrf: '',
-        //             user: '',
-        //             invitationOn: false,
-        //             mailTo: [],
-        //         }
-        //     },
-        //     methods: {
-        //         revertChanges() {
-        //             this.group.name = this.tempName;
-        //             this.group.color = this.tempColor;
-        //             this.group.stamps = this.tempStamps;
-        //             this.group.imageUrl = this.tempImageUrl;
-        //             // this.adminIds = this.tempAdminIds;
-        //         },
-        //         saveState() {
-        //             this.tempName = this.group.name;
-        //             this.tempColor = this.group.color;
-        //             this.tempStamps = this.group.stamps;
-        //             this.tempImageUrl = this.group.imageUrl;
-        //             this.tempAdminIds = this.adminIds;
-        //         },
-        //         getImageFromImageUrl(imageUrl){
-        //             let tmp = imageUrl.split('/');
-        //             return tmp.slice(-1).pop();
-        //         },
-        //         stateHasChanged(){
-        //             return (this.group.name != this.tempName ||
-        //             this.group.color != this.tempColor ||
-        //             this.group.stamps != this.tempStamps ||
-        //             this.group.imageUrl != this.tempImageUrl ||
-        //             this.adminIds != this.tempAdminIds ||
-        //             this.newImageFlag != '');
-        //         },
-
-        //         showConfirmation(){
-        //             // show confirmation modal
-        //             $("#confirmation_modal_"+this.group.id).modal("show");
-        //         },
-
-        //         createGroup() {
-        //             $.post("/group/create")
-        //                 .done(function () {
-        //                     Dom.createNotification('Le groupe a bien été créé', constantes.ALERT_SUCCESS);
-        //                 })
-        //                 .error(function (data) {
-        //                     console.log(data);
-        //                     Dom.createNotification(data, constantes.ALERT_ERROR);
-        //                 });
-        //         },
-        //         formDataIsValid(){
-        //             // test image size isn't greater than 1Mo and is an actual image
-        //             if (this.$els.fileinput.files[0]) {
-        //
-        //                 let imageSize = this.$els.fileinput.files[0].size;
-        //                 if (imageSize > 100000) {
-        //                     Dom.createNotification(constantes.messages.IMAGE_SIZE, constantes.ALERT_ERROR);
-        //                     return false;
-        //                 }
-        //
-        //                 let imageMimeType = this.$els.fileinput.files[0].type;
-        //                 if (imageMimeType != 'image/png' && imageMimeType != 'image/jpeg' && imageMimeType != 'image/gif') {
-        //                     Dom.createNotification(constantes.messages.IMAGE_FORMAT, constantes.ALERT_ERROR);
-        //                     return false;
-        //                 }
-        //             }
-        //
-        //             // test there's at least one admin
-        //             if (this.adminIds.length <= 0) {
-        //                 Dom.createNotification(constantes.messages.ONE_ADMIN, constantes.ALERT_ERROR);
-        //                 return false;
-        //             }
-        //
-        //             // if every test is valid then send ok to keep going on with form submission
-        //             return true;
-        //         },
-        //         // revert changes on modal dismissal if nothing has been saved
-        //         revertStateOnModalDismissal(){
-        //             let self = this;
-        //             vm.$nextTick(function () {
-        //
-        //                 // revert when click outside modal content
-        //                 $(".modal.fade").on('click', function (e) {
-        //                     if (e.target == this) {
-        //                         self.revertChanges();
-        //                     }
-        //                 });
-        //
-        //                 // revert when ESC key pressed
-        //                 $(document).keyup(function (e) {
-        //                     if (e.keyCode == 27) { // escape key maps to keycode `27`
-        //                         self.revertChanges();
-        //                     }
-        //                 });
-        //             });
-        //         },
-        //         openInvitation(){
-        //             this.invitationOn = true;
-        //         },
-        //         sendInvitation(){
-        //             let formData = new FormData();
-        //
-        //             formData.append('csrf', this.csrf);
-        //             formData.append('mailTo', this.mailTo);
-        //
-        //             this.$http.post('/group/invitation', formData)
-        //                 .then(
-        //                     // success
-        //                     function (response) {
-        //                         if (response.body == "ok") {
-        //                             Dom.hideModal();
-        //                             Dom.createNotification(constantes.messages.INVITATION_SENT, constantes.ALERT_SUCCESS);
-        //                             this.mailTo = [];
-        //                         } else {
-        //                             Dom.createNotification('marche pas...', constantes.ALERT_ERROR);
-        //                             // Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
-        //                         }
-        //                     },
-        //                     // error
-        //                     function (response) {
-        //                         console.log(response);
-        //                         Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
-        //                     }
-        //                 ).bind(this);
-        //         },
-        //         orderLink() {
-        //             window.location = `/order/group/${this.group.id}`;
-        //         },
-        //     },
-        //     created(){
-        //         this.revertStateOnModalDismissal();
-        //     }
-        // });
     }
 }

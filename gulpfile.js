@@ -56,7 +56,6 @@ gulp.task('concat-css', ['sass'], function () {
 gulp.task('images', function () {
     return gulp.src('./src/AppBundle/Resources/public/images/**/*.*')
         .pipe(gulp.dest('./web/assets/images'));
-
 });
 
 // Watches

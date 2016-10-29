@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Group;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class GroupController extends Controller
@@ -20,7 +19,8 @@ class GroupController extends Controller
     {
         $submittedToken = $request->get('csrf');
         if (!$this->isCsrfTokenValid('group_token', $submittedToken)) {
-            return $this->json("L'action a expirée");
+            $this->addFlash('error', "L'action a expirée");
+            throw $this->createNotFoundException();
         }
 
         $user = $this->getUser();
@@ -44,7 +44,8 @@ class GroupController extends Controller
     {
         $submittedToken = $request->get('csrf');
         if (!$this->isCsrfTokenValid('group_token', $submittedToken)) {
-            return $this->json("L'action a expirée");
+            $this->addFlash('error', "L'action a expirée.");
+            throw $this->createNotFoundException();
         }
 
         $user = $this->getUser();
@@ -64,14 +65,17 @@ class GroupController extends Controller
 
         // add confirmation message
         $this->addFlash('success', "Le groupe a bien été supprimé.");
+
         // return confirmation
         return $this->json("ok");
     }
 
+    // TODO: invitation process:
     public function addToGroupAction(Group $group)
     {
         if (!$group) {
-            throw $this->createNotFoundException('Aucun groupe trouvé.');
+            $this->addFlash('error', "Aucun groupe trouvé.");
+            throw $this->createNotFoundException();
         }
 
         $user = $this->getUser();
@@ -79,11 +83,13 @@ class GroupController extends Controller
 
         // check if group isn't already in user's groups
         if ($groups->contains($group)) {
-            return $this->json(false);
+            $this->addFlash('error', "L'utilisateur fait déjà partie du groupe.");
+            throw $this->createNotFoundException();
         }
 
         $groups->add($group);
         $this->getDoctrine()->getManager()->flush();
+
         // return confirmation
         return $this->json("ok");
     }
@@ -97,7 +103,8 @@ class GroupController extends Controller
 
         $submittedToken = $request->get('csrf');
         if (!$this->isCsrfTokenValid('group_token', $submittedToken)) {
-            return $this->json("L'action a expirée");
+            $this->addFlash('error', "L'action a expirée.");
+            throw $this->createNotFoundException();
         }
 
         // group creation
@@ -121,7 +128,8 @@ class GroupController extends Controller
     public function removeFromGroupAction(Group $group)
     {
         if (!$group) {
-            throw $this->createNotFoundException('Aucun groupe trouvé.');
+            $this->addFlash('error', "Aucun groupe trouvé.");
+            throw $this->createNotFoundException();
         }
 
         $user = $this->getUser();
@@ -129,7 +137,8 @@ class GroupController extends Controller
 
         // return false if group isn't in user's groups
         if (!$userGroups->contains($group)) {
-            return $this->json(false);
+            $this->addFlash('error', "L'utilisateur ne fait pas partie du groupe.");
+            throw $this->createAccessDeniedException();
         }
 
         $userGroups->removeElement($group);
@@ -150,9 +159,9 @@ class GroupController extends Controller
         }
 
         $submittedToken = $request->get('csrf');
-
         if (!$this->isCsrfTokenValid('group_token', $submittedToken)) {
-            return $this->json("L'action a expirée");
+            $this->addFlash('error', "L'action a expirée.");
+            throw $this->createNotFoundException();
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -166,7 +175,8 @@ class GroupController extends Controller
             foreach ($adminIds as $userId) {
                 $user = $userRepo->find($userId);
                 if (!$user || !$group->getMembers()->contains($user)) {
-                    return $this->json("Au moins un utilisateur n'est pas membre du groupe");
+                    $this->addFlash('error', "Au moins un utilisateur n'est pas membre du groupe.");
+                    throw $this->createAccessDeniedException();
                 }
             }
 
@@ -183,28 +193,18 @@ class GroupController extends Controller
 
         // image management
         $imageFile = $request->files->get('image');
-        $imageName = "";
 
         if ($imageFile) {
-            $mimeType = $imageFile->getMimeType();
+            $imageValidator = $this->get('mardizza.image_validator');
+            $imageValidator->setImageFile($imageFile);
 
-            if ($mimeType != 'image/png' && $mimeType != 'image/jpeg' && $mimeType != 'image/gif') {
-                return $this->json("L'image doit être au format jpg, png ou gif");
+            if(! $imageValidator->imageIsValid()){
+                $this->addFlash('error', $imageValidator->getMessage());
+                throw $this->createAccessDeniedException();
             }
 
-            if ($imageFile->getSize() > 100000) {
-                return $this->json("L'image ne doit pas faire plus de 1 Mo");
-            }
-
-            $imageNameToHash = $imageFile->getClientOriginalName() . random_int(1,5);
-            $imageExtension = $imageFile->guessExtension();
-
-            $imageName = hash('md5', $imageNameToHash) . '.' . $imageExtension;
+            $imageName = $this->get('mardizza.image_service')->saveImage($imageFile);
             $group->setImage($imageName);
-
-            // move image file to group images folder
-            $groupImagesDir = $_SERVER['DOCUMENT_ROOT'] . '/assets/images/group/';
-            $imageFile->move($groupImagesDir, $imageName);
         }
 
         // update remaining data

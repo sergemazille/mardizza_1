@@ -30,6 +30,12 @@ services:
         class: AppBundle\Security\LoginFormAuthenticator
         autowire: true
 
+    mardizza.image_validator:
+        class: AppBundle\Validator\ImageValidator
+
+    mardizza.image_service:
+        class: AppBundle\Service\ImageService
+
     app_extension.twig_extension:
         class: AppBundle\Twig\Extension\AppExtension
         public: false
