@@ -53,7 +53,12 @@ gulp.task('concat-css', ['sass'], function () {
 });
 
 // Images
-gulp.task('images', function () {
+gulp.task('group-image', function() {
+    return gulp.src('./src/AppBundle/Resources/public/images/group/*.*')
+        .pipe(gulp.dest('./web/assets/files/images'));
+});
+
+gulp.task('images', ['group-image'], function () {
     return gulp.src('./src/AppBundle/Resources/public/images/**/*.*')
         .pipe(gulp.dest('./web/assets/images'));
 });
