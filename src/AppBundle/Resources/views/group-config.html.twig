@@ -92,7 +92,7 @@
 
                                 {# invite button #}
                                 <div class="invitation-group">
-                                    <button class="btn btn-success btn-block" @click.prevent="openInvitation()">
+                                    <button type="button" class="btn btn-success btn-block" @click.prevent="openInvitation()">
                                         Inviter un nouveau membre
                                         <span class="fa fa-user pull-right"></span>
                                     </button>
@@ -123,7 +123,7 @@
                                     type="button" class="btn btn-warning pull-left" data-toggle="modal" data-target="#confirmation_leave">
                                 Quitter ce groupe
                             </button>
-                            <button @click.prevent="updateGroup()" class="btn btn-primary pull-right btn-submit" v-if="$validation.valid">
+                            <button @click.prevent="updateGroup()" type="submit" class="btn btn-primary pull-right btn-submit" v-if="$validation.valid">
                                 Enregistrer
                             </button>
                             <a href="{{ path('group_list') }}" class="btn btn-default pull-right">
