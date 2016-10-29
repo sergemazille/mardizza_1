@@ -115,7 +115,7 @@ export class groupConfigVue {
                             // success
                             function (response) {
                                 if (response) {
-
+                                    Dom.createNotification(constantes.messages.INVITATION_SENT, constantes.ALERT_SUCCESS);
                                 }
                             },
                             // error
