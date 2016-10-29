@@ -45,6 +45,7 @@ class PageController extends Controller
         return $this->render('@App/order.html.twig', [
             'user' => $user,
             'orderRef' => $orderRef,
+            'group' => $group,
         ]);
     }
 
@@ -78,7 +79,7 @@ class PageController extends Controller
 
         return $this->render('@App/group-config.html.twig', [
             'user' => $user,
-            'group' => $groupReadModel,
+            'groupReadModel' => $groupReadModel,
         ]);
     }
 }

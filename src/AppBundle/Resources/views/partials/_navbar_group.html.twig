@@ -1,0 +1,5 @@
+{% if group is defined and group is not null %}
+    <li>
+        <img style="width: 40px; height: 40px;" src="{{ asset('assets/files/images/' ~ group.image) }}" title="{{ group.name }}" alt="image représentant le groupe">
+    </li>
+{% endif %}

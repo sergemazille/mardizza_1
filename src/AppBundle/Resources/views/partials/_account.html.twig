@@ -1,15 +1,13 @@
-<li class="dropdown nav-right-content">
-    <a href="#account" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-       aria-expanded="false">
-        <span class="glyphicon glyphicon-user"></span>
-        {% if user is defined and user is not null %}
+{% if user is defined and user is not null %}
+    <li class="dropdown nav-right-content">
+        <a href="#account" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+           aria-expanded="false">
+            <span class="glyphicon glyphicon-user"></span>
             <span id="username" data-username="{{ user.username }}">{{ user.username }}</span>
-        {% else %}
-            Mon compte
-        {% endif %}
-    </a>
-    <ul class="dropdown-menu">
-        <li><a href="{{ path('group_list') }}">Mes groupes</a></li>
-        <li><a href="{{ path('logout') }}">Déconnexion</a></li>
-    </ul>
-</li>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="{{ path('group_list') }}">Mes groupes</a></li>
+            <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+        </ul>
+    </li>
+{% endif %}

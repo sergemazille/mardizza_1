@@ -26,12 +26,15 @@
       .dropdown-toggle {
         color: white;
       }
+      li{
+        margin-left: 1em;
+      }
     }
   }
 }
 
 // prevent account menu to change background color on leave
-.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+.navbar .nav .dropdown.open .dropdown-toggle, .navbar .nav .dropdown.active .dropdown-toggle, .navbar .nav .dropdown.open.active .dropdown-toggle {
   background-color: darken(red, 10%);
 }
 
