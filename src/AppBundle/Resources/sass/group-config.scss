@@ -9,6 +9,10 @@
     border-radius: 5px;
     padding: 24px;
 
+    h1{
+      margin: 0 0 0.5em 0;
+    }
+
     .image-group {
       .group-thumbnail {
         border: 1px solid $dark-grey;
@@ -40,8 +44,8 @@
 
     table {
       tr {
-        th {
-          padding: 0 0 5px 0;
+        th, td {
+          vertical-align: middle;
         }
         td {
           input {

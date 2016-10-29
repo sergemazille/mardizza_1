@@ -60,32 +60,35 @@
 
                             {# members #}
                             <div class="col-xs-12 col-sm-6">
-                                <table class="table table-striped table-condensed">
-                                    <thead>
-                                    <tr class="row">
-                                        <th class="col-xs-2 text-center">Admin</th>
-                                        <th class="col-xs-8">Membre</th>
-                                        <th class="col-xs-2">Tampons</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="row" v-for="member in group.members">
-                                        <td class="col-xs-2 text-center">
-                                            <input type="checkbox" :checked="member.isAdmin" :value="member.id"
-                                                   v-model="adminIds"
-                                                   name="memberIds"
-                                            >
-                                        </td>
-                                        <td class="col-xs-8">${member.username}</td>
-                                        <td class="col-xs-2">
-                                            <input type="number" :value="member.stampNumber"
-                                                   name="memberStampNumber"
-                                                   v-model="member.stampNumber"
-                                            >
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="table table-bordered table-condensed">
+                                    <table>
+                                        <thead>
+                                        <tr class="row">
+                                            <th class="col-xs-2 text-center">Admin</th>
+                                            <th class="col-xs-8">Membre</th>
+                                            <th class="col-xs-2">Tampons</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="row" v-for="member in group.members">
+                                            <td class="col-xs-2 text-center">
+                                                <input type="checkbox" :checked="member.isAdmin" :value="member.id"
+                                                       v-model="adminIds"
+                                                       name="memberIds"
+                                                >
+                                            </td>
+                                            <td class="col-xs-8">${member.username}</td>
+                                            <td class="col-xs-2">
+                                                <input type="number" :value="member.stampNumber"
+                                                       name="memberStampNumber"
+                                                       v-model="member.stampNumber"
+                                                       class="form-control input-sm"
+                                                >
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
                                 {# invite button #}
                                 <div class="invitation-group">
