@@ -60,7 +60,7 @@
 
                             {# members #}
                             <div class="col-xs-12 col-sm-6">
-                                <table class="table table-striped">
+                                <table class="table table-striped table-condensed">
                                     <thead>
                                     <tr class="row">
                                         <th class="col-xs-2 text-center">Admin</th>
@@ -86,27 +86,30 @@
                                     </tr>
                                     </tbody>
                                 </table>
+
+                                {# invite button #}
+                                <div class="invitation-group">
+                                    <button class="btn btn-success btn-block" @click.prevent="openInvitation()">
+                                        Inviter un nouveau membre
+                                        <span class="fa fa-user pull-right"></span>
+                                    </button>
+
+                                    <form class="form form-horizontal">
+                                        <div class="input-group" v-if="invitationOn">
+                                            <input type="email" placeholder="email de la personne" v-model="mailTo"
+                                                   class="form-control"
+                                                   required >
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary" type="button" @click.prevent="sendInvitation()">
+                                                    Envoyer
+                                                    <span class="fa fa-envelope-o"></span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-
-                        {# invite button #}
-                        <section class="invitation-group">
-                            <button class="btn btn-success btn-block" @click.prevent="openInvitation()" disabled>
-                                Inviter un nouveau membre
-                                <span class="fa fa-user pull-right"></span>
-                            </button>
-
-                            <div class="input-group" v-if="invitationOn">
-                                <input type="email" placeholder="email de la personne" :value="" v-model="mailTo"
-                                       class="form-control">
-                                <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button" @click.prevent="sendInvitation()" disabled>
-                                Envoyer
-                                <span class="fa fa-envelope-o"></span>
-                            </button>
-                        </span>
-                            </div>
-                        </section>
 
                         {# validation buttons #}
                         <section class="config-footer clearfix">

@@ -12,6 +12,7 @@ export const messages = {
     GROUP_DELETED: 'Le groupe a bien été supprimé.',
     GROUP_CREATED: 'Votre nouveau groupe a bien été créé.',
     ERROR_MESSAGE: "Une erreur est survenue.",
+    EMPTY_EMAIL_ADDRESS: "Vous devez indiquer une adresse email valide.",
     EMAIL_SENT: "L'email a bien été envoyé.",
     INVITATION_SENT: "L'invitation à rejoindre votre groupe a bien été envoyée.",
 };

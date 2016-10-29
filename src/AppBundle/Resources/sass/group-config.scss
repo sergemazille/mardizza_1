@@ -52,7 +52,11 @@
     }
 
     .invitation-group, .config-footer {
-      margin-top: 2em;
+      margin-top: 1.5em;
+
+      .input-group{
+        margin-top: 0.6em;
+      }
     }
 
     .config-footer {

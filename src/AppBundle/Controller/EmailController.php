@@ -10,13 +10,10 @@ class EmailController extends Controller
     public function groupInvitationAction(Request $request)
     {
         $submittedToken = $request->get('csrf');
-        if(! $this->isCsrfTokenValid('group_token', $submittedToken)){
-            return $this->json("L'action a expirée");
+        if (!$this->isCsrfTokenValid('group_token', $submittedToken)) {
+            $this->addFlash('error', "L'action a expirée");
+            throw $this->createNotFoundException();
         }
-
-        // create a validation token
-        $tokenManager = $this->get("security.csrf.token_manager");
-        $token = $tokenManager->refreshToken('group_invitation');
 
         // send the actual invitation
         $mailTo = $request->get('mailTo');

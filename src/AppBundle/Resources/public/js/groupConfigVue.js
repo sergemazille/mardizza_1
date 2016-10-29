@@ -13,6 +13,8 @@ export class groupConfigVue {
                 csrf: '',
                 adminIds: [],
                 tmpImage: '',
+                invitationOn: false,
+                mailTo: '',
             },
             methods: {
                 userIsLastMember(){
@@ -99,6 +101,34 @@ export class groupConfigVue {
                     // if image is valid then return true
                     return true;
                 },
+                sendInvitation() {
+                    if(! this.emailIsValid()) {
+                        Dom.createNotification(constantes.messages.EMPTY_EMAIL_ADDRESS, constantes.ALERT_ERROR);
+                    }
+
+                    let formData = new FormData();
+                    formData.append('csrf', this.csrf);
+                    formData.append('mailTo', this.mailTo);
+
+                    this.$http.post('/group/invitation', formData)
+                        .then(
+                            // success
+                            function (response) {
+                                if (response) {
+
+                                }
+                            },
+                            // error
+                            function () {
+                                Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
+                            }
+                        ).bind(this);
+
+                },
+                emailIsValid() {
+                    let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return emailRegex.test(this.mailTo)
+                },
                 quitGroup(){
                     let formData = new FormData();
                     formData.append('csrf', this.csrf);
@@ -142,6 +172,9 @@ export class groupConfigVue {
                                 Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
                             }
                         ).bind(this);
+                },
+                openInvitation() {
+                    this.invitationOn = !this.invitationOn;
                 },
             },
             watch : {
