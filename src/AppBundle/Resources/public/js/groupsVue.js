@@ -10,9 +10,6 @@ export class groupsVue {
             template: '#group-template',
             props: ['group'],
             methods: {
-                groupConfig(){
-                    console.log(this.group.id);
-                },
                 orderLink() {
                     window.location = `/order/group/${this.group.id}`;
                 },
