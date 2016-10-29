@@ -77,7 +77,8 @@ class PageController extends Controller
         $groupReadModel = $this->get('mardizza.group_service')->getGroup($group);
 
         return $this->render('@App/group-config.html.twig', [
-            'group' => $groupReadModel
+            'user' => $user,
+            'group' => $groupReadModel,
         ]);
     }
 }
