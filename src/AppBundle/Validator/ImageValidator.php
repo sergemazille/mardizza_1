@@ -9,10 +9,13 @@ class ImageValidator
 
     /**
      * @param $imageFile
+     * @return ImageValidator
      */
-    public function setImageFile($imageFile)
+    public function init($imageFile) : ImageValidator
     {
         $this->imageFile = $imageFile;
+
+        return $this;
     }
 
     /**

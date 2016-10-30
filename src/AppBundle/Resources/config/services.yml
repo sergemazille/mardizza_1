@@ -36,6 +36,9 @@ services:
     mardizza.image_validator:
         class: AppBundle\Validator\ImageValidator
 
+    mardizza.invitation_validator:
+        class: AppBundle\Validator\InvitationValidator
+
     mardizza.image_service:
         class: AppBundle\Service\ImageService
 

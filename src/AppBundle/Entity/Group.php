@@ -161,10 +161,7 @@ class Group
         return $this->stamps;
     }
 
-    /**
-     * @param int $stamps
-     */
-    public function setStamps(int $stamps)
+    public function setStamps($stamps)
     {
         $this->stamps = $stamps;
     }

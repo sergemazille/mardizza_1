@@ -195,8 +195,7 @@ class GroupController extends Controller
         $imageFile = $request->files->get('image');
 
         if ($imageFile) {
-            $imageValidator = $this->get('mardizza.image_validator');
-            $imageValidator->setImageFile($imageFile);
+            $imageValidator = $this->get('mardizza.image_validator')->init($imageFile);
 
             if(! $imageValidator->imageIsValid()){
                 $errorMessage = $imageValidator->getMessage();

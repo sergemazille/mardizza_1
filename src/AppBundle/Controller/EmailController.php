@@ -17,18 +17,12 @@ class EmailController extends Controller
         }
 
         $user = $this->getUser();
-        $groups = $user->getGroups();
-
-        // check if host is part of the group
-        if (! $groups->contains($group)) {
-            $errorMessage = "Vous ne pouvez pas envoyer d'invitation à un groupe auquel vous ne faites pas partie.";
-            return $this->json($errorMessage);
-        }
-
-        // check user doesn't invite himself
         $mailTo = $request->get('mailTo');
-        if ($mailTo == $user->getEmail()) {
-            $errorMessage = "Vous ne pouvez pas vous envoyer une invitation à vous même.";
+
+        // invitation validation
+        $invitationValidator = $this->get('mardizza.invitation_validator')->init($user, $group, $mailTo);
+        if(! $invitationValidator->invitationIsValid()) {
+            $errorMessage = $invitationValidator->getMessage();
             return $this->json($errorMessage);
         }
 
@@ -53,6 +47,10 @@ class EmailController extends Controller
             $invitation = $this->get('mardizza.invitation');
             $invitation->setGroup($group);
             $invitation->setInvitedEmail($mailTo);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($invitation);
+            $em->flush();
 
             return $this->json("ok");
         }
