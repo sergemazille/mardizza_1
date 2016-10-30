@@ -83,7 +83,7 @@ class GroupController extends Controller
 
         // check if group isn't already in user's groups
         if ($groups->contains($group)) {
-            $errorMessage = "L'utilisateur fait déjà partie du groupe.";
+            $errorMessage = "Vous êtes déjà membre de ce groupe.";
             return $this->json($errorMessage);
         }
 
