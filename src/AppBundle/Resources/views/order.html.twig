@@ -1,12 +1,10 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block content %}
-
-    <div id="app" :order_reference="{{ orderRef }}" :current_username="{{ user.username|json_encode }}">
+    <div id="app" :order_reference="{{ orderRef }}" :current_username="{{ user.username|json_encode }}" :group_stamps="{{ group.stamps|json_encode }}">
 
         {# action navbar #}
         {% include 'AppBundle:partials:_navbar_order.html.twig' %}
-
         <div class="container-fluid">
             <div class="row">
                 <div id="pizzas" class="col-md-9 col-lg-8">

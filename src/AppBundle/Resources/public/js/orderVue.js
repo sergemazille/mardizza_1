@@ -54,12 +54,11 @@ export class orderVue {
 
         let Row = {
             template: '#row-template',
-            props: ['pizza'],
+            props: ['pizza', 'price'],
             data(){
                 return {
                     username: this.pizza.username,
                     name: this.pizza.name,
-                    price: this.pizza.price,
                     key: this.pizza.key,
                 }
             },
@@ -84,17 +83,17 @@ export class orderVue {
                 return {
                     messages: [],
                     message: '',
-                    rows: [],
+                    pizzas: [],
                 }
             },
             methods: {
                 addPizzaToBasket(pizza){
-                    this.rows.push({'pizza': pizza}); // set a key to the object so user can add multiple times the same pizza
+                    this.pizzas.push({'pizza': pizza, 'price':pizza.price}); // set a key to the object so user can add multiple times the same pizza
                 },
                 removePizzaFromBasket(key){
-                    $(this.rows).each(function (index, row) {
+                    $(this.pizzas).each(function (index, row) {
                         if (row.pizza.key == key) {
-                            this.rows.$remove(row);
+                            this.pizzas.$remove(row);
                         }
                     }.bind(this));
                 },
@@ -120,17 +119,33 @@ export class orderVue {
             },
             computed: {
                 order_total(){
-                    if (!this.rows) {
+                    if (!this.pizzas) {
                         return 0;
                     }
                     // prices array
-                    let selectedPizzasPrices = this.rows.map(function(row){
-                        return row.pizza.price;
+                    let selectedPizzasPrices = this.pizzas.map(function(pizza){
+                        return pizza.price;
                     });
                     return selectedPizzasPrices.reduce(function (total, value) {
                         return total + value;
                     }, 0);
-                }
+                },
+                pizzaLowestPrice() {
+                    let lowestPrice = 99; // arbitrary high value
+                    for(let item of this.pizzas) {
+                        lowestPrice = (item.pizza.price < lowestPrice) ? item.pizza.price : lowestPrice;
+                    }
+                    return lowestPrice;
+                },
+                groupStamps() {
+                    return vm.group_stamps;
+                },
+                promoStamps() {
+                    return this.groupStamps + this.pizzas.length;
+                },
+                promoOn() {
+                    return this.promoStamps >= 11;
+                },
             },
             created(){
                 this.getMessages();
@@ -157,7 +172,7 @@ export class orderVue {
 
         vm = new Vue({
             el: '#app',
-            props: ['order_reference', 'current_username'],
+            props: ['order_reference', 'current_username', 'group_stamps'],
             data: {
                 pizzas: [],
                 filterByFavorite: false,
