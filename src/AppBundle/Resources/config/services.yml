@@ -23,7 +23,6 @@ services:
 
     mardizza.user:
         class: AppBundle\Entity\User
-        arguments: [ '@doctrine.orm.entity_manager' ]
 
     mardizza.group:
         class: AppBundle\Entity\Group
@@ -38,6 +37,7 @@ services:
 
     mardizza.invitation_validator:
         class: AppBundle\Validator\InvitationValidator
+        arguments: [ '@doctrine.orm.entity_manager' ]
 
     mardizza.image_service:
         class: AppBundle\Service\ImageService

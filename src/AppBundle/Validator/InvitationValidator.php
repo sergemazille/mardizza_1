@@ -4,6 +4,7 @@ namespace AppBundle\Validator;
 
 use AppBundle\Entity\Group;
 use AppBundle\Entity\User;
+use Doctrine\ORM\EntityManager;
 
 class InvitationValidator
 {
@@ -11,6 +12,16 @@ class InvitationValidator
     private $user;
     private $group;
     private $mailTo;
+    private $em;
+
+    /**
+     * InvitationValidator constructor.
+     * @param $em
+     */
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
 
     /**
      * @param User $user
@@ -79,8 +90,11 @@ class InvitationValidator
             }
         }
 
-        // check if user hasn't already been invited
-
+        // check if user hasn't already been invited into this group
+        if($this->em->getRepository('AppBundle:Invitation')->findOneByEmailAndGroup($this->mailTo, $this->group)) {
+            $this->message = "L'utilisateur a déjà eté invité à rejoindre le groupe.";
+            return false;
+        }
 
         return true;
     }

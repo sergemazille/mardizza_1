@@ -53,9 +53,8 @@ class User implements UserInterface
 
     /**
      * User constructor.
-     * @param EntityManager $em
      */
-    public function __construct(EntityManager $em)
+    public function __construct()
     {
         $this->groups = new ArrayCollection();
     }
