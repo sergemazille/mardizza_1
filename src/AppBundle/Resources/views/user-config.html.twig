@@ -1,0 +1,33 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <div id="user-config">
+
+        <div class="container">
+            <div class="user-container">
+                <h1>Mon compte</h1>
+                <h2>{{ user.username }}</h2>
+                <section class="config-section">
+                    <h3>Mes invitations</h3>
+                    {% if invitations|length > 0 %}
+                        <ul class="list-unstyled">
+                            {% for invitation in invitations %}
+                                <li class="invitation">
+                                    <p>{{ invitation.group.name }}</p>
+                                    <form class="form" method="post" action="{{ path('user_add_group', { id: invitation.group.id }) }}">
+                                        <button type="submit" name="invitation-response" value="accept" class="btn btn-success">Accepter</button>
+                                        <button type="submit" name="invitation-response" value="refuse" class="btn btn-warning">Refuser</button>
+                                    </form>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Vous n'avez pas d'invitations</p>
+                    {% endif %}
+                </section>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

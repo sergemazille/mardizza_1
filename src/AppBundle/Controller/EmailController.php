@@ -42,7 +42,7 @@ class EmailController extends Controller
             );
 
         $emailSent = $this->get('mailer')->send($message);
-        if(true){
+        if($emailSent){
             //register the invitation
             $invitation = $this->get('mardizza.invitation');
             $invitation->setGroup($group);

@@ -6,6 +6,7 @@
             <span id="username" data-username="{{ user.username }}">{{ user.username }}</span>
         </a>
         <ul class="dropdown-menu">
+            <li><a href="{{ path('user', { id: user.id }) }}">Mon compte</a></li>
             <li><a href="{{ path('group_list') }}">Mes groupes</a></li>
             <li><a href="{{ path('logout') }}">Déconnexion</a></li>
         </ul>

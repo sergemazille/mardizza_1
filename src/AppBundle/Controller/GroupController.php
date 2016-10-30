@@ -70,30 +70,6 @@ class GroupController extends Controller
         return $this->json("ok");
     }
 
-    // TODO: invitation process:
-    public function addToGroupAction(Group $group)
-    {
-        if (!$group) {
-            $errorMessage = "Aucun groupe trouvé.";
-            return $this->json($errorMessage);
-        }
-
-        $user = $this->getUser();
-        $groups = $user->getGroups();
-
-        // check if group isn't already in user's groups
-        if ($groups->contains($group)) {
-            $errorMessage = "Vous êtes déjà membre de ce groupe.";
-            return $this->json($errorMessage);
-        }
-
-        $groups->add($group);
-        $this->getDoctrine()->getManager()->flush();
-
-        // return confirmation
-        return $this->json("ok");
-    }
-
     public function createGroupAction(Request $request)
     {
         $user = $this->getUser();
