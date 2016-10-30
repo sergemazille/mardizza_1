@@ -57,9 +57,11 @@ export class groupConfigVue {
                         .then(
                             // success
                             function (response) {
-                                if (response) {
+                                if (response.data == "ok") {
                                     // redirect back to user groups
                                     window.location = '/groups';
+                                }else{
+                                    Dom.createNotification(response.data, constantes.ALERT_ERROR);
                                 }
                             },
                             // error
@@ -110,12 +112,14 @@ export class groupConfigVue {
                     formData.append('csrf', this.csrf);
                     formData.append('mailTo', this.mailTo);
 
-                    this.$http.post('/group/invitation', formData)
+                    this.$http.post(`/invitation/group/${this.group.id}`, formData)
                         .then(
                             // success
                             function (response) {
-                                if (response) {
+                                if (response.data == "ok") {
                                     Dom.createNotification(constantes.messages.INVITATION_SENT, constantes.ALERT_SUCCESS);
+                                }else{
+                                    Dom.createNotification(response.data, constantes.ALERT_ERROR);
                                 }
                             },
                             // error
@@ -141,12 +145,11 @@ export class groupConfigVue {
                                     // redirect back to user groups
                                     window.location = '/groups';
                                 } else {
-                                    Dom.createNotification(response.body, constantes.ALERT_ERROR);
+                                    Dom.createNotification(response.data, constantes.ALERT_ERROR);
                                 }
                             },
                             // error
-                            function (response) {
-                                console.log(response.body);
+                            function () {
                                 Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
                             }
                         ).bind(this);
@@ -163,7 +166,7 @@ export class groupConfigVue {
                                     // redirect back to user groups
                                     window.location = '/groups';
                                 } else {
-                                    Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
+                                    Dom.createNotification(response.data, constantes.ALERT_ERROR);
                                 }
                             },
                             // error

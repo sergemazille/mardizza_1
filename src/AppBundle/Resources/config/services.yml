@@ -18,6 +18,9 @@ services:
     mardizza.order:
         class: AppBundle\Entity\Order
 
+    mardizza.invitation:
+        class: AppBundle\Entity\Invitation
+
     mardizza.user:
         class: AppBundle\Entity\User
         arguments: [ '@doctrine.orm.entity_manager' ]

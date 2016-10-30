@@ -91,14 +91,14 @@ user_remove_group:
     methods: [GET, POST]
 
 update_group:
-    path: /group/update/{group}
+    path: /group/update/{id}
     defaults: { _controller: AppBundle:Group:updateGroup }
     requirements:
         id: \d+
     methods: [POST]
 
 quit_group:
-    path: /group/quit/{group}
+    path: /group/quit/{id}
     defaults: { _controller: AppBundle:Group:quitGroup }
     methods: [POST]
     requirements:
@@ -117,6 +117,8 @@ create_group:
     methods: [POST]
 
 group_invitation:
-    path: /group/invitation
+    path: /invitation/group/{id}
     defaults: { _controller: AppBundle:Email:groupInvitation }
     methods: [POST]
+    requirements:
+        id: \d+

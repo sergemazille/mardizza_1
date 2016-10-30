@@ -55,6 +55,11 @@ class Group
     private $orders;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Invitation", mappedBy="group")
+     */
+    private $invitations;
+
+    /**
      * Group constructor.
      * @param GroupService $groupService
      */
@@ -65,6 +70,7 @@ class Group
         $this->name = "Groupe";
         $this->admins = new ArrayCollection();
         $this->members = new ArrayCollection();
+        $this->invitedMembers = new ArrayCollection();
     }
 
     /**
@@ -78,11 +84,14 @@ class Group
     /**
      * @param string $image
      */
-    public function setImage($image)
+    public function setImage(string $image)
     {
         $this->image = $image;
     }
 
+    /**
+     * @return string
+     */
     public function getColor() : string
     {
         return $this->color;
@@ -91,42 +100,71 @@ class Group
     /**
      * @param string $color
      */
-    public function setColor($color)
+    public function setColor(string $color)
     {
         $this->color = $color;
     }
 
+    /**
+     * @return int
+     */
     public function getId() : int
     {
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getName() : string
     {
         return $this->name;
     }
 
-    public function setName($name)
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
+    /**
+     * @return ArrayCollection
+     */
     public function getAdmins()
     {
         return $this->admins;
     }
 
+    /**
+     * @return ArrayCollection
+     */
     public function getMembers()
     {
         return $this->members;
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getInvitations()
+    {
+        return $this->invitations;
+    }
+
+    /**
+     * @return int
+     */
     public function getStamps() : int
     {
         return $this->stamps;
     }
 
-    public function setStamps($stamps)
+    /**
+     * @param int $stamps
+     */
+    public function setStamps(int $stamps)
     {
         $this->stamps = $stamps;
     }
@@ -134,7 +172,7 @@ class Group
     /**
      * @return Order
      */
-    public function getOrders()
+    public function getOrders() : Order
     {
         return $this->orders;
     }
@@ -142,7 +180,7 @@ class Group
     /**
      * @param Order $orders
      */
-    public function setOrders($orders)
+    public function setOrders(Order $orders)
     {
         $this->orders = $orders;
     }
