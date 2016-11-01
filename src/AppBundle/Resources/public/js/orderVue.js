@@ -98,7 +98,7 @@ export class orderVue {
                     return (this.promoOn && row == this.freePizzaCandidateRow) ? (row.pizza.price - this.pizzaLowestPrice) : row.pizza.price;
                 },
                 isFreePizzaRow(row) {
-                    return row == this.promoOn ? this.freePizzaCandidateRow : false;
+                    return this.promoOn ? (row ==  this.freePizzaCandidateRow) : false;
                 },
                 saveOrder(){
 
@@ -106,12 +106,14 @@ export class orderVue {
                     let groupStamps = this.promoOn ? (this.promoStamps - 10) : this.promoStamps;
 
                     // free pizza member
-                    let freePizzaUserId = (this.promoOn) ? freePizzaCandidateRow.id : null;
+                    let freePizzaUserId = (this.promoOn) ? this.freePizzaCandidateRow.pizza.userId : null;
+
+                    let csrf = store.csrf;
 
                     // form submission
                     let formData = new FormData();
 
-                    formData.append('csrf', vm.csrf);
+                    formData.append('csrf', csrf);
                     formData.append('stamps', groupStamps);
                     formData.append('freePizzaUserId', freePizzaUserId);
 
@@ -211,6 +213,7 @@ export class orderVue {
                         // load functions that needs pizzas to be on DOM to work
                         this.$nextTick(function () {
                             Dom.loadClipboard(); // for snapshots
+                            store.csrf = this.csrf;
                         });
                     }.bind(this));
                 },

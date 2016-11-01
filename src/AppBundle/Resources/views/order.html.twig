@@ -1,7 +1,7 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block content %}
-    <div id="app" :order_reference="{{ orderRef }}" :current_username="{{ user.username|json_encode }}" :current_user_id="{{ user.id|json_encode }}" :current_user_stamps="{{ user.stampNumber|json_encode }}" :group_stamps="{{ group.stamps|json_encode }}" :group_members="{{ groupMembers|json_encode }}" :csrf="{{ csrf_token('order_token') }}" :group_id="{{ group.id|json_encode }}">
+    <div id="app" :order_reference="{{ orderRef }}" :current_username="{{ user.username|json_encode }}" :current_user_id="{{ user.id|json_encode }}" :current_user_stamps="{{ user.stampNumber|json_encode }}" :group_stamps="{{ group.stamps|json_encode }}" :group_members="{{ groupMembers|json_encode }}" :csrf="{{ csrf_token('order_token')|json_encode }}" :group_id="{{ group.id|json_encode }}">
 
         {# action navbar #}
         {% include 'AppBundle:partials:_navbar_order.html.twig' %}
