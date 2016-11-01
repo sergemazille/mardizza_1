@@ -55,13 +55,6 @@ export class orderVue {
         let Row = {
             template: '#row-template',
             props: ['pizza', 'price'],
-            data(){
-                return {
-                    username: this.pizza.username,
-                    name: this.pizza.name,
-                    key: this.pizza.key,
-                }
-            },
             methods: {
                 removePizzaFromDb(){
                     vm.$emit('pizzaRemoved', this.pizza);
@@ -88,7 +81,7 @@ export class orderVue {
             },
             methods: {
                 addPizzaToBasket(pizza){
-                    this.pizzas.push({'pizza': pizza, 'price':pizza.price}); // set a key to the object so user can add multiple times the same pizza
+                    this.pizzas.push({'pizza': pizza, 'price': pizza.price}); // set a key to the object so user can add multiple times the same pizza
                 },
                 removePizzaFromBasket(key){
                     $(this.pizzas).each(function (index, row) {
