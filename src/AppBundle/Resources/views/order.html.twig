@@ -1,7 +1,7 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block content %}
-    <div id="app" :order_reference="{{ orderRef }}" :current_username="{{ user.username|json_encode }}" :group_stamps="{{ group.stamps|json_encode }}">
+    <div id="app" :order_reference="{{ orderRef }}" :current_username="{{ user.username|json_encode }}" :current_user_id="{{ user.id|json_encode }}" :current_user_stamps="{{ user.stampNumber|json_encode }}" :group_stamps="{{ group.stamps|json_encode }}" :group_members="{{ groupMembers|json_encode }}">
 
         {# action navbar #}
         {% include 'AppBundle:partials:_navbar_order.html.twig' %}
@@ -21,7 +21,6 @@
 
         {# includes templates #}
         {% include 'AppBundle:templates:pizza.html.twig' %}
-        {% include 'AppBundle:templates:row.html.twig' %}
         {% include 'AppBundle:templates:basket.html.twig' %}
     </div>
 {% endblock %}

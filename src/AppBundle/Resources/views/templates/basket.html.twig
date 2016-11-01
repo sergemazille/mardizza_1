@@ -13,7 +13,12 @@
 
             <div id="basket-body" class="collapse in" v-show="pizzas.length">
                 <table class="table table-striped">
-                    <tr v-for="item in pizzas" :pizza="item.pizza" :price="item.price" is="row"></tr>
+                    <tr v-for="row in pizzas">
+                        <td><span class="fa fa-times" :class="{'hidden': !isOwner(row)}" @click.prevent="removePizzaFromDb(row)"></span></td>
+                        <td class="user-name" :class="{'reduced-price': isFreePizzaRow(row)}">${row.pizza.username}</td>
+                        <td class="pizza-name" :class="{'reduced-price': isFreePizzaRow(row)}">${row.pizza.name}</td>
+                        <td class="pizza-price" :class="{'reduced-price': isFreePizzaRow(row)}">${pizzaPrice(row)|euro}</td>
+                    </tr>
                 </table>
             </div>
 
@@ -21,6 +26,7 @@
                 <p id="basket-message" v-show="!pizzas.length">${ message }</p>
                 <section v-show="pizzas.length">
                     <p class="order-total">TOTAL&nbsp;:&nbsp;${order_total | euro }</p>
+                    <div id="btn-save-order"><button class="btn btn-success" @click.prevent="saveOrder">Enregistrer</button></div>
                     <p class="phone-number">04 37 64 60 79</p>
                 </section>
             </div>

@@ -1,8 +1,0 @@
-<template id="row-template">
-    <tr>
-        <td><span class="fa fa-times" :class="{'hidden':isNotOwner}" @click.prevent="removePizzaFromDb"></span></td>
-        <td class="user-name">${pizza.username}</td>
-        <td class="pizza-name">${pizza.name}</td>
-        <td class="pizza-price">${price|euro}</td>
-    </tr>
-</template>

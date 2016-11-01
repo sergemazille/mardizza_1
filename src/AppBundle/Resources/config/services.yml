@@ -42,6 +42,10 @@ services:
     mardizza.image_service:
         class: AppBundle\Service\ImageService
 
+    mardizza.user_service:
+        class: AppBundle\Service\UserService
+        arguments: [ '@doctrine.orm.entity_manager' ]
+
     app_extension.twig_extension:
         class: AppBundle\Twig\Extension\AppExtension
         public: false

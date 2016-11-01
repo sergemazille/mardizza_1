@@ -39,6 +39,9 @@ class PageController extends Controller
             return $this->redirectToRoute('group_list');
         }
 
+        // get group members for stamps calculation
+        $groupMembers = $this->get('mardizza.user_service')->getGroupUsersReadModel($group);
+
         // reference for database
         $orderRef = $this->get('mardizza.order_service')->getOrderRef($group);
 
@@ -46,6 +49,7 @@ class PageController extends Controller
             'user' => $user,
             'orderRef' => $orderRef,
             'group' => $group,
+            'groupMembers' => $groupMembers,
         ]);
     }
 

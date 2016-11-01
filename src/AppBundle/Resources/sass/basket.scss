@@ -77,6 +77,11 @@
         }
       }
     }
+
+    .reduced-price{
+      font-weight: bold;
+      color: #00a800;
+    }
   }
 }
 
@@ -94,6 +99,12 @@
     @media #{$phone}{
       padding-right: 2em;
     }
+  }
+
+  #btn-save-order{
+    background-color: white;
+    text-align: right;
+    padding: 6px;
   }
 
   .phone-number {

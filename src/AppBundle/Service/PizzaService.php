@@ -9,7 +9,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class PizzaService
 {
-
     private $tokenStorage;
     private $requestStack;
 

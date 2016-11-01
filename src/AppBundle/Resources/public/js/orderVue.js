@@ -36,6 +36,8 @@ export class orderVue {
                         name: this.pizza.name,
                         price: this.pizza.price,
                         username: vm.current_username,
+                        userStamps: vm.current_user_stamps,
+                        userId: vm.current_user_id,
                     });
                 },
                 saveUserFavorite(){
@@ -52,24 +54,6 @@ export class orderVue {
             },
         });
 
-        let Row = {
-            template: '#row-template',
-            props: ['pizza', 'price'],
-            methods: {
-                removePizzaFromDb(){
-                    vm.$emit('pizzaRemoved', this.pizza);
-                },
-            },
-            computed: {
-                isOwner(){
-                    return this.pizza.username == vm.current_username;
-                },
-                isNotOwner(){
-                    return !this.isOwner;
-                },
-            },
-        };
-
         let Basket = {
             template: '#basket-template',
             data(){
@@ -81,7 +65,7 @@ export class orderVue {
             },
             methods: {
                 addPizzaToBasket(pizza){
-                    this.pizzas.push({'pizza': pizza, 'price': pizza.price}); // set a key to the object so user can add multiple times the same pizza
+                    this.pizzas.push({'pizza': pizza}); // set a key to the object so user can add multiple times the same pizza
                 },
                 removePizzaFromBasket(key){
                     $(this.pizzas).each(function (index, row) {
@@ -90,43 +74,54 @@ export class orderVue {
                         }
                     }.bind(this));
                 },
-                removePizzaFromDb(pizza){
-                    if (pizza.username == vm.current_username) {
-                        let dbPizza = firebase.database().ref(`orders/${store.order_reference}/${pizza.key}`);
+                removePizzaFromDb(row) {
+                    if (row.pizza.username == vm.current_username) {
+                        let dbPizza = firebase.database().ref(`orders/${store.order_reference}/${row.pizza.key}`);
                         dbPizza.remove();
                     }
                 },
-                setRandomMessage(){
+                setRandomMessage() {
                     let ln = this.messages.length;
                     this.message = this.messages[Math.floor(Math.random() * ln)];
                 },
-                getMessages(){
+                getMessages() {
                     $.get('/basket/messages', function (messages) {
                         this.messages = messages;
                         this.setRandomMessage();
                     }.bind(this));
                 },
-            },
-            components: {
-                'row': Row,
+                isOwner(row) {
+                    return row.pizza.username == vm.current_username;
+                },
+                pizzaPrice(row) {
+                    return (this.promoOn && row == this.freePizzaCandidateRow) ? (row.pizza.price - this.pizzaLowestPrice) : row.pizza.price;
+                },
+                isFreePizzaRow(row) {
+                    console.log(row == this.freePizzaCandidateRow);
+                    return row == this.freePizzaCandidateRow;
+                },
+                saveOrder(){
+
+                },
             },
             computed: {
                 order_total(){
                     if (!this.pizzas) {
                         return 0;
                     }
+
                     // prices array
-                    let selectedPizzasPrices = this.pizzas.map(function(pizza){
-                        return pizza.price;
-                    });
+                    let selectedPizzasPrices = this.pizzas.map(function(row){
+                        return this.pizzaPrice(row);
+                    }.bind(this));
                     return selectedPizzasPrices.reduce(function (total, value) {
                         return total + value;
                     }, 0);
                 },
                 pizzaLowestPrice() {
                     let lowestPrice = 99; // arbitrary high value
-                    for(let item of this.pizzas) {
-                        lowestPrice = (item.pizza.price < lowestPrice) ? item.pizza.price : lowestPrice;
+                    for(let row of this.pizzas) {
+                        lowestPrice = (row.pizza.price < lowestPrice) ? row.pizza.price : lowestPrice;
                     }
                     return lowestPrice;
                 },
@@ -138,6 +133,18 @@ export class orderVue {
                 },
                 promoOn() {
                     return this.promoStamps >= 11;
+                },
+                freePizzaCandidateRow() {
+                    let lowestStampNumber = 99; // arbitrary high value
+                    for(let row of this.pizzas) {
+                        lowestStampNumber = (row.pizza.userStamps < lowestStampNumber) ? row.pizza.userStamps : lowestStampNumber;
+                    }
+                    for(let row of this.pizzas) {
+                        if(lowestStampNumber == row.pizza.userStamps) {
+                            return row;
+                        }
+                    }
+                    return null;
                 },
             },
             created(){
@@ -157,15 +164,12 @@ export class orderVue {
                         this.removePizzaFromBasket(key);
                     }.bind(this));
                 }.bind(this));
-
-                // listen for when a remove row button is clicked
-                this.$parent.$on('pizzaRemoved', this.removePizzaFromDb)
             }
         };
 
         vm = new Vue({
             el: '#app',
-            props: ['order_reference', 'current_username', 'group_stamps'],
+            props: ['order_reference', 'current_username', 'current_user_stamps', 'current_user_id', 'group_stamps', 'group_members'],
             data: {
                 pizzas: [],
                 filterByFavorite: false,
@@ -178,7 +182,7 @@ export class orderVue {
                         this.pizzas = pizzas;
                         // load functions that needs pizzas to be on DOM to work
                         this.$nextTick(function () {
-                            Dom.loadClipboard();
+                            Dom.loadClipboard(); // for snapshots
                         });
                     }.bind(this));
                 },
