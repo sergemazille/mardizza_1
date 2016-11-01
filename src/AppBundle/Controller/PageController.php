@@ -45,11 +45,15 @@ class PageController extends Controller
         // reference for database
         $orderRef = $this->get('mardizza.order_service')->getOrderRef($group);
 
+        // check if current user is group admin
+        $userIsAdmin = $group->getAdmins()->contains($user);
+
         return $this->render('@App/order.html.twig', [
             'user' => $user,
             'orderRef' => $orderRef,
             'group' => $group,
             'groupMembers' => $groupMembers,
+            'userIsAdmin' => $userIsAdmin,
         ]);
     }
 

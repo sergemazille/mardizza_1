@@ -1,4 +1,5 @@
 import {Dom} from './Dom';
+import * as constantes from './constantes';
 
 export class orderVue {
 
@@ -97,11 +98,38 @@ export class orderVue {
                     return (this.promoOn && row == this.freePizzaCandidateRow) ? (row.pizza.price - this.pizzaLowestPrice) : row.pizza.price;
                 },
                 isFreePizzaRow(row) {
-                    console.log(row == this.freePizzaCandidateRow);
-                    return row == this.freePizzaCandidateRow;
+                    return row == this.promoOn ? this.freePizzaCandidateRow : false;
                 },
                 saveOrder(){
 
+                    // group stamps
+                    let groupStamps = this.promoOn ? (this.promoStamps - 10) : this.promoStamps;
+
+                    // free pizza member
+                    let freePizzaUserId = (this.promoOn) ? freePizzaCandidateRow.id : null;
+
+                    // form submission
+                    let formData = new FormData();
+
+                    formData.append('csrf', vm.csrf);
+                    formData.append('stamps', groupStamps);
+                    formData.append('freePizzaUserId', freePizzaUserId);
+
+                    this.$http.post(`/order/update/${vm.group_id}`, formData)
+                        .then(
+                            // success
+                            function (response) {
+                                if (response.data == "ok") {
+                                    Dom.createNotification(constantes.messages.ORDER_UPDATED, constantes.ALERT_SUCCESS);
+                                }else{
+                                    Dom.createNotification(response.data, constantes.ALERT_ERROR);
+                                }
+                            },
+                            // error
+                            function () {
+                                Dom.createNotification(constantes.messages.ERROR_MESSAGE, constantes.ALERT_ERROR);
+                            }
+                        ).bind(this);
                 },
             },
             computed: {
@@ -169,7 +197,7 @@ export class orderVue {
 
         vm = new Vue({
             el: '#app',
-            props: ['order_reference', 'current_username', 'current_user_stamps', 'current_user_id', 'group_stamps', 'group_members'],
+            props: ['csrf', 'order_reference', 'group_id', 'current_username', 'current_user_stamps', 'current_user_id', 'group_stamps', 'group_members'],
             data: {
                 pizzas: [],
                 filterByFavorite: false,

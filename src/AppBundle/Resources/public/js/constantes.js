@@ -15,6 +15,7 @@ export const messages = {
     EMPTY_EMAIL_ADDRESS: "Vous devez indiquer une adresse email valide.",
     EMAIL_SENT: "L'email a bien été envoyé.",
     INVITATION_SENT: "L'invitation à rejoindre votre groupe a bien été envoyée.",
+    ORDER_UPDATED: "La commande à bien été mise à jour.",
 };
 
 export const firebaseConfigs = {

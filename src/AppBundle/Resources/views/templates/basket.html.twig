@@ -26,7 +26,7 @@
                 <p id="basket-message" v-show="!pizzas.length">${ message }</p>
                 <section v-show="pizzas.length">
                     <p class="order-total">TOTAL&nbsp;:&nbsp;${order_total | euro }</p>
-                    <div id="btn-save-order"><button class="btn btn-success" @click.prevent="saveOrder">Enregistrer</button></div>
+                    <div id="btn-save-order" v-if="{{ userIsAdmin }}"><button class="btn btn-success" @click.prevent="saveOrder">Enregistrer</button></div>
                     <p class="phone-number">04 37 64 60 79</p>
                 </section>
             </div>

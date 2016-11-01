@@ -129,3 +129,10 @@ group_invitation:
     methods: [POST]
     requirements:
         id: \d+
+
+update_order:
+    path: /order/update/{groupId}
+    defaults: { _controller: AppBundle:Order:update }
+    methods: [POST]
+    requirements:
+        groupId: \d+
